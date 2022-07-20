@@ -1,7 +1,7 @@
 # Shoppingify challenge - REACT.js
 
 ## Welcome! 👋
-> #### REACT app for space travel services
+> #### REACT app for shoppers
 > This is an app where you can create shopping lists, save them, keep a record of them, view some dirived statistics showing various trends.
 
                              
