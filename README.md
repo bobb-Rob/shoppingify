@@ -1,46 +1,91 @@
-# Getting Started with Create React App and Redux
+# Space Traveler's Hub - REACT.js
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+## Welcome! 👋
+> #### REACT app for space travel services
+> This is a web application for a company that provides commercial and scientific space travel services. The application will allow users to book rockets and join selected space missions.
 
-## Available Scripts
+                             
+## Built With ✔️
 
-In the project directory, you can run:
+- React 🔥
+- redux toolkit
+- CSS 😋
 
-### `npm start`
+## Functionalites 😄
+ 
+- Users can book each rocket by clicking the reservation button or cancel the previously made booking.
+- Users can join selected mission or leave the mission the user joined earlier. 😋
+- 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started 🙌
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To get a local copy up and running follow these simple example steps.
 
-### `npm test`
+## Live link 🙌
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Demo link](#)
 
-### `npm run build`
+To get a local copy up and running follow these simple example steps.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
+```
+  node js
+  npm
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+### Setup
+Clone the repository and change the directory to portfolio
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+``` 
+  `$ git clone https://github.com/bobb-Rob/Space-travelers-Hub.git`
 
-### `npm run eject`
+  `$ cd Space-travelers-Hub`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Install
+Install all project dependencies by running the command below
+ 
+``` 
+ ` $ npm install`
+```
+### Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Run
+``` 
+  `$ npm start or deploy the index.html from the build/public folder 
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Deployment
+- [Visit Application Homepage](#)
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Authors
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| 👤 Name | Github | Twitter | LinkedIn |
+|------|--------|---------|----------|
+|Robertson Akpan|[@bobb-rob](https://github.com/bobb-rob)|[@___Robertson](https://twitter.com/___Robertson)|[@RobertsonAkpan](https://www.linkedin.com/in/robertsonakpan/)|
+
+
+| 👤 Name | Github | Twitter | LinkedIn |
+|------|--------|---------|----------|
+|Kinyera Amos|[@Kinyera](#)|[@Kinyera](#)|[@Kinyera](#)|
+
+
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- Hat tip to Microverse team for inspiring this project.
+
+## 📝 License
+
+All rights reserved.
