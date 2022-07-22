@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import SideNav from './components/Navbar';
+import SideNav from './components/navigation/Navbar';
 
 function App() {
   return (
