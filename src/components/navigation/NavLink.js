@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 
 const NavLinkEl = ({icon, handleClick, to}) => {
   const activeStyle = {
-    textDecoration: 'underline',
+  
   };
   
   return (
-    <div>
+    <div className='nav-wrap'>
       <NavLink
         to={to}
-        onClick={handleClick}
-        style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        onClick={handleClick}       
+        className={({ isActive }) => (isActive ? "list-nav-link" : undefined)}
       >
         {icon}
       </NavLink>

@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import NavLinkEl from './NavLink';
 import { FaListUl } from 'react-icons/fa';
 import { MdOutlineAnalytics } from 'react-icons/md';
 import { IoMdRefresh } from 'react-icons/io';
 import { BsCart3 } from 'react-icons/bs';
 import logo from '../../assets/logo.svg';
-import { Link, NavLink } from 'react-router-dom';
 import '../../styles/sidenav.css'
 
 const SideNav = () => {
@@ -16,18 +17,19 @@ const SideNav = () => {
         </Link>
       </div>
       <div style={{color: 'var(--navIconColor)'}}>
-        <NavLink
+        <NavLinkEl
           to='/list'
           className="list-nav-link"
-        >
-          <FaListUl size={21} />
-        </NavLink>
-        <NavLink to='/history'>
-          <IoMdRefresh size={22} />
-        </NavLink>
-        <NavLink to="analysis">
-          <MdOutlineAnalytics size={22} />
-        </NavLink>
+          icon={<FaListUl size={21} />}
+        />    
+        <NavLinkEl
+          to='/history'
+          icon={<IoMdRefresh size={22} />}
+        />
+        <NavLinkEl
+          to="analysis"
+          icon={<MdOutlineAnalytics size={22} />}
+        />        
       </div>
       <div>
         <NavLink to="cart">
