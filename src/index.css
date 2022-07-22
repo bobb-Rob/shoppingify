@@ -1,8 +1,10 @@
 * {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-:root {
+:root {                                                                                
   --orange: #F9A109;
   --navIconColor: #454545;
   --white: #fff;
