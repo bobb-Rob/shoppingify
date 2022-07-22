@@ -16,10 +16,9 @@ const SideNav = () => {
           <img src={logo} alt="Shoppingify Logo" />
         </Link>
       </div>
-      <div style={{color: 'var(--navIconColor)'}}>
+      <div>
         <NavLinkEl
-          to='/list'
-          className="list-nav-link"
+          to='/'          
           icon={<FaListUl size={21} />}
         />    
         <NavLinkEl
@@ -31,9 +30,12 @@ const SideNav = () => {
           icon={<MdOutlineAnalytics size={22} />}
         />        
       </div>
-      <div>
-        <NavLink to="cart">
-          <BsCart3 />
+      <div >
+        <NavLink
+          to="cart"
+          style={{color: 'var(--white)'}}
+        >
+          <BsCart3 size={22}/>
         </NavLink>        
       </div>
     </nav>

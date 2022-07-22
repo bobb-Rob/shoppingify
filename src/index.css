@@ -1,8 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+* {
+  margin: 0;
+}
 
 :root {
   --orange: #F9A109;
   --navIconColor: #454545;
+  --white: #fff;
+}
+
+.App {
+  display: grid; 
+  grid-template-columns: 61.58px 1fr ;
 }
