@@ -12,8 +12,8 @@ function App() {
       <main className='container'>
         <Routes>
           <Route path='/' element={<ListContainer />} />
-          <Route path='/' element={<History />} />
-          <Route path='/' element={<Analysis />} />
+          <Route path='/history' element={<History />} />
+          <Route path='/analysis' element={<Analysis />} />
         </Routes>  
       </main>          
     </div>
