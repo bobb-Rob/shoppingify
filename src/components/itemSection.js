@@ -2,7 +2,13 @@ import React from 'react'
 
 const ItemSection = () => {
   return (
-    <div className='Items'>itemSection</div>
+    <section className='Items'>
+      <div className="list-top">
+                    
+      </div>
+      <div className="shopping-list"></div>
+      <div className="list-bottom"></div>      
+    </section>
   );
 };
 
