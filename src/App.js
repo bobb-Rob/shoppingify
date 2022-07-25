@@ -4,6 +4,7 @@ import SideNav from './components/navigation/Navbar';
 import ListContainer from './components/ListContainer';
 import History from './components/History';
 import Analysis from './components/Analysis';
+import ItemSection from './components/itemSection';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
           <Route path='/history' element={<History />} />
           <Route path='/analysis' element={<Analysis />} />
         </Routes>  
-      </main>          
+      </main>
+       <ItemSection />
     </div>
   );
 }
