@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from './Button';
+import ShoppingList from './ShoppingList';
 
 const ItemSection = () => {
   return (
@@ -9,11 +10,13 @@ const ItemSection = () => {
             <img src="" alt="" />
           </div>
           <div>
-            <p></p>
+            <p>Didn't find what you need?</p>
             <Button name="Add item" />
           </div>        
       </div>
-      <div className="shopping-list"></div>
+      <div className="shopping-list">
+        <ShoppingList />
+      </div>
       <div className="list-bottom"></div>      
     </section>
   );
