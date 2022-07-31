@@ -5,6 +5,7 @@ import ListContainer from './components/List/ListContainer';
 import History from './components/History';
 import Analysis from './components/Analysis';
 import ItemSection from './components/itemSection';
+import './styles/App.css'
 
 function App() {
   return (
