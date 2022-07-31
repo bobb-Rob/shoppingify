@@ -1,5 +1,4 @@
-
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap');
 
 * {
   margin: 0;
@@ -7,13 +6,8 @@
   box-sizing: border-box;
 }
 
-:root {                                                                                
+:root {
   --orange: #F9A109;
   --navIconColor: #454545;
   --white: #fff;
-}
-
-.App {
-  display: grid; 
-  grid-template-columns: 61.58px 1fr 24.3rem; 
 }
