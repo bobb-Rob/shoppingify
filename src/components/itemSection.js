@@ -3,7 +3,7 @@ import Button from './Button';
 import ShoppingList from './ShoppingList';
 
 const ItemSection = () => (
-  <section className="Items">
+  <section className="Items border">
     <div className="list-top">
       <div>
         <img src="" alt="" />

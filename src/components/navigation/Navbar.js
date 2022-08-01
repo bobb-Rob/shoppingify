@@ -9,13 +9,13 @@ import logo from '../../assets/logo.svg';
 import '../../styles/sidenav.css';
 
 const SideNav = () => (
-  <nav className="side-navbar">
-    <div>
+  <nav className="grid grid-rows-[1fr 1fr 1fr] py-6 w-[61.58px] h-[100vh]">
+    <div className="flex justify-center">
       <Link to="/">
         <img src={logo} alt="Shoppingify Logo" />
       </Link>
     </div>
-    <div>
+    <div className="flex justify-evenly flex-col relative items-center">
       <NavLinkEl
         to="/"
         icon={<FaListUl size={21} />}
@@ -29,7 +29,9 @@ const SideNav = () => (
         icon={<MdOutlineAnalytics size={22} />}
       />
     </div>
-    <div>
+    <div
+      className="flex justify-center items-center self-end justify-self-center rounded-[50%] bg-orange w-[42px] h-[42px]"
+    >
       <NavLink
         to="cart"
         style={{ color: 'var(--white)' }}
