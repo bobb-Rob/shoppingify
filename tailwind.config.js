@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
+    './src/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
     screens: {
@@ -15,9 +15,11 @@ module.exports = {
     },
     colors: {
       orange: '#f9a109',
+      darkgrey: '#34333A',
       grey: '#454545',
-      white: '#fff',      
-    }, 
+      white: '#fff',
+      black: '#000000',
+    },
     extend: {
       gridTemplateColumns: {
         desktop: '61.58px 1fr 24.3rem',
@@ -25,4 +27,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};

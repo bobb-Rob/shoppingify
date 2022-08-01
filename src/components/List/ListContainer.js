@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from './Header';
 
-const ListContainer = () => {
-  return (
-    <div>
-      <Header />
-    </div>
-  )
-}
+const ListContainer = () => (
+  <div
+    className="bg-[#fff] h-[100vh] p-8"
+  >
+    <Header />
+  </div>
+);
 
 export default ListContainer;

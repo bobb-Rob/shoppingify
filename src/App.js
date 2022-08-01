@@ -5,20 +5,20 @@ import ListContainer from './components/List/ListContainer';
 import History from './components/History';
 import Analysis from './components/Analysis';
 import ItemSection from './components/itemSection';
-import './styles/App.css'
+import './styles/App.css';
 
 function App() {
   return (
     <div className="grid md:grid-cols-desktop">
       <SideNav />
-      <main className='container'>
+      <main className="container">
         <Routes>
-          <Route path='/' element={<ListContainer />} />
-          <Route path='/history' element={<History />} />
-          <Route path='/analysis' element={<Analysis />} />
-        </Routes>  
+          <Route path="/" element={<ListContainer />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/analysis" element={<Analysis />} />
+        </Routes>
       </main>
-       <ItemSection />
+      <ItemSection />
     </div>
   );
 }
