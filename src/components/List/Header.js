@@ -5,7 +5,7 @@ import { BiSearchAlt2 } from 'react-icons/bi';
 const Header = () => {
 
   return (
-    <header className="flex items-center border">
+    <header className="flex items-center">
       <span className="text-2xl font-poppins font-semibold">
         <span className="text-orange">Shoppingify </span>
         allows you take your
