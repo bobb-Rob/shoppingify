@@ -9,7 +9,7 @@ const ItemSection = () => (
         <img src="" alt="" />
       </div>
       <div>
-        <p>Didn't find what you need?</p>
+        <p>Didn&#39;t find what you need?</p>
         <Button name="Add item" />
       </div>
     </div>

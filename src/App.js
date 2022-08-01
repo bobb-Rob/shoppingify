@@ -9,7 +9,7 @@ import './styles/App.css';
 
 function App() {
   return (
-    <div className="grid md:grid-cols-desktop">
+    <div className="grid md:grid-cols-desktop font-quicksand">
       <SideNav />
       <main className="container">
         <Routes>

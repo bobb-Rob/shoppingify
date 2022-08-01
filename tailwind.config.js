@@ -11,7 +11,7 @@ module.exports = {
       xl: '1440px',
     },
     fontFamily: {
-      poppins: ['Poppins', 'sans-serif'],
+      quicksand: ['Quicksand', 'sans-serif'],
     },
     colors: {
       orange: '#f9a109',
