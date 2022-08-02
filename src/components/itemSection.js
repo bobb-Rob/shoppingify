@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Button from './Button';
 import ShoppingList from './ShoppingList';
 import sourceBottle from '../assets/source.svg';
@@ -15,10 +16,12 @@ const ItemSection = () => (
       </div>
       <div className="py-4 pl-9 font-bold">
         <p>Didn&#39;t find what you need?</p>
-        <Button
-          klassName="bg-white text-black rounded-xl mt-2"
-          name="Add item"
-        />
+        <Link to="/add-item">
+          <Button
+            klassName="bg-white text-black rounded-xl mt-2"
+            name="Add item"
+          />
+        </Link>
       </div>
     </div>
     <div className="shopping-list">
