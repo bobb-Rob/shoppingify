@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import Button from '../reusables/Button';
 import { hideAddItemForm } from '../../redux/AddItemReducers/AddItemReducers';
+import Select from './CreatableSelect';
 
 const AddItem = () => {
   const dispatch = useDispatch();
@@ -35,11 +36,7 @@ const AddItem = () => {
       </div>
       <div>
         <label htmlFor="category">Category</label>
-        <input
-          type="text"
-          placeholder="Enter a category"
-          id="category"
-        />
+        <Select />
       </div>
       <div>
         <Button
