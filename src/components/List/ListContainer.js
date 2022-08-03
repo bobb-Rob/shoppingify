@@ -1,11 +1,15 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import Header from './Header';
 
 const ListContainer = () => (
   <div
-    className="bg-[#fff] h-[100vh] p-6"
+    className="grid md:grid-cols-routes bg-[#fff] h-[100vh]"
   >
-    <Header />
+    <>
+      <Header />
+    </>
+    <Outlet />
   </div>
 );
 

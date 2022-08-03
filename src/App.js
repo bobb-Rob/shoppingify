@@ -5,7 +5,7 @@ import ListContainer from './components/List/ListContainer';
 import History from './components/History';
 import Analysis from './components/Analysis';
 import ItemSection from './components/itemSection';
-import AddItem from './components/AddItemForm/AddItem';
+// import AddItem from './components/AddItemForm/AddItem';
 import './styles/App.css';
 
 function App() {
@@ -14,17 +14,24 @@ function App() {
       <SideNav />
       <main className="container">
         <Routes>
-          <Route path="/" element={<ListContainer />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/analysis" element={<Analysis />} />
+          <Route path="/" element={<ListContainer />}>
+            <Route path="/" element={<ItemSection />} />
+          </Route>
+          <Route path="/history" element={<History />}>
+            <Route path="" element={<ItemSection />} />
+          </Route>
+          <Route path="/analysis" element={<Analysis />}>
+            <Route path="" element={<ItemSection />} />
+          </Route>
         </Routes>
       </main>
-      <aside>
+      {/* <aside>
         <Routes>
-          <Route path="/" element={<ItemSection />} />
-          <Route path="/add-item" element={<AddItem />} />
+          <Route path="/" element={<ItemSection />}>
+            <Route index element={<AddItem />} />
+          </Route>
         </Routes>
-      </aside>
+      </aside> */}
     </div>
   );
 }
