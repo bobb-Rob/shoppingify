@@ -1,9 +1,13 @@
 /* eslint-disable */
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import Button from '../reusables/Button';
+import { hideAddItemForm } from '../../redux/AddItemReducers/AddItemReducers';
 
 const AddItem = () => {
+  const dispatch = useDispatch();
   return (
-    <form>
+    <form className="p-5">
       <h3>Add a new item</h3>
       <div>
         <label htmlFor="name">Name</label>
@@ -32,10 +36,17 @@ const AddItem = () => {
       <div>
         <label htmlFor="category">Category</label>
         <input
-          type="url"
-          placeholder="Enter a url"
+          type="text"
+          placeholder="Enter a category"
           id="category"
         />
+      </div>
+      <div>
+        <Button
+          name="Cancel"
+          onClick={() => dispatch(hideAddItemForm())}
+        />
+        <input type="submit" value="Save" />
       </div>
     </form>
   )
