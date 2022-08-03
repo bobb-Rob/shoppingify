@@ -6,9 +6,9 @@ const ListContainer = () => (
   <div
     className="grid md:grid-cols-routes bg-[#fff] h-[100vh]"
   >
-    <>
+    <div>
       <Header />
-    </>
+    </div>
     <Outlet />
   </div>
 );

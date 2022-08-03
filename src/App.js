@@ -5,7 +5,6 @@ import ListContainer from './components/List/ListContainer';
 import History from './components/History';
 import Analysis from './components/Analysis';
 import ItemSection from './components/itemSection';
-// import AddItem from './components/AddItemForm/AddItem';
 import './styles/App.css';
 
 function App() {
@@ -25,13 +24,6 @@ function App() {
           </Route>
         </Routes>
       </main>
-      {/* <aside>
-        <Routes>
-          <Route path="/" element={<ItemSection />}>
-            <Route index element={<AddItem />} />
-          </Route>
-        </Routes>
-      </aside> */}
     </div>
   );
 }
