@@ -30,11 +30,11 @@ const AddItem = () => {
         />
       </div>
       <div>
-        <label htmlFor="imageUrl">Image (optional)</label>
+        <label htmlFor="category">Category</label>
         <input
           type="url"
           placeholder="Enter a url"
-          id="imageUrl"
+          id="category"
         />
       </div>
     </form>

@@ -6,7 +6,6 @@ import { IoMdRefresh } from 'react-icons/io';
 import { BsCart3 } from 'react-icons/bs';
 import NavLinkEl from './NavLink';
 import logo from '../../assets/logo.svg';
-import '../../styles/sidenav.css';
 
 const SideNav = () => (
   <nav className="grid grid-rows-[1fr 1fr 1fr] py-6 w-[61.58px] h-[100vh]">
