@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import rightDisplayReducer from './AddItemReducers/AddItemReducers';
+import rightDisplayReducer from './RSidebarReducers/RSidebarReducers';
+import ItemListReducers from './ItemList/ItemListReducers';
 
 const store = configureStore({
   reducer: {
-    isDisplayedReducer: rightDisplayReducer,
+    RSidebarReducers: rightDisplayReducer,
+    list: ItemListReducers,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

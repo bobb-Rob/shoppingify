@@ -1,49 +1,20 @@
 import React from 'react';
 import CreatableSelect from 'react-select/creatable';
+import PropTypes from 'prop-types';
 
-const Select = () => {
-  const colourOptions = [
-    {
-      value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true,
-    },
-    {
-      value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true,
-    },
-    {
-      value: 'purple', label: 'Purple', color: '#5243AA',
-    },
-    {
-      value: 'red', label: 'Red', color: '#FF5630', isFixed: true,
-    },
-    {
-      value: 'orange', label: 'Orange', color: '#FF8B00',
-    },
-    {
-      value: 'yellow', label: 'Yellow', color: '#FFC400',
-    },
-    {
-      value: 'green', label: 'Green', color: '#36B37E',
-    },
-  ];
-
-  const handleChange = (inputValue, actionMeta) => {
-    console.log(inputValue);
-    console.log(actionMeta.action);
-  };
-
-  const handleInputChange = (newValue, actionMeta) => {
-    console.log(newValue);
-    console.log(actionMeta.action);
-  };
-
-  return (
-    <CreatableSelect
-      isClearable
-      onChange={handleChange}
-      onInputChange={handleInputChange}
-      options={colourOptions}
-    />
-  );
-};
+const Select = ({ handleChange, options }) => (
+  <CreatableSelect
+    isClearable
+    onChange={handleChange}
+    options={options}
+  />
+);
 
 export default Select;
+
+Select.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  ).isRequired,
+};

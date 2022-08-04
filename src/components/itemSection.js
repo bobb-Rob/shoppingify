@@ -7,7 +7,7 @@ import AddItemForm from './AddItemForm/AddItem';
 
 
 const ItemSection = () => {
-  const isDisplayed = useSelector((state) => state.isDisplayedReducer.isDisplayed);
+  const isDisplayed = useSelector((state) => state.RSidebarReducers.isDisplayed);
   console.log(isDisplayed);
   return (
     <section className="Items ">

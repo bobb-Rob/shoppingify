@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import ShoppingList from './ShoppingList';
 import Button from '../reusables/Button';
-import { showAddItemForm } from '../../redux/AddItemReducers/AddItemReducers';
+import { showAddItemForm } from '../../redux/RSidebarReducers/RSidebarReducers';
 import sourceBottle from '../../assets/source.svg';
 
 const ShoppingListHolder = () => {
