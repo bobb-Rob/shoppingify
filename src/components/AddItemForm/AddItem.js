@@ -6,39 +6,34 @@ import { hideAddItemForm } from '../../redux/RSidebarReducers/RSidebarReducers';
 import { updateItems, addtoList } from '../../redux/ItemList/ItemListReducers';
 import Select from './CreatableSelect';
 import getCategories from '../../helperFunctions/getCategories';
+import { getCategoryOptions } from '../../helperFunctions/getCategories';
 
 const AddItem = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.list);
  
-  const { name, note, image } = state.item;
+  const { name, note, image, category } = state.item;
 
-  const categories = getCategories(state);
-  console.log(categories);
-  const colourOptions = [
-    {
-      value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true,
-    },
-    {
-      value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true,
-    },
-  ];
+  const categoryOptions = getCategoryOptions(getCategories(state)); 
 
   const handleChange = (e) => {
     const input = e.target.value;
     const inputName = e.target.name;
-    const newItem = { ...state.item };
-    
+    const newItem = { ...state.item };    
     dispatch(updateItems({ ...newItem, [inputName]: input}));
   };
 
-  const handleSelectChange = (inputValue, actionMeta) => {
-    console.log(inputValue);
-    console.log(actionMeta.action);
+  const handleSelectChange = (newValue) => {
+    console.log(newValue);
     const newItem = { ...state.item };
-    if(inputValue.value) {
-      dispatch(updateItems({ ...newItem, category: inputValue.value}));
+    if(newValue === null) return;
+    if(newValue.value) {
+      dispatch(updateItems({ ...newItem, category: newValue.value}));
     }
+  };
+
+  const onInputChange = (inputValue) => {
+
   };
 
   const handleSubmit = (e) => {
@@ -86,7 +81,8 @@ const AddItem = () => {
         <label htmlFor="category">Category</label>
         <Select
           handleChange={handleSelectChange}
-          options={colourOptions}
+          options={categoryOptions}
+          onInputChange={onInputChange}
         />
       </div>
       <div>

@@ -18,6 +18,6 @@ let obj = {
   value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true,
 };
 
-export const categoryOptions = (categories) => {
+export const getCategoryOptions = (categories) => {
   return categories.map((item) => ({ value: item, label: item, color: '#00B8D9' }));
 }

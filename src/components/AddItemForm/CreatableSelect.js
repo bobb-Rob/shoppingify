@@ -2,10 +2,11 @@ import React from 'react';
 import CreatableSelect from 'react-select/creatable';
 import PropTypes from 'prop-types';
 
-const Select = ({ handleChange, options }) => (
+const Select = ({ handleChange, options, onInputChange }) => (
   <CreatableSelect
     isClearable
     onChange={handleChange}
+    onInputChange={onInputChange}
     options={options}
   />
 );
@@ -17,4 +18,5 @@ Select.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   ).isRequired,
+  onInputChange: PropTypes.func.isRequired,
 };
