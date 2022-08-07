@@ -3,7 +3,7 @@ import { HiOutlinePlusSm } from 'react-icons/hi';
 import PropTypes from 'prop-types';
 
 const ItemCard = ({ itemName }) => (
-  <div>
+  <div className="flex rounded-5">
     <span>{itemName}</span>
     <button
       type="button">
