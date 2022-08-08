@@ -3,10 +3,11 @@ import { HiOutlinePlusSm } from 'react-icons/hi';
 import PropTypes from 'prop-types';
 
 const ItemCard = ({ itemName }) => (
-  <div className="flex rounded-5">
+  <div className="flex border max-w-max rounded-xl px-3 mr-3">
     <span>{itemName}</span>
     <button
-      type="button">
+      type="button"
+    >
       <HiOutlinePlusSm />
     </button>
   </div>
@@ -14,6 +15,6 @@ const ItemCard = ({ itemName }) => (
 
 export default ItemCard;
 
-ItemCard.proptypes = {
+ItemCard.propTypes = {
   itemName: PropTypes.string.isRequired,
 };
