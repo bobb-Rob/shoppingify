@@ -19,11 +19,12 @@ const ListContainer = () => {
         <Header />
         <div>
           {items2d.map((categoryArray) => {
-            const categoryName = categoryArray[0].category;
+            let categoryNam = categoryArray[0].category;
+            categoryNam = categoryNam.charAt(0).toUpperCase() + categoryNam.slice(1).toLowerCase();
             return (
               <CategoryCard
                 key={uuidv4()}
-                categoryName={categoryName}
+                categoryName={categoryNam}
                 categoryArray={categoryArray}
               />
             );
