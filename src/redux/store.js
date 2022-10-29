@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import rightDisplayReducer from './RSidebarReducers/RSidebarReducers';
 import ItemListReducers from './ItemList/ItemListReducers';
-import userReducer from './RSidebarReducers/user/userSlice';
+import userReducer from './user/userSlice';
 
 const store = configureStore({
   reducer: {

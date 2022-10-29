@@ -1,15 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../DataProvider';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+// import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { HiOutlineUser, HiOutlineMail, HiOutlineArrowSmRight } from 'react-icons/hi';
 import { RiUserLine } from 'react-icons/ri';
 import { MdOutlineLock } from 'react-icons/md';
 import BackArrow from '../reusables/BackArrow';
+import { registerUser } from '../../redux/user/userSlice';
 
 const Registration = () => {
-  const { onSubmit } = useContext(UserContext);
-  const { register, handleSubmit, formState: {errors} } = useForm({
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState([]);
+
+  const { dispatch } = useContext(UserContext);  
+  const navigate = useNavigate();
+  const { register, handleSubmit, reset, formState: {errors} } = useForm({
     defaultValues: {
       username: '',
       first_name: '',
@@ -19,10 +26,53 @@ const Registration = () => {
     }
   });
 
+  useEffect(() => {
+    if (isSubmitted) {
+      reset();
+      setTimeout(() => {
+        setIsSubmitted(false);
+        navigate('/login');
+      }, 3000);
+    } else if (isError) {
+      setTimeout(() => {
+        setIsError(false);
+      }, 3000);
+    }
+  }, [isSubmitted, reset, navigate, isError]); 
+
+  const onSubmit = (user, e) => {
+    e.preventDefault();
+    console.log(user);
+    dispatch(registerUser(user)).then((response) => {
+      console.log(response);
+      if(response.type === 'user/registerUser/fulfilled') {
+        if (response.payload.status.code === 200) {
+          setIsSubmitted(true);
+        } else {
+          setIsError(true);
+          console.log(response.payload.status.error);
+          setErrorMessage(response.payload.status.error);
+        }
+      } else {
+        setIsError(true);
+      }
+    });
+  };
+
+  const disPlayError = () => {
+    return errorMessage.map((error, index) => {
+      return (<p key={index}>{error}</p>);
+    });
+  };
+
   return (
     <div className="user-container flex flex-col space-between">
       <BackArrow classNam={"register-back-btn"} />
       <div className="user-form-wrap flex flex-col">
+        <div>
+          <p>{ isSubmitted && 'Registration successful' }</p>
+          { isError && disPlayError() }
+        </div>
         <h2>Create Account</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="relative mb-4">

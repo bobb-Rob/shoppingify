@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import setJwtToken from './saveJwtToken';
 
 export const registerUser = createAsyncThunk(
-  'authentication/signUpUser',
+  'user/registerUser',
   async (user, { rejectWithValue }) => {
     try {
       const response = await fetch('http://localhost:3001/users', {
@@ -22,7 +22,7 @@ export const registerUser = createAsyncThunk(
 );
 
 export const loginUser = createAsyncThunk(
-  'authentication/signInUser',
+  'user/loginUser',
   async (user, { rejectWithValue }) => {
     try {
       const response = await fetch('http://localhost:3001/users/sign_in', {
@@ -56,6 +56,13 @@ const userSlice = createSlice({
       const newState = {
         ...state,
         user: action.payload,
+      };
+      return newState;
+    },
+    [registerUser.rejected]: (state, action) => {
+      const newState = {
+        ...state,
+        user: action.payload.error,
       };
       return newState;
     },

@@ -5,26 +5,10 @@ import { useDispatch } from 'react-redux';
 export const UserContext = createContext();
 
 const DataProvider = ({children}) => {
-  const dispatch = useDispatch(); 
-  
-  const onSubmit = (user, e) => {
-    e.preventDefault();
-    console.log(user)
-    // dispatch(registerUser(user)).then((response) => {
-    //   const { code } = response.payload.status;
-    //   if (code === 200) {
-    //     setUser({
-    //       name: '',
-    //       email: '',
-    //       password: '',
-    //     });
-    //   }
-    // });
-  };
-
+  const dispatch = useDispatch();
   return (
     <UserContext.Provider value={{
-      dispatch, onSubmit
+      dispatch,
     }}>
       {children}
     </UserContext.Provider>
