@@ -1,30 +1,16 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import SideNav from './components/navigation/Navbar';
-import ListContainer from './components/List/ListContainer';
-import History from './components/History';
-import Analysis from './components/Analysis';
-import ItemSection from './components/itemSection';
+import Routing from './components/Routing';
+import DataProvider from './components/DataProvider';
 import './styles/App.css';
+import './styles/user.css';
 
 function App() {
   return (
-    <div className="grid md:grid-cols-desktop font-quicksand">
-      <SideNav />
-      <main className="container">
-        <Routes>
-          <Route path="/" element={<ListContainer />}>
-            <Route path="/" element={<ItemSection />} />
-          </Route>
-          <Route path="/history" element={<History />}>
-            <Route path="" element={<ItemSection />} />
-          </Route>
-          <Route path="/analysis" element={<Analysis />}>
-            <Route path="" element={<ItemSection />} />
-          </Route>
-        </Routes>
-      </main>
-    </div>
+    <DataProvider>
+      {/* <main className="grid md:grid-cols-desktop font-quicksand"> */}
+        <Routing />
+      {/* </main> */}
+    </DataProvider>
   );
 }
 

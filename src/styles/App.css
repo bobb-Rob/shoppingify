@@ -8,8 +8,12 @@
 
 :root {
   --orange: #F9A109;
+  --orange: #895803;
   --navIconColor: #454545;
   --white: #fff;
+  --peach: #FFF0DE;
+  --darkGray: #313131;
+  --light-grey: #e4e2e2;
 }
 
 .nav-wrap {

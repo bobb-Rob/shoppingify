@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { showDetails } from '../../redux/RSidebarReducers/RSidebarReducers';
 
-const ItemCard = ({ itemName }) => {
+const ItemCard = ({ itemName, id }) => {
   const dispatch = useDispatch();
 
   return (
     <button
       type="button"
       className="flex border max-w-max rounded-xl px-3 mr-3"
-      onClick={() => dispatch(showDetails())}
+      onClick={() => dispatch(showDetails(id))}
     >
       <span>{itemName}</span>
       <button
@@ -27,4 +27,5 @@ export default ItemCard;
 
 ItemCard.propTypes = {
   itemName: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };

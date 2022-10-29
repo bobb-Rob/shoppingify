@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { BsArrowLeft } from 'react-icons/bs';
-import propTypes from 'prop-types';
+import { HiArrowNarrowLeft } from 'react-icons/hi';
+
 
 const BackArrow = ({ classNam }) => {
   const navigate = useNavigate();
@@ -11,14 +12,14 @@ const BackArrow = ({ classNam }) => {
       onClick={() => navigate(-1)}
       className={"back-arrow " + classNam}
     >
-      <BsArrowLeft />
+      <HiArrowNarrowLeft />
     </button>
   );
 };
 
 export default BackArrow;
 
-const propTypes = {
+BackArrow.propTypes = {
   classNam: PropTypes.string,
 };
 
