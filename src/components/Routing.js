@@ -1,22 +1,15 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
 // import SideNav from './navigation/Navbar';
 import Splash from './user/Splash';
-import Login from './user/Login';
-import Registration from './user/Registration';
 
 const Routing = () => {
-  const routes = [
-    { path: '/', element: <Splash /> },
-  ];
-  console.log(routes);
   return (
     <>
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Splash />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Registration />} />
-      </Routes>
+      </Routes> */}
       {/* <SideNav /> */}
       {/* <main className="container">
         <Routes>
