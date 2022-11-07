@@ -30,6 +30,7 @@ const ShoppingListHolder = () => {
       <div className="shopping-list">
         <ShoppingList />
       </div>
+      
       <div className="list-bottom" />
     </div>
   );
