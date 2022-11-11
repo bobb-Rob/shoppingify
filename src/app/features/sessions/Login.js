@@ -37,6 +37,18 @@ const Login = () => {
     e.preventDefault();
     setAllErrors([]);
     console.log(user);
+    const payload = {
+      email: user.email,
+      password: user.password,
+    };
+    // const response = await dispatch(login(payload));
+    const response = [];
+    console.log(response);
+    if (errorMessages.length > 0) {
+      navigate('/');
+    } else {
+      return setAllErrors(errorMessages);
+    }
   };
 
   return (
