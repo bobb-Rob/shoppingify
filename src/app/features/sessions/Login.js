@@ -1,22 +1,23 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { HiOutlineArrowSmRight, HiOutlineMail } from 'react-icons/hi';
 import { MdOutlineLock } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const errorMessages = [];
-  const loading = false;
+  let errorMessages = useSelector((state) => state.session.errorMessages);
+  // const loading = useSelector((state) => state.session.loading);
   const [allErrors, setAllErrors] = useState([]);
-  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  console.log(allErrors);
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -44,11 +45,13 @@ const Login = () => {
     // const response = await dispatch(login(payload));
     const response = [];
     console.log(response);
+    console.log(payload);
     if (errorMessages.length > 0) {
       navigate('/');
     } else {
       return setAllErrors(errorMessages);
     }
+    return null;
   };
 
   return (
@@ -105,7 +108,7 @@ const Login = () => {
       </div>
       <div>
         <span>
-          Don't have an account?
+          Don&apos;t have an account?
           <Link to="/signup" className="">
             Sign up
           </Link>
