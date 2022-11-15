@@ -1,0 +1,81 @@
+.splash-logo {
+  height: 18rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orange);
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.action-btn > a {
+  margin: 1rem 0.5rem;
+  color: var(--darkGray);
+  border: 2px solid var(--orange);
+  border-radius: 24px;
+  padding: 0.2rem 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  width: 75%;
+}
+
+.splash-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.icons-wrap {
+  background-color: var(--light-grey);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 2.5rem 1rem;
+}
+
+/* Sign up CSS start here */
+
+.user-container {
+  background-image: url(../assets/login-bg-ilustration.svg);
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+  background-size: 40%;
+  height: 100vh;
+  position: relative;
+}
+
+.user-form-wrap {
+  border: 1px solid red;
+  padding: 11rem 1.6rem 1rem 1.6rem;
+}
+
+.user-form-wrap > h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--darkGray);
+  margin-bottom: 1rem;
+}
+
+.user-form-wrap > form {
+  /* border: 1px solid red; */
+}
+
+.register-back-btn {
+  position: absolute;
+  top: 2.5rem;
+  left: 1.6rem;
+  color: var(--darkGray);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.border-bottom {
+  border-bottom: 1px solid var(--light-grey);
+}

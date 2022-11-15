@@ -1,25 +1,62 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import SideNav from './components/navigation/Navbar';
-import ListContainer from './components/List/ListContainer';
-import History from './components/History';
-import Analysis from './components/Analysis';
-import ItemSection from './components/itemSection';
-import './styles/App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Dashboard from './app/features/dashboard/Dashboard';
+import PrivateRoute from './app/features/routes/PrivateRoute';
+import PublicOnlyRoute from './app/features/routes/PublicRoute';
+import Login from './app/features/sessions/Login';
+import Logout from './app/features/sessions/Logout';
+import PersistLogin from './app/features/sessions/PersistLogin';
+import SignUp from './app/features/sessions/SignUp';
+import DataProvider from './app/DataProvider';
+import './styles/App.css';
+import './styles/user.css';
 
 function App() {
   return (
-    <div className="grid md:grid-cols-desktop">
-      <SideNav />
-      <main className='container'>
-        <Routes>
-          <Route path='/' element={<ListContainer />} />
-          <Route path='/history' element={<History />} />
-          <Route path='/analysis' element={<Analysis />} />
-        </Routes>  
-      </main>
-       <ItemSection />
-    </div>
+    <DataProvider>
+      <Router>
+        {/* <main className="grid md:grid-cols-desktop font-quicksand"> */}
+        <main>
+          <Routes>
+            <Route element={<PersistLogin />}>
+              <Route
+                path="/"
+                element={(
+                  <PrivateRoute>
+                    <Dashboard />
+                  </PrivateRoute>
+              )}
+              />
+              <Route
+                path="/logout"
+                element={(
+                  <PrivateRoute>
+                    <Logout />
+                  </PrivateRoute>
+                )}
+              />
+              <Route
+                path="/login"
+                element={(
+                  <PublicOnlyRoute>
+                    <Login />
+                  </PublicOnlyRoute>
+                )}
+              />
+              <Route
+                path="/signup"
+                element={(
+                  <PublicOnlyRoute>
+                    <SignUp />
+                  </PublicOnlyRoute>
+                )}
+              />
+            </Route>
+          </Routes>
+        </main>
+        {/* </main> */}
+      </Router>
+    </DataProvider>
   );
 }
 

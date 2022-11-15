@@ -1,23 +1,20 @@
+/* eslint-disable */
 import React from 'react';
-import Button from './Button';
-import ShoppingList from './ShoppingList';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux/es/exports';
+import ShoppingListHolder from './shoppingList/shoppingListHolder';
+import AddItemForm from './AddItemForm/AddItem';
+import ItemDetails from './itemDetails/itemDetails';
+
 
 const ItemSection = () => {
+  const isDisplayed = useSelector((state) => state.RSidebarReducers.isDisplayed);
+  console.log(isDisplayed);
   return (
-    <section className='Items'>
-      <div className="list-top">
-           <div>
-            <img src="" alt="" />
-          </div>
-          <div>
-            <p>Didn't find what you need?</p>
-            <Button name="Add item" />
-          </div>        
-      </div>
-      <div className="shopping-list">
-        <ShoppingList />
-      </div>
-      <div className="list-bottom"></div>      
+    <section className="Items ">
+      {isDisplayed === 'shoppingList' && <ShoppingListHolder />} 
+      {isDisplayed === 'addItemForm' && <AddItemForm />}    
+      {isDisplayed === 'showDetails' && <ItemDetails />}    
     </section>
   );
 };
