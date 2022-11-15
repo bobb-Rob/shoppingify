@@ -1,11 +1,12 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function PrivateRoute({ children }) {
-  const accessToken = false;
-  const loading = false;
-  const navigate = useNavigate();
+  const accessToken = useSelector((state) => state.session.accessToken);
+  const loading = useSelector((state) => state.session.loading);
+  // const navigate = useNavigate();
   const location = useLocation();
   const fromLocation = location.state?.from;
   const previousLocation = location.state
@@ -14,13 +15,16 @@ function PrivateRoute({ children }) {
 
   if (accessToken) {
     return children;
-  } else if (loading) {
-    return <div>Loading...</div>;
-  } else if (!accessToken && !loading) {
-    return <Navigate to={previousLocation} state={{ from: location }} replace />;
-  } else {
-    return <div>Something went wrong</div>;
   }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (!accessToken && !loading) {
+    return (
+      <Navigate to={previousLocation} state={{ from: location }} replace />
+    );
+  }
+  return <div>Something went wrong</div>;
 }
 
 export default PrivateRoute;

@@ -7,7 +7,7 @@ import Login from './app/features/sessions/Login';
 import Logout from './app/features/sessions/Logout';
 import PersistLogin from './app/features/sessions/PersistLogin';
 import SignUp from './app/features/sessions/SignUp';
-import DataProvider from './components/DataProvider';
+import DataProvider from './app/DataProvider';
 import './styles/App.css';
 import './styles/user.css';
 
@@ -21,35 +21,35 @@ function App() {
             <Route element={<PersistLogin />}>
               <Route
                 path="/"
-                element={
+                element={(
                   <PrivateRoute>
                     <Dashboard />
                   </PrivateRoute>
-                }
+              )}
               />
               <Route
                 path="/logout"
-                element={
+                element={(
                   <PrivateRoute>
                     <Logout />
                   </PrivateRoute>
-                }
+                )}
               />
               <Route
                 path="/login"
-                element={
+                element={(
                   <PublicOnlyRoute>
                     <Login />
                   </PublicOnlyRoute>
-                }
+                )}
               />
               <Route
                 path="/signup"
-                element={
+                element={(
                   <PublicOnlyRoute>
                     <SignUp />
                   </PublicOnlyRoute>
-                }
+                )}
               />
             </Route>
           </Routes>

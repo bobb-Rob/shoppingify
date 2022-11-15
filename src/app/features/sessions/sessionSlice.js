@@ -1,4 +1,19 @@
-import { createSlice, createAsyncThunk } from 'redux-toolkit';
+/* eslint-disable no-param-reassign */
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createUserWithEmailAndPassword, getCurrentUser, requestAccessTokenWithRefreshToken } from '../../api/sessionApi';
+
+function setRefreshToken(token) {
+  localStorage.setItem('refreshToken', token);
+}
+
+// function removeRefreshToken() {
+//   localStorage.removeItem('refreshToken');
+// }
+
+function getRefreshToken() {
+  const token = localStorage.getItem('refreshToken');
+  return token;
+}
 
 const initialState = {
   currentUser: {
@@ -16,18 +31,39 @@ const initialState = {
   tokenType: undefined,
 };
 
-const signUpUser = createAsyncThunk(
+export const refreshAccessToken = createAsyncThunk(
+  'session/refreshAccessToken',
+  async (refreshToken, { rejectWithValue }) => {
+    if (!refreshToken) {
+      return rejectWithValue('No refresh token');
+    }
+
+    const refreshResponse = await requestAccessTokenWithRefreshToken(refreshToken);
+
+    if (refreshResponse.errors) {
+      return rejectWithValue(refreshResponse.data);
+    }
+
+    const userResponse = await getCurrentUser(refreshResponse.access_token);
+    if (userResponse.errors) {
+      return rejectWithValue(userResponse.data);
+    }
+    return { ...refreshResponse, ...userResponse };
+  },
+);
+
+export const signUpUser = createAsyncThunk(
   'session/signUpUser',
   async (payload, { rejectWithValue }) => {
     const response = await createUserWithEmailAndPassword(
       payload.email,
-      payload.password
+      payload.password,
     );
     if (response.errors) {
       return rejectWithValue(response.errors);
     }
-    return response.data;
-  }
+    return response;
+  },
 );
 
 const sessionSlice = createSlice({
@@ -36,62 +72,57 @@ const sessionSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(signUpUser.pending, (state, action) => {
+      .addCase(signUpUser.pending, (state) => {
         state.loading = true;
         state.error = false;
         state.errorMessages = [];
       })
       .addCase(signUpUser.fulfilled, (state, action) => {
+        state.accessToken = action.payload.access_token;
+        state.refreshToken = action.payload.refresh_token;
+        state.expiresIn = action.payload.expires_in;
+        state.tokenType = action.payload.token_type;
+        state.currentUser = {
+          id: action.payload.id,
+          email: action.payload.email,
+          role: action.payload.role,
+          createdAt: action.payload.created_at,
+        };
+        setRefreshToken(action.payload.refresh_token);
         state.loading = false;
-        state.accessToken = action.payload.accessToken;
-        state.refreshToken = action.payload.refreshToken;
-        state.expiresIn = action.payload.expiresIn;
-        state.tokenType = action.payload.tokenType;
-        state.currentUser.id = action.payload.id;
-        state.currentUser.email = action.payload.email;
-        state.currentUser.role = action.payload.role;
-        state.currentUser.createdAt = action.payload.createdAt;
+        state.error = false;
+        state.errorMessages = [];
       })
       .addCase(signUpUser.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
         state.errorMessages = action.payload.errors;
       })
-      .addCase('session/logout/pending', (state, action) => {
+      .addCase(refreshAccessToken.pending, (state) => {
         state.loading = true;
         state.error = false;
         state.errorMessages = [];
       })
-      .addCase('session/logout/fulfilled', (state, action) => {
+      .addCase(refreshAccessToken.fulfilled, (state, action) => {
+        state.accessToken = action.payload.access_token;
+        state.refreshToken = action.payload.refresh_token;
+        state.expiresIn = action.payload.expires_in;
+        state.currentUser = {
+          id: action.payload.id,
+          email: action.payload.email,
+          role: action.payload.role,
+          createdAt: action.payload.created_at,
+        };
+        setRefreshToken(action.payload.refresh_token);
         state.loading = false;
-        state.accessToken = undefined;
-        state.refreshToken = undefined;
-        state.expiresIn = undefined;
-        state.tokenType = undefined;
-        state.currentUser.id = undefined;
-        state.currentUser.email = undefined;
-        state.currentUser.role = undefined;
-        state.currentUser.createdAt = undefined;
+        state.error = false;
+        state.errorMessages = [];
       })
-      .addCase('session/logout/rejected', (state, action) => {
+      .addCase(refreshAccessToken.rejected, (state) => {
         state.loading = false;
         state.error = true;
-        state.errorMessages = action.payload;
       });
   },
 });
 
 export default sessionSlice.reducer;
-
-function setRefreshToken(token) {
-  localStorage.setItem('refreshToken', token);
-}
-
-function removeRefreshToken() {
-  localStorage.removeItem('refreshToken');
-}
-
-function getRefreshToken() {
-  const token = localStorage.getItem('refreshToken');
-  return token;
-}

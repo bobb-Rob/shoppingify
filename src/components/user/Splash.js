@@ -11,7 +11,7 @@ const Splash = () => (
     </div>
     <div className="action-btn">
       <Link
-        to="/login"   
+        to="/login"
       >
         <span>Sign In</span>
       </Link>
