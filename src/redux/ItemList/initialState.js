@@ -24,16 +24,23 @@
 //       id: uuidv4(),
 //     },
 //     {
-//       name: 'Chicken leg', note: 'Matured chicken for all families', image: 'shrtco.de/CT5TnR', category: 'meat and fish', id: uuidv4(),
+//       name: 'Chicken leg',
+// note: 'Matured chicken for all families',
+// image: 'shrtco.de/CT5TnR',
+// category: 'meat and fish', id: uuidv4(),
 //     },
 //     {
-//       name: 'Pork Fillet', note: 'Matured chicken for all families', image: 'shrtco.de/VLimLc', category: 'meat and fish', id: uuidv4(),
+//       name: 'Pork Fillet',
+// note: 'Matured chicken for all families',
+// image: 'shrtco.de/VLimLc', category: 'meat and fish', id: uuidv4(),
 //     },
 //     {
-//       name: 'Milo', note: 'Matured chicken for all families', image: 'shrtco.de/VLimLc', category: 'beverages', id: uuidv4(),
+//       name: 'Milo', note: 'Matured chicken for all families',
+// image: 'shrtco.de/VLimLc', category: 'beverages', id: uuidv4(),
 //     },
 //     {
-//       name: 'Creamed Milk', note: 'Milk for families', image: 'shrtco.de/VLimLc', category: 'beverages', id: uuidv4(),
+//       name: 'Creamed Milk', note: 'Milk for families',
+// image: 'shrtco.de/VLimLc', category: 'beverages', id: uuidv4(),
 //     },
 //   ],
 //   item: {

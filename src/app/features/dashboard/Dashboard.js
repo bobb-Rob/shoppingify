@@ -1,5 +1,15 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Navbar from './navbar/Navbar';
 
-const Dashboard = () => <div>Dashboard</div>;
+const DashboardLayout = () => {
 
-export default Dashboard;
+  return (
+  <div className="dashboard-container grid md:grid-cols-desktop font-quicksand">
+    <Navbar />
+    <Outlet />
+  </div>
+  );
+}
+
+export default DashboardLayout;

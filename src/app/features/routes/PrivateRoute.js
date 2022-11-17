@@ -9,6 +9,7 @@ function PrivateRoute({ children }) {
   // const navigate = useNavigate();
   const location = useLocation();
   const fromLocation = location.state?.from;
+  console.log('fromLocation', fromLocation);
   const previousLocation = location.state
     ? fromLocation
     : { pathname: '/login' };

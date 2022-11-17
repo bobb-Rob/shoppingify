@@ -4,25 +4,25 @@ import Splash from './user/Splash';
 
 const Routing = () => (
   <>
-    {/* <Routes>
+    <Routes>
         <Route path="/" element={<Splash />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Registration />} />
-      </Routes> */}
-    {/* <SideNav /> */}
-    {/* <main className="container">
-        <Routes>
-          <Route path="" element={<ListContainer />}>
-            <Route path="" element={<ItemSection />} />
-          </Route>
-          <Route path="/history" element={<History />}>
-            <Route path="" element={<ItemSection />} />
-          </Route>
-          <Route path="/analysis" element={<Analysis />}>
-            <Route path="" element={<ItemSection />} />
-          </Route>
-        </Routes>
-        </main> */}
+      </Routes>
+    <SideNav />
+    <main className="container">
+      <Routes>
+        <Route path="" element={<ListContainer />}>
+          <Route path="" element={<ItemSection />} />
+        </Route>
+        <Route path="/history" element={<History />}>
+          <Route path="" element={<ItemSection />} />
+        </Route>
+        <Route path="/analysis" element={<Analysis />}>
+          <Route path="" element={<ItemSection />} />
+        </Route>
+      </Routes>
+    </main>
   </>
 );
 
