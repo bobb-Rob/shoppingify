@@ -2,13 +2,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux/es/exports';
-import ShoppingListHolder from './shoppingList/shoppingListHolder';
-import AddItemForm from './AddItemForm/AddItem';
-import ItemDetails from './itemDetails/itemDetails';
+import ShoppingListHolder from './shoppingListHolder';
+import AddItemForm from '../items/AddItemForm/AddItem';
+import ItemDetails from '../items/itemDetails';
 
 const shoppingListLayout = () => {
   const isDisplayed = useSelector(
-    (state) => state.RSidebarReducers.isDisplayed
+    (state) => state.shoppingList.isDisplayed
   );
   console.log(isDisplayed);
   return (

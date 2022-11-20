@@ -1,17 +1,16 @@
 import React from 'react';
 import { HiOutlinePlusSm } from 'react-icons/hi';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { showDetails } from '../../redux/RSidebarReducers/RSidebarReducers';
+// import { useDispatch } from 'react-redux';
 
 const ItemCard = ({ itemName, id }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   return (
     <button
       type="button"
       className="flex border max-w-max rounded-xl px-3 mr-3"
-      onClick={() => dispatch(showDetails(id))}
+      // onClick={() => dispatch(showDetails(id))}
     >
       <span>{itemName}</span>
       <button

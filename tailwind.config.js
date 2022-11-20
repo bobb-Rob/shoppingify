@@ -23,7 +23,7 @@ module.exports = {
     },
     extend: {
       gridTemplateColumns: {
-        desktop: '61.58px 1fr',
+        desktop: '61.58px 1fr 24.3rem',
         routes: '1fr 24.3rem',
       },
     },

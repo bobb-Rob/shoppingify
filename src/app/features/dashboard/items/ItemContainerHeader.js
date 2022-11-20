@@ -1,7 +1,7 @@
 import React from 'react';
 import { BiSearchAlt2 } from 'react-icons/bi';
 
-const Header = () => (
+const ItemContainerHeader = () => (
   <header className="flex items-center mb-5">
     <span className="text-[26px] font-semibold grow">
       <span className="text-orange">Shoppingify </span>
@@ -20,4 +20,4 @@ const Header = () => (
   </header>
 );
 
-export default Header;
+export default ItemContainerHeader;

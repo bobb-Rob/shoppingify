@@ -1,8 +1,4 @@
 /* eslint-disable */
-import store from "../redux/store";
-
-console.log(store.getState());
-
 function getCategories (state) {
   const list  = state.itemList;
   let category = [];

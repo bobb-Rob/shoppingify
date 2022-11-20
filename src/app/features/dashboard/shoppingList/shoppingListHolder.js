@@ -1,12 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux/es/hooks/useDispatch';
+// import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import ShoppingList from './ShoppingList';
-import Button from '../reusables/Button';
-import { showAddItemForm } from '../../redux/RSidebarReducers/RSidebarReducers';
-import sourceBottle from '../../assets/source.svg';
+import Button from '../../../reusables/Button';
+// import { showAddItemForm } from '../../redux/RSidebarReducers/RSidebarReducers';
+import sourceBottle from '../../../../assets/source.svg';
 
 const ShoppingListHolder = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   return (
     <div className="bg-peach px-12 py-10 h-[100vh]">
@@ -23,7 +23,7 @@ const ShoppingListHolder = () => {
           <Button
             klassName="bg-white text-black rounded-xl mt-2"
             name="Add item"
-            onClick={() => dispatch(showAddItemForm())}
+            // onClick={() => dispatch(showAddItemForm())}
           />
         </div>
       </div>
