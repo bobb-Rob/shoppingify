@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import DashboardLayout from './app/features/dashboard/Dashboard';
+import DashboardLayout from './app/features/dashboard/DashboardLayout';
 import PrivateRoute from './app/features/routes/PrivateRoute';
 import PublicOnlyRoute from './app/features/routes/PublicRoute';
 import Login from './app/features/sessions/Login';
@@ -10,14 +10,13 @@ import SignUp from './app/features/sessions/signup';
 import DataProvider from './app/DataProvider';
 import './styles/App.css';
 import './styles/user.css';
-import ItemAndShoppingListRoute from './app/features/routes/ItemAndShoppingListRoute';
 
 function App() {
   return (
     <DataProvider>
       <Router>
         {/* <main className="grid md:grid-cols-desktop font-quicksand"> */}
-        <main >
+        <main>
           <Routes>
             <Route element={<PersistLogin />}>
               <Route
@@ -27,12 +26,7 @@ function App() {
                     <DashboardLayout />
                   </PrivateRoute>
                 }
-              >
-                <Route
-                  path="/"
-                  element={<ItemAndShoppingListRoute />}
-                />
-              </Route>
+              />
               {/* <Route
                 path="/logout"
                 element={

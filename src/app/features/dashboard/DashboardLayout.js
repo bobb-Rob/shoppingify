@@ -1,7 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import ListContainer from './items/ListContainer';
+import Navbar from './navbar/Navbar';
 
-const ItemAndShoppingListRoute = () => {
+const DashboardLayout = () => {
+
   return (
+  <div className="dashboard-container grid md:grid-cols-desktop font-quicksand">
+    <Navbar />
     <div>
       <Routes>
         <Route path="" element={<ListContainer />}>
@@ -15,7 +21,13 @@ const ItemAndShoppingListRoute = () => {
         </Route>
       </Routes>
     </div>
-  )
+  </div>
+  );
 }
 
-export default ItemAndShoppingListRoute;
+export default DashboardLayout;
+
+DashboardLayout.propTypes = {
+  main: PropTypes.element.isRequired,
+};
+
