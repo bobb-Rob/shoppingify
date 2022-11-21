@@ -1,9 +1,8 @@
 import React from 'react';
-import propTypes from 'prop-types';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-function PrivateRoute({ children }) {
+function PrivateRoute() {
   const accessToken = useSelector((state) => state.session.accessToken);
   const loading = useSelector((state) => state.session.loading);
   // const navigate = useNavigate();
@@ -15,7 +14,7 @@ function PrivateRoute({ children }) {
     : { pathname: '/login' };
 
   if (accessToken) {
-    return children;
+    return <Outlet />;
   }
   if (loading) {
     return <div>Loading...</div>;
@@ -29,7 +28,3 @@ function PrivateRoute({ children }) {
 }
 
 export default PrivateRoute;
-
-PrivateRoute.propTypes = {
-  children: propTypes.node.isRequired,
-};

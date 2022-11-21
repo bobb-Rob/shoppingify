@@ -8,6 +8,9 @@ import Login from './app/features/sessions/Login';
 import PersistLogin from './app/features/sessions/PersistLogin';
 import SignUp from './app/features/sessions/signup';
 import DataProvider from './app/DataProvider';
+import History from './app/features/dashboard/history/History';
+import Analysis from './app/features/dashboard/analysis/Analysis';
+import ListContainer from './app/features/dashboard/items/ListContainer';
 import './styles/App.css';
 import './styles/user.css';
 
@@ -21,12 +24,14 @@ function App() {
             <Route element={<PersistLogin />}>
               <Route
                 path="/"
-                element={
-                  <PrivateRoute>
-                    <DashboardLayout />
-                  </PrivateRoute>
-                }
-              />
+                element={<PrivateRoute/>}
+              >
+                <Route element={<DashboardLayout /> }>
+                  <Route path="" element={<ListContainer />} />
+                  <Route path="/history" element={<History />} />
+                  <Route path="/analysis" element={<Analysis />} />
+                </Route>    
+              </Route>
               {/* <Route
                 path="/logout"
                 element={

@@ -7,8 +7,7 @@ const ItemCard = ({ itemName, id }) => {
   // const dispatch = useDispatch();
 
   return (
-    <button
-      type="button"
+    <div     
       className="flex border max-w-max rounded-xl px-3 mr-3"
       onClick={() => console.log(id)}
     >
@@ -18,7 +17,7 @@ const ItemCard = ({ itemName, id }) => {
       >
         <HiOutlinePlusSm />
       </button>
-    </button>
+    </div>
   );
 };
 
