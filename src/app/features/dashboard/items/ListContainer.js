@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet } from 'react-router-dom';
 import ItemContainerHeader from './ItemContainerHeader';
 import CategoryCard from './categoryCard';
 import { fetchItems } from './itemSlice';
@@ -20,14 +19,10 @@ const ItemContainer = () => {
   }, [items]);
 
   return (
-    <section className="grid md:grid-cols-routes bg-[#fff] h-[100vh]">
-      <div>
+    <section className="bg-[#fff] h-[100vh] p-5 md:pl-16">  
         <ItemContainerHeader />
-        <div>
-          Here
+        <div className="mt-6">
           {items.map((category) => {
-            // let categoryNam = category[0];
-            // categoryNam = categoryNam.charAt(0).toUpperCase() + categoryNam.slice(1).toLowerCase();
             const { id, name, items} = category;
             return (
               <CategoryCard
@@ -37,9 +32,7 @@ const ItemContainer = () => {
               />
             );
           })}
-        </div>
-      </div>
-      <Outlet />
+        </div>     
     </section>
   );
 };

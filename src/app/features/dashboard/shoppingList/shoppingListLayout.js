@@ -12,7 +12,7 @@ const shoppingListLayout = () => {
   );
   console.log(isDisplayed);
   return (
-    <section className="Items ">
+    <section className="Items hidden md:block">
       {isDisplayed === 'shoppingList' && <ShoppingListHolder />}
       {isDisplayed === 'addItemForm' && <AddItemForm />}
       {isDisplayed === 'showDetails' && <ItemDetails />}

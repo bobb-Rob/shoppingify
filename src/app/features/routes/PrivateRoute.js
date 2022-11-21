@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 function PrivateRoute() {
   const accessToken = useSelector((state) => state.session.accessToken);
   const loading = useSelector((state) => state.session.loading);
-  // const navigate = useNavigate();
   const location = useLocation();
   const fromLocation = location.state?.from;
   console.log('fromLocation', fromLocation);

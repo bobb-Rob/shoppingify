@@ -32,7 +32,7 @@ const SideNav = () => (
       className="flex justify-center items-center self-end justify-self-center rounded-[50%] bg-orange w-[42px] h-[42px]"
     >
       <NavLink
-        to="cart"
+        to="/cart"
         style={{ color: 'var(--white)' }}
       >
         <BsCart3 size={22} />

@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './src/**/*.{js,jsx,ts,tsx}',
-  ],
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     screens: {
       sm: '380px',
@@ -23,7 +21,9 @@ module.exports = {
     },
     extend: {
       gridTemplateColumns: {
-        desktop: '61.58px 1fr 24.3rem',
+        desktop: '61.58px 1fr 20.3rem',
+        mobile: '60px 1fr',
+        itemsContainer: 'repeat(auto-fill, minmax(10rem, 1fr))',
         routes: '1fr 24.3rem',
       },
     },

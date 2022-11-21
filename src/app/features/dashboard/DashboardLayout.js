@@ -10,7 +10,7 @@ const DashboardLayout = () => {
   // Fetch shopping list 
 
   return (
-  <div className="dashboard-container grid md:grid-cols-desktop font-quicksand">
+  <div className="dashboard-container grid grid-cols-mobile md:grid-cols-desktop font-quicksand">
     <Navbar />
     <div>
       <Outlet />

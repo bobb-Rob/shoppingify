@@ -11,8 +11,10 @@ import DataProvider from './app/DataProvider';
 import History from './app/features/dashboard/history/History';
 import Analysis from './app/features/dashboard/analysis/Analysis';
 import ListContainer from './app/features/dashboard/items/ListContainer';
+import ShoppingListLayout from './app/features/dashboard/shoppingList/ShoppingListLayout';
 import './styles/App.css';
 import './styles/user.css';
+import './styles/items.css';
 
 function App() {
   return (
@@ -30,6 +32,7 @@ function App() {
                   <Route path="" element={<ListContainer />} />
                   <Route path="/history" element={<History />} />
                   <Route path="/analysis" element={<Analysis />} />
+                  <Route path="/cart" element={<ShoppingListLayout />} />
                 </Route>    
               </Route>
               {/* <Route

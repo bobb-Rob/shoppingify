@@ -8,14 +8,14 @@ const ItemCard = ({ itemName, id }) => {
 
   return (
     <div     
-      className="flex border max-w-max rounded-xl px-3 mr-3"
+      className="flex w-full rounded-xl p-3 justify-between items-center shadow-[0_2px_8px_-1px_rgba(181,181,181,1)]"
       onClick={() => console.log(id)}
     >
-      <span>{itemName}</span>
+      <span className="font-medium">{itemName}</span>
       <button
         type="button"
       >
-        <HiOutlinePlusSm />
+        <HiOutlinePlusSm className="text-xl" />
       </button>
     </div>
   );
