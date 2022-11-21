@@ -14,8 +14,8 @@ export const fetchItems = createAsyncThunk(
 
 const initialState = {
   items: [],
-  status: 'idle',
-  error: null,
+  loading: false,
+  error: false,
   errorMessages: [],  
 };
 
@@ -38,7 +38,24 @@ const itemsSlice = createSlice({
       }
     }
   },
-  extraReducers: {},
+  extraReducers: {
+    [fetchItems.pending]: (state) => {
+      state.loading = true;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [fetchItems.fulfilled]: (state, action) => {      
+      state.items = state.items.concat(action.payload);
+      state.loading = false;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [fetchItems.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.errorMessages = action.payload.errors;
+    }
+  },
 });
 
 export const { addItem } = itemsSlice.actions;

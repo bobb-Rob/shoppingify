@@ -1,6 +1,6 @@
 import myAxios from './myAxios';
 
-const itemsUrl = '/items';
+const itemsUrl = '/categories';
 
 export async function fetchItemsWithAccessToken(accessToken) {
   const config = {

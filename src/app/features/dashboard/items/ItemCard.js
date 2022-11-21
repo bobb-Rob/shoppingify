@@ -10,7 +10,7 @@ const ItemCard = ({ itemName, id }) => {
     <button
       type="button"
       className="flex border max-w-max rounded-xl px-3 mr-3"
-      // onClick={() => dispatch(showDetails(id))}
+      onClick={() => console.log(id)}
     >
       <span>{itemName}</span>
       <button
@@ -26,5 +26,5 @@ export default ItemCard;
 
 ItemCard.propTypes = {
   itemName: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 };
