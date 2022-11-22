@@ -33,11 +33,14 @@ const shoppingListSlice = createSlice({
       } else {
         existingItem.quantity++;
       }
-    }
+    },
+    displayItemDetails(state) {
+      state.isDisplayed = "showItemDetails";
+    },
   },
   extraReducers: {},
 });
 
-export const { addItem } = shoppingListSlice.actions;
+export const { addItem, displayItemDetails } = shoppingListSlice.actions;
 
 export default shoppingListSlice.reducer;

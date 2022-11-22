@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { HiOutlinePlusSm } from 'react-icons/hi';
 import PropTypes from 'prop-types';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { AppState } from '../../../DataProvider';
 
-const ItemCard = ({ itemName, id }) => {
-  // const dispatch = useDispatch();
+const ItemCard = ({ item }) => {
+  const dispatch = useDispatch();
+  const { displayItemDetails } = useContext(AppState);
 
   return (
-    <div     
+    <div
       className="flex w-full rounded-xl p-3 justify-between items-center shadow-[0_2px_8px_-1px_rgba(181,181,181,1)]"
-      onClick={() => console.log(id)}
+      onClick={() => displayItemDetails(item)}
     >
-      <span className="font-medium">{itemName}</span>
-      <button
-        type="button"
-      >
+      <span className="font-medium">{item.name}</span>
+      <button type="button">
         <HiOutlinePlusSm className="text-xl" />
       </button>
     </div>
@@ -24,6 +24,11 @@ const ItemCard = ({ itemName, id }) => {
 export default ItemCard;
 
 ItemCard.propTypes = {
-  itemName: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  item: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    note: PropTypes.string,
+    image: PropTypes.string,
+    category_name: PropTypes.string,
+  }).isRequired,
 };

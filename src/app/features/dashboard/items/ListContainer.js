@@ -19,7 +19,7 @@ const ItemContainer = () => {
   }, [items]);
 
   return (
-    <section className="bg-[#fff] h-[100vh] p-5 md:pl-16">  
+    <section className="bg-[#f9f9f9] h-[100vh] p-5 md:pl-16">  
         <ItemContainerHeader />
         <div className="mt-6">
           {items.map((category) => {

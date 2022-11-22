@@ -10,7 +10,7 @@ const categoryCard = ({ categoryName, itemsArr }) => {
       <span className="font-bold">{name}</span>
       <div className="item-container mt-3">
         {itemsArr.map((item) => (
-          <ItemCard key={item.id} itemName={item.name} id={item.id} />
+          <ItemCard key={item.id} item={item} />
         ))}
       </div>
     </div>

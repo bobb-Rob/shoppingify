@@ -9,7 +9,6 @@ import DashboardLayout from './app/features/dashboard/DashboardLayout';
 import PrivateRoute from './app/features/routes/PrivateRoute';
 import PublicOnlyRoute from './app/features/routes/PublicRoute';
 import Login from './app/features/sessions/Login';
-// import Logout from './app/features/sessions/Logout';
 import PersistLogin from './app/features/sessions/PersistLogin';
 import SignUp from './app/features/sessions/signup';
 import DataProvider, { UserContext } from './app/DataProvider';
