@@ -1,0 +1,15 @@
+.item-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  gap: 1rem;
+}
+
+.showShoppingList {
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .item-container {
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  }
+}
