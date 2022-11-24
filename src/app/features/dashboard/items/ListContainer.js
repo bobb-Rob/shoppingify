@@ -16,7 +16,7 @@ const ItemContainer = () => {
         dispatch(fetchItems(accessToken));
       }
     }
-  }, [items]);
+  }, []);
 
   return (
     <section className="bg-[#f9f9f9] h-[100vh] p-5 md:pl-16">  

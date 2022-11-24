@@ -4,15 +4,16 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { HiOutlineArrowSmRight, HiOutlineMail } from 'react-icons/hi';
 import { MdOutlineLock } from 'react-icons/md';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { loginUser } from './sessionSlice';
 
 const Login = () => {
   let errorMessages = useSelector((state) => state.session.errorMessages);
   // const loading = useSelector((state) => state.session.loading);
   const [allErrors, setAllErrors] = useState([]);
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   console.log(allErrors);
 
   const {
@@ -42,10 +43,8 @@ const Login = () => {
       email: user.email,
       password: user.password,
     };
-    // const response = await dispatch(login(payload));
-    const response = [];
-    console.log(response);
-    console.log(payload);
+    const response = await dispatch(loginUser(payload));
+    console.log(response);   
     if (errorMessages.length > 0) {
       navigate('/');
     } else {

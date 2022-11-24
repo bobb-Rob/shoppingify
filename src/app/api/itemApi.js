@@ -1,6 +1,8 @@
 import myAxios from './myAxios';
 
-const itemsUrl = '/categories';
+const fetchItemsUrl = '/categories';
+const createCategoryUrl = '/categories';
+const createItemUrl = '/items';
 
 export async function fetchItemsWithAccessToken(accessToken) {
   const config = {
@@ -10,7 +12,21 @@ export async function fetchItemsWithAccessToken(accessToken) {
   };
 
   return myAxios
-    .get(itemsUrl, config)
+    .get(fetchItemsUrl, config)
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+}
+
+export async function createCategoryWithAccessToken(data, accessToken) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: data
+  };
+
+  return myAxios
+    .post(createCategoryUrl, config)
     .then((response) => response.data)
     .catch((error) => error.response.data);
 }

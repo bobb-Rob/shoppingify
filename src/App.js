@@ -6,6 +6,7 @@ import {
   Navigate,
 } from 'react-router-dom';
 import DashboardLayout from './app/features/dashboard/DashboardLayout';
+import ShoppingListLayout from './app/features/dashboard/shoppingList/shoppingListLayout';
 import PrivateRoute from './app/features/routes/PrivateRoute';
 import PublicOnlyRoute from './app/features/routes/PublicRoute';
 import Login from './app/features/sessions/Login';
@@ -15,10 +16,11 @@ import DataProvider, { UserContext } from './app/DataProvider';
 import History from './app/features/dashboard/history/History';
 import Analysis from './app/features/dashboard/analysis/Analysis';
 import ListContainer from './app/features/dashboard/items/ListContainer';
-import ShoppingListLayout from './app/features/dashboard/shoppingList/ShoppingListLayout';
 import './styles/App.css';
 import './styles/user.css';
 import './styles/items.css';
+import CreatableSelect from './app/features/dashboard/items/AddItemForm/CreatableSelect';
+
 
 function App() {
   const { windowSize } = useContext(UserContext);
@@ -45,6 +47,7 @@ function App() {
                   />
                 </Route>
               </Route>
+              <Route path="/select" element={<CreatableSelect />} />
               {/* <Route
                 path="/logout"
                 element={
