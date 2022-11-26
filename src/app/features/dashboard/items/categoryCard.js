@@ -4,7 +4,7 @@ import ItemCard from './ItemCard';
 
 const categoryCard = ({ categoryName, itemsArr }) => {
   const name =
-    categoryName.charAt(0).toUpperCase() + categoryName.slice(1).toLowerCase();
+    categoryName?.charAt(0).toUpperCase() + categoryName?.slice(1).toLowerCase();
   return (
     <div className="mb-6 ">
       <span className="font-bold">{name}</span>

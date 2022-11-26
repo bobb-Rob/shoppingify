@@ -1,11 +1,18 @@
 /* eslint-disable */
 import React, { useContext } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../../../DataProvider';
 import Button from '../../../../reusables/Button';
+import { createCategoryAndItem, createItem } from '../itemSlice';
 import Select from './CreatableSelect';
 
 const AddItem = () => {
+  const dispatch = useDispatch();
+  const { items } = useSelector((state) => state.items);
+  const currentUser = useSelector((state) => state.session.currentUser);
+  const accessToken = useSelector((state) => state.session.accessToken);
+  // console.log(items);
   const { displayShoppingList } = useContext(AppState);
   // useForm
   const { register, control, handleSubmit,  formState: { errors } } = useForm({
@@ -15,8 +22,33 @@ const AddItem = () => {
     image: '',
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data, e) => {
+    e.preventDefault();
     console.log(data);
+    
+    const newCategory = {
+      name: data.category.label,
+      user_id: currentUser.id,
+    }
+
+    const item = {
+      name: data.name,
+      note: data.note,
+      image: data.image,
+      category_id: data.category.value || undefined,
+      user_id: currentUser.id,
+    }
+    const arrayOfRequest = [newCategory, item];
+    console.log(arrayOfRequest);
+
+    if(data.category.isNew) {
+      // dispatch action to create new category and item
+      dispatch(createCategoryAndItem(arrayOfRequest));
+    } else {
+      // dispatch action to create new item with existing category
+      dispatch(createItem({item, accessToken}));
+      console.log('existing category');
+    }
   };
   
   return (
@@ -44,7 +76,7 @@ const AddItem = () => {
         <input
           type="url"
           placeholder="Enter a url"
-          {...register('imageUrl')}
+          {...register('image')}
         />
       </div>
       <div>
@@ -53,15 +85,15 @@ const AddItem = () => {
           name="category"
           control={control}
           rules={{ required: true }}
-          render={({ field }) => <Select
-            {...field}
-            defaultOptions={[
-              { label: 'Fruits', value: 'fruits' },
-              { label: 'Vegetables', value: 'vegetables' },
-              { label: 'Meat', value: 'meat' },
-              { label: 'Fish', value: 'fish' },
-            ]}
-          />}
+          render={({ field: { onChange, value } }) => (<Select
+            onChange={onChange}
+            value={value}
+            defaultOptions={items.map((item) => ({
+              label: item.name,
+              value: item.id,
+              isNew: false,
+            }))}
+          />)}
         /> 
       </div>
       <div>

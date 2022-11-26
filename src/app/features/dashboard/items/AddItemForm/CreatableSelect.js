@@ -1,30 +1,42 @@
 import React,{ useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CreatableSelect from 'react-select/creatable';
+import { createCategory } from '../itemSlice';
 
-const createOption = (label) => ({
-  label,
-  value: label.toLowerCase().replace(/\W/g, ''),
-});
 
-export default ({defaultOptions,  }) => {
-  const categories = useSelector((state) => state.items);
-  console.log(categories);
+
+export default (props) => {
+ 
+
+const dispatch = useDispatch();
+  const accessToken = useSelector((state) => state.session.accessToken);
+  const currentUser = useSelector((state) => state.session.currentUser);
   const [isLoading, setIsLoading] = useState(false);
-  const [options, setOptions] = useState(defaultOptions);
+  const [options, setOptions] = useState(props.defaultOptions);
   const [value, setValue] = useState({
     label: '',
-    value: '',
+    value: 1,
   });
 
-  const handleCreate = (inputValue) => {
+  const createOption = (data) => ({
+    label: data.name,
+    value: data.id,
+    isNew: true,
+  });
+
+  const handleCreate = async (inputValue) => {   
+    const newCategory = {
+      name: inputValue,
+      user_id: currentUser.id,     
+    };
     setIsLoading(true);
-    setTimeout(() => {
-      const newOption = createOption(inputValue);
+    // dispatch action to create new category
+    // const newCategory = await dispatch(createCategory({category, accessToken}));
+    console.log(newCategory);    
+      const newOption = createOption(newCategory);
       setIsLoading(false);
       setOptions((prev) => [...prev, newOption]);
-      setValue(newOption);
-    }, 3000);
+      // setValue(newOption);  
   };
 
   return (
@@ -32,10 +44,11 @@ export default ({defaultOptions,  }) => {
       isClearable
       isDisabled={isLoading}
       isLoading={isLoading}
-      onChange={(newValue) => setValue(newValue)}
+      onChange={props.onChange}
       onCreateOption={handleCreate}
+      createOptionPosition="first"
       options={options}
-      value={value}
+      value={props.value}      
     />
   );
 };

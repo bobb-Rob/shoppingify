@@ -7,7 +7,6 @@ function PrivateRoute() {
   const loading = useSelector((state) => state.session.loading);
   const location = useLocation();
   const fromLocation = location.state?.from;
-  console.log('fromLocation', fromLocation);
   const previousLocation = location.state
     ? fromLocation
     : { pathname: '/login' };

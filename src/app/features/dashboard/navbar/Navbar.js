@@ -10,7 +10,7 @@ import logo from '../../../../assets/logo.svg';
 
 const SideNav = () => {
   const { cartBtnClicked, setCartBtnClicked, windowSize } = useContext(UserContext);
-  console.log(cartBtnClicked);
+
   return (
     <nav className="grid grid-rows-[1fr 1fr 1fr] py-6 w-[61.58px] h-[100vh]">
       <div className="flex justify-center">

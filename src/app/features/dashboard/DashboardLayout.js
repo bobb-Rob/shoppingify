@@ -8,7 +8,6 @@ import { UserContext } from '../../DataProvider';
 const DashboardLayout = () => {
   const location = useLocation();
   const { setWindowSize } = useContext(UserContext);
-  console.log(location);
 
   useEffect(() => {
     function handleResize() {
