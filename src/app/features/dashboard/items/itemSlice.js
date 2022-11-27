@@ -160,8 +160,7 @@ const itemsSlice = createSlice({
         note: action.payload.note,
         category_name: action.payload.category_name,
       };
-      const category = state.items.find((item) => current(item).name === newItem.category_name);      
-      console.log(category);
+      const category = state.items.find((item) => current(item).name === newItem.category_name);
       if (category) {
         category.items.push(newItem);
       }
