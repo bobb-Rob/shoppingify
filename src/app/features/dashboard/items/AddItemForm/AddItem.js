@@ -12,9 +12,9 @@ const AddItem = () => {
   const { items } = useSelector((state) => state.items);
   const currentUser = useSelector((state) => state.session.currentUser);
   const accessToken = useSelector((state) => state.session.accessToken);
-  // console.log(items);
+  
   const { displayShoppingList } = useContext(AppState);
-  // useForm
+ 
   const { register, control, handleSubmit,  formState: { errors } } = useForm({
     name: '',
     category: '',
@@ -38,16 +38,14 @@ const AddItem = () => {
       category_id: data.category.value || undefined,
       user_id: currentUser.id,
     }
-    const arrayOfRequest = [newCategory, item];
-    console.log(arrayOfRequest);
+    const dataObj = { newCategory, item };
 
     if(data.category.isNew) {
-      // dispatch action to create new category and item
-      dispatch(createCategoryAndItem(arrayOfRequest));
+      // dispatch action to create new category and then a new item
+      dispatch(createCategoryAndItem(dataObj));
     } else {
       // dispatch action to create new item with existing category
-      dispatch(createItem({item, accessToken}));
-      console.log('existing category');
+      dispatch(createItem({item, accessToken}));     
     }
   };
   

@@ -45,21 +45,42 @@ export async function createCategoryWithNameAndAccessToken(category, accessToken
     });
 }
 
+export async function createNewCategoryAndItemWithAccessToken(data, accessToken) {
+  // use promise.all to create category and item
+  // if category is created, then create item
+  // if item is created, then return item
+  // if item is not created, then return error
+  // if category is not created, then return error
+  const config = {
+    headers: {      
+      Authorization: `Bearer ${accessToken}`,
+    }    
+  };
+
+  return myAxios
+  .post(createCategoryUrl, data.newCategory, config)
+  .then((response) => {
+    if (response.status === 201) {
+      data.item.category_id = response.data.id;
+      return myAxios
+      .post(createItemUrl, data.item, config)
+      .then((response) => {
+        if (response.status === 201) {
+          return response.data;
+        }
+      })
+      .catch((error) => error.response);
+    }
+  })
+  .catch((error) => error.response);
+}
+
 export async function createItemWithCategoryAndAccessToken(item, accessToken) {
   const config = {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
   };
-
-  // const data = {
-  //   name: item.name,
-  //   note: item.note,
-  //   image: item.image,
-  //   category_id: category.id,
-  //   user_id: item.user_id,
-  // };
-
   return myAxios
     .post(createItemUrl, item, config)
     .then((response) => response.data)

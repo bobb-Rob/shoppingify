@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
-import { createCategoryWithNameAndAccessToken, createItemWithCategoryAndAccessToken, fetchItemsWithAccessToken } from '../../../api/itemApi';
+import { createItemWithCategoryAndAccessToken, createNewCategoryAndItemWithAccessToken, fetchItemsWithAccessToken } from '../../../api/itemApi';
 import store from '../../../store';
 
 export const fetchItems = createAsyncThunk(
@@ -15,42 +15,16 @@ export const fetchItems = createAsyncThunk(
 
 export const createCategoryAndItem = createAsyncThunk(
   'items/createCategoryAndItem',
-  async (arrayOfRequest, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     const accessToken = store.getState().session.accessToken;
-    const response = await createCategoryWithNameAndAccessToken(arrayOfRequest[0], accessToken);
+    const response = await createNewCategoryAndItemWithAccessToken(data, accessToken);
     console.log(response);
     if (response.errors) {
       return rejectWithValue(response.data);
     }
-
-    const item = arrayOfRequest[1];
-    const setCategory = async (item) => {
-      const category = response;
-      return {...item, category_id: category.id};
-    }
-    const newItem = await setCategory(item);
-    console.log(newItem);
-    const response2 = await createItemWithCategoryAndAccessToken(newItem, accessToken);
-    console.log(response2);
-    if (response2.errors) {
-      return rejectWithValue(response2.data);
-    }
-    return response2;
+    return response;
   }
 )
-
-// export const createCategory = createAsyncThunk(
-//   'items/createCategory',
-//   async (data, { rejectWithValue }) => {
-//     console.log(data);
-//     const { category, accessToken } = data;
-//     const response = await createCategoryWithNameAndAccessToken(category, accessToken);
-//     if (response.errors) {
-//       return rejectWithValue(response.errors);
-//     }    
-//     return response;
-//   }
-// )
 
 export const createItem = createAsyncThunk(
   'items/createItem',
@@ -61,32 +35,7 @@ export const createItem = createAsyncThunk(
     }
     return response;
   }
-)
-// export const createCategoryAndItem = async (arrayOfRequest, accessToken) => {
-//   // const promises = arrayOfRequest.map(async (obj) => {
-//   //   console.log(obj);
-//   //   const data = { ...obj.category, accessToken}
-//   //   const newCategory = await store.dispatch(createCategory(data));
-//   //   console.log(newCategory);
-//   //   // obj.item.category_id = newCategory.id;
-//   //   // const setCategory = (item) => item.category_id = newCategory.id; 
-//   //   // const newItem = await setCategory(obj.item);
-//   //   // const item = await store.dispatch(createItem({ ...newItem, accessToken}));
-//   //   // return item;
-//   // });
-
-//   const newCategory = await store.dispatch(createCategory({ category: arrayOfRequest[0], accessToken}));
-//   console.log(newCategory);
-
-//   const promises = [newCategory];
-
-//   const res = await Promise.all(promises);
-//   console.log(res);
-// }
-
-
-
-
+);
 
 const initialState = {
   items: [],
@@ -131,22 +80,33 @@ const itemsSlice = createSlice({
       state.error = true;
       state.errorMessages = action.payload.errors;
     },
-    // [createCategory.pending]: (state) => {
-    //   state.loading = true;
-    //   state.error = false;
-    //   state.errorMessages = [];
-    // },
-    // [createCategory.fulfilled]: (state, action) => {
-    //   state.items = state.items.concat(action.payload);
-    //   state.loading = false;
-    //   state.error = false;
-    //   state.errorMessages = [];
-    // },
-    // [createCategory.rejected]: (state, action) => {
-    //   state.loading = false;
-    //   state.error = true;
-    //   state.errorMessages = action.payload;
-    // },
+    [createCategoryAndItem.pending]: (state) => {
+      state.loading = true;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [createCategoryAndItem.fulfilled]: (state, action) => {
+      const newItem = {
+        id: action.payload.id,
+        name: action.payload.name,
+        image: action.payload.image,
+        note: action.payload.note,
+        category_name: action.payload.category_name,
+      };
+      const category = {
+        ...action.payload.category,
+        items: [newItem],
+      }
+      state.items.push(category);
+      state.loading = false;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [createCategoryAndItem.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.errorMessages = action.payload;
+    },
     [createItem.pending]: (state) => {
       state.loading = true;
       state.error = false;
