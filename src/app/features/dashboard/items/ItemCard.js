@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { AppState } from '../../../DataProvider';
 
-const ItemCard = ({ item }) => {
+const ItemCard = ({ item, catId }) => {
   const dispatch = useDispatch();
   const { displayItemDetails } = useContext(AppState);
 
@@ -31,4 +31,5 @@ ItemCard.propTypes = {
     image: PropTypes.string,
     category_name: PropTypes.string,
   }).isRequired,
+  catId: PropTypes.number.isRequired,
 };

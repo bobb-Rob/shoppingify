@@ -1,9 +1,30 @@
 import React, { useContext } from 'react';
 import { BsArrowLeft } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../DataProvider';
+import store from '../../../store';
+import { deleteEmptyCategory, deleteItem } from './itemSlice';
 
 const ItemDetails = () => {
+  const dispatch = useDispatch();
   const { displayShoppingList, itemDetails } = useContext(AppState);
+  
+  // delete category if no items are associated with it
+  const handleDelete = () => {
+    dispatch(deleteItem(itemDetails.id)).then((response) => {
+      if (response.payload.message === 'Item deleted') {
+        const categories = store.getState().items.items
+        const category = categories.find((item) => item.name === itemDetails.category_name);
+        console.log(categories);
+        console.log(category);
+        if (category.items.length < 1) {
+          dispatch(deleteEmptyCategory(category.id));
+        }
+      }
+    });
+    displayShoppingList();
+  };
+
   return (
     <div className="px-8 py-5 bg-white h-[100vh] relative">
       <button
@@ -31,7 +52,11 @@ const ItemDetails = () => {
       </div>
       <div className="absolute bottom-5 left-0 right-0 px-8 flex gap-x-2.5 justify-center">
         <div className="fixed bottom-5 bg-white flex gap-x-2.5 justify-center">
-          <button type="button" className="p-4">delete</button>
+          <button
+            type="button"
+            className="p-4"
+            onClick={() => handleDelete()}
+          >delete</button>
           <button type="button" className="p-4 bg-orange text-white rounded-xl">Add to list</button>
         </div>
       </div>

@@ -42,10 +42,18 @@ const AddItem = () => {
 
     if(data.category.isNew) {
       // dispatch action to create new category and then a new item
-      dispatch(createCategoryAndItem(dataObj));
+      dispatch(createCategoryAndItem(dataObj)).then((response) => {
+        if (response.type === "items/createCategoryAndItem/fulfilled") {
+          displayShoppingList();
+        }
+      });
     } else {
       // dispatch action to create new item with existing category
-      dispatch(createItem({item, accessToken}));     
+      dispatch(createItem({item, accessToken})).then((response) => {
+        if (response.type === "items/createItem/fulfilled") {
+          displayShoppingList();
+        }
+      });   
     }
   };
   

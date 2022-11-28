@@ -28,6 +28,7 @@ const ItemContainer = () => {
             return (
               <CategoryCard
                 key={id}
+                catId={id}
                 categoryName={name}
                 itemsArr={items}
               />
