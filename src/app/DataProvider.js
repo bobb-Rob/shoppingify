@@ -1,6 +1,8 @@
 import React, { createContext, useState } from 'react';
+import { toast } from 'react-toastify';
 import propTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const UserContext = createContext();
 export const AppState = createContext();
@@ -11,6 +13,8 @@ const DataProvider = ({ children }) => {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [isDisplayed, setIsDisplayed] = useState('shoppingList');
   const [itemDetails, setItemDetails] = useState({});
+
+  const notify = (message) => toast(message);
 
   const displayItemDetails = (item) => {
     setItemDetails(item);
@@ -33,6 +37,7 @@ const DataProvider = ({ children }) => {
         displayItemDetails,
         displayShoppingList,
         displayAddItemForm,
+        notify,
       }}
     >
       <UserContext.Provider

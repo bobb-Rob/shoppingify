@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import ItemContainerHeader from './ItemContainerHeader';
 import CategoryCard from './categoryCard';
 import { fetchItems } from './itemSlice';
 
+
 const ItemContainer = () => {
   const dispatch = useDispatch();
   const { items, loading } = useSelector((state) => state.items);
-  const accessToken = useSelector((state) => state.session.accessToken);
-
+  const accessToken = useSelector((state) => state.session.accessToken); 
+  
   useEffect(() => {
     if (items.length <= 0 && loading === false) {
       if (accessToken) {
@@ -34,7 +36,7 @@ const ItemContainer = () => {
               />
             );
           })}
-        </div>     
+        </div>
     </section>
   );
 };

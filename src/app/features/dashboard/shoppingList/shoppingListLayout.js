@@ -2,7 +2,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
-import { useSelector } from 'react-redux/es/exports';
 import ShoppingListHolder from './shoppingListHolder';
 import AddItemForm from '../items/AddItemForm/AddItem';
 import ItemDetails from '../items/itemDetails';

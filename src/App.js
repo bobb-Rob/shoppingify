@@ -12,10 +12,12 @@ import PublicOnlyRoute from './app/features/routes/PublicRoute';
 import Login from './app/features/sessions/Login';
 import PersistLogin from './app/features/sessions/PersistLogin';
 import SignUp from './app/features/sessions/signup';
-import DataProvider, { UserContext } from './app/DataProvider';
+import { UserContext } from './app/DataProvider';
 import History from './app/features/dashboard/history/History';
 import Analysis from './app/features/dashboard/analysis/Analysis';
 import ListContainer from './app/features/dashboard/items/ListContainer';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './styles/App.css';
 import './styles/user.css';
 import './styles/items.css';
@@ -74,6 +76,7 @@ function App() {
               />
             </Route>
           </Routes>
+          <ToastContainer progressClassName="toast-progress-bar" />
         </main>
         {/* </main> */}
       </Router> 

@@ -6,12 +6,16 @@ import { AppState } from '../../../../DataProvider';
 import Button from '../../../../reusables/Button';
 import { createCategoryAndItem, createItem } from '../itemSlice';
 import Select from './CreatableSelect';
+import { IoCloseSharp } from 'react-icons/io5';
+import { clearError } from '../itemSlice';
+import { toast } from 'react-toastify';
 
 const AddItem = () => {
   const dispatch = useDispatch();
-  const { items } = useSelector((state) => state.items);
+  const { items, errorMessages } = useSelector((state) => state.items);
   const currentUser = useSelector((state) => state.session.currentUser);
   const accessToken = useSelector((state) => state.session.accessToken);
+  const { notify } = useContext(AppState);
   
   const { displayShoppingList } = useContext(AppState);
  
@@ -44,21 +48,42 @@ const AddItem = () => {
       // dispatch action to create new category and then a new item
       dispatch(createCategoryAndItem(dataObj)).then((response) => {
         if (response.type === "items/createCategoryAndItem/fulfilled") {
+          toast.success('Category and Item created successfully', {
+            position: 'top-center',
+          });
           displayShoppingList();
         }
       });
     } else {
-      // dispatch action to create new item with existing category
       dispatch(createItem({item, accessToken})).then((response) => {
         if (response.type === "items/createItem/fulfilled") {
+          toast.success("Item created successfully!", {
+            position: toast.POSITION.TOP_CENTER,
+          });
           displayShoppingList();
+        } else if (errorMessages.length === 0) {
+          notify('Item creation failed. Please try again.');
         }
-      });   
+      });      
     }
   };
   
   return (
-    <form className="p-5" onSubmit={handleSubmit(onSubmit)}>
+    <form className="p-5 border h-full " onSubmit={handleSubmit(onSubmit)}>
+      {/* { show error messages if any} */}
+      {errorMessages.length > 0 && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <strong className="font-bold">Error!</strong>
+          <div>
+            {errorMessages.map((message) => (
+              <span className="block sm:inline" key={message}>
+                {message}
+              </span>
+            ))}
+          </div>          
+          <IoCloseSharp className="absolute top-2 right-2 pointer" onClick={() => dispatch(clearError())} />
+        </div>
+      )}
       <h3>Add a new item</h3>
       <div>
         <label htmlFor="name">Name</label>
@@ -112,6 +137,7 @@ const AddItem = () => {
           value="Save"          
         />
       </div>
+      {/* <ToastContainer /> */}
     </form>
   )
 }

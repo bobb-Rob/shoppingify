@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { BsArrowLeft } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { AppState } from '../../../DataProvider';
 import store from '../../../store';
+import BackArrow from '../../utils/backArrow';
 import { deleteEmptyCategory, deleteItem } from './itemSlice';
 
 const ItemDetails = () => {
@@ -10,31 +12,59 @@ const ItemDetails = () => {
   const { displayShoppingList, itemDetails } = useContext(AppState);
   
   // delete category if no items are associated with it
-  const handleDelete = () => {
-    dispatch(deleteItem(itemDetails.id)).then((response) => {
+  // const handleDelete = () => {
+  //   dispatch(deleteItem(itemDetails.id)).then((response) => {
+  //     if (response.payload.message === 'Item deleted') {
+  //       const categories = store.getState().items.items
+  //       const category = categories.find((item) => item.name === itemDetails.category_name);
+  //       toast.success('Item deleted successfully', {
+  //         position: 'top-center',
+  //       });
+  //       if (category.items.length < 1) {
+  //         dispatch(deleteEmptyCategory(category.id)).then(res => {
+  //           if (res.payload.message === 'Category deleted') {
+  //             toast.success('Category deleted successfully', {
+  //               position: 'top-center',
+  //             });
+  //           }
+  //         })
+  //       }
+  //     }
+  //   });
+  //   displayShoppingList();
+  // };
+
+  const handleDelete = async () => {
+    try {
+      const response = await dispatch(deleteItem(itemDetails.id));
       if (response.payload.message === 'Item deleted') {
         const categories = store.getState().items.items
         const category = categories.find((item) => item.name === itemDetails.category_name);
-        console.log(categories);
-        console.log(category);
+        await toast.success('Item deleted successfully', {
+          position: 'top-center',
+        });
         if (category.items.length < 1) {
-          dispatch(deleteEmptyCategory(category.id));
+          dispatch(deleteEmptyCategory(category.id)).then(res => {
+            if (res.payload.message === 'Category deleted') {
+              toast.success('Category deleted successfully', {
+                position: 'top-center',
+                progressClassName: 'success-toast-progress',
+              });
+            }
+          })
         }
-      }
-    });
+      }      
+    } catch (error) {
+      console.log(error);
+    }
     displayShoppingList();
   };
-
+     
   return (
     <div className="px-8 py-5 bg-white h-[100vh] relative">
-      <button
-        type="button"
-        onClick={() => displayShoppingList()}
-        className="flex text-orange mb-5"
-      >
-        <BsArrowLeft />
-        <span className="text-xs ml-2">back</span>
-      </button>
+      <BackArrow
+        onClick={() => displayShoppingList()}     
+      />
       <div className="item-image border h-[190px] rounded-3xl mb-7">
         <img src={itemDetails?.image} alt={itemDetails.name} />
       </div>
