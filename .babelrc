@@ -7,6 +7,5 @@
           ],
         "@babel/preset-react"
     ],
-    "plugins": ["@babel/plugin-syntax-jsx"],
-    "transform": { "\\.js$": "babel-jest" }
+    "plugins": ["@babel/plugin-syntax-jsx"]  
   }

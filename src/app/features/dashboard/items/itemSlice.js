@@ -18,7 +18,6 @@ export const createCategoryAndItem = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     const accessToken = store.getState().session.accessToken;
     const response = await createNewCategoryAndItemWithAccessToken(data, accessToken);
-    console.log(response);
     if (response.errors) {
       return rejectWithValue(response.data);
     }

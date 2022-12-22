@@ -7,8 +7,8 @@ import itemReducer from './features/dashboard/items/itemSlice';
 const store = configureStore({
   reducer: {
     session: sessionReducer,
-    shoppingList: shoppingListReducer,
     items: itemReducer,
+    shoppingList: shoppingListReducer,    
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
