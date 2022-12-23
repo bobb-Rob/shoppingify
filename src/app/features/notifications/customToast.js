@@ -8,3 +8,5 @@ const customeToast = {
         });
     }
 }
+
+export default customeToast;

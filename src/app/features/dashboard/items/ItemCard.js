@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
 import { HiOutlinePlusSm } from 'react-icons/hi';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
 import { AppState } from '../../../DataProvider';
 
 const ItemCard = ({ item, catId }) => {
-  const dispatch = useDispatch();
   const { displayItemDetails } = useContext(AppState);
 
   return (

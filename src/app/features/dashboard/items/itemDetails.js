@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { BsArrowLeft } from 'react-icons/bs';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { AppState } from '../../../DataProvider';
 import store from '../../../store';
@@ -11,29 +10,6 @@ const ItemDetails = () => {
   const dispatch = useDispatch();
   const { displayShoppingList, itemDetails } = useContext(AppState);
   
-  // delete category if no items are associated with it
-  // const handleDelete = () => {
-  //   dispatch(deleteItem(itemDetails.id)).then((response) => {
-  //     if (response.payload.message === 'Item deleted') {
-  //       const categories = store.getState().items.items
-  //       const category = categories.find((item) => item.name === itemDetails.category_name);
-  //       toast.success('Item deleted successfully', {
-  //         position: 'top-center',
-  //       });
-  //       if (category.items.length < 1) {
-  //         dispatch(deleteEmptyCategory(category.id)).then(res => {
-  //           if (res.payload.message === 'Category deleted') {
-  //             toast.success('Category deleted successfully', {
-  //               position: 'top-center',
-  //             });
-  //           }
-  //         })
-  //       }
-  //     }
-  //   });
-  //   displayShoppingList();
-  // };
-
   const handleDelete = async () => {
     try {
       const response = await dispatch(deleteItem(itemDetails.id));
