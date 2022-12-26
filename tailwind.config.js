@@ -31,7 +31,7 @@ module.exports = {
     },
   },
   plugins: [
-    plugin(function({ addComponents }) {
+    plugin(({ addComponents }) => {
       addComponents({
         '.btn': {
           padding: '.5rem 1rem',
@@ -48,7 +48,7 @@ module.exports = {
             backgroundColor: '#e63946',
           },
         },
-      })
+      });
     }),
   ],
 };

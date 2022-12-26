@@ -3,7 +3,7 @@ import { HiOutlinePlusSm } from 'react-icons/hi';
 import PropTypes from 'prop-types';
 import { AppState } from '../../../DataProvider';
 
-const ItemCard = ({ item, catId }) => {
+const ItemCard = ({ item }) => {
   const { displayItemDetails } = useContext(AppState);
 
   return (

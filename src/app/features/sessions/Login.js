@@ -44,7 +44,7 @@ const Login = () => {
       password: user.password,
     };
     const response = await dispatch(loginUser(payload));
-    console.log(response);   
+    console.log(response);
     if (errorMessages.length > 0) {
       navigate('/');
     } else {

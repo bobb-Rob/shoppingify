@@ -18,6 +18,10 @@ const BackArrow = ({ classNam }) => {
 
 export default BackArrow;
 
+BackArrow.defaultProps = {
+  classNam: "",
+}
+
 BackArrow.propTypes = {
   classNam: PropTypes.string,
 };

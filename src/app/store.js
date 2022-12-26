@@ -8,7 +8,7 @@ const store = configureStore({
   reducer: {
     session: sessionReducer,
     items: itemReducer,
-    shoppingList: shoppingListReducer,    
+    shoppingList: shoppingListReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

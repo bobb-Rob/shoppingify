@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { UserContext } from '../../../DataProvider'
 import { Link, NavLink } from 'react-router-dom';
 import { FaListUl } from 'react-icons/fa';
 import { MdOutlineAnalytics } from 'react-icons/md';
 import { IoMdRefresh } from 'react-icons/io';
 import { BsCart3 } from 'react-icons/bs';
+import { UserContext } from '../../../DataProvider';
 import NavLinkEl from './NavLink';
 import logo from '../../../../assets/logo.svg';
 
@@ -37,15 +37,14 @@ const SideNav = () => {
       >
         <NavLink
           to={(cartBtnClicked && windowSize < 768) ? '/' : '/cart'} // Go back to root route if cartBtnClicked is true
-          state={{ cartBtnClicked: !cartBtnClicked, windowSize: windowSize }}
+          state={{ cartBtnClicked: !cartBtnClicked, windowSize }}
           style={{ color: 'var(--white)' }}
           onClick={() => {
             // Check and trigger below function only if window screen is below 768px;
             if (windowSize < 768) {
               cartBtnClicked ? setCartBtnClicked(false) : setCartBtnClicked(true);
-              }
-            } 
-          }
+            }
+          }}
         >
           <BsCart3 size={22} />
         </NavLink>

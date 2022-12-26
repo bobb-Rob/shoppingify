@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { createUserWithEmailAndPassword, getCurrentUser, loginUserWithEmailAndPassword, requestAccessTokenWithRefreshToken } from '../../api/sessionApi';
+import {
+  createUserWithEmailAndPassword, getCurrentUser, loginUserWithEmailAndPassword, requestAccessTokenWithRefreshToken,
+} from '../../api/sessionApi';
 
 function setRefreshToken(token) {
   localStorage.setItem('refreshToken', token);

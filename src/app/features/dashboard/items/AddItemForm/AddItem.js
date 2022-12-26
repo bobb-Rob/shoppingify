@@ -46,7 +46,7 @@ const AddItem = () => {
 
     if(data.category.isNew) {
       // dispatch action to create new category and then a new item
-      dispatch(createCategoryAndItem(dataObj)).then((response) => {
+      dispatch(createCategoryAndItem({ dataObj, accessToken })).then((response) => {
         if (response.type === "items/createCategoryAndItem/fulfilled") {
           toast.success('Category and Item created successfully', {
             position: 'top-center',

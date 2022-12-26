@@ -1,51 +1,61 @@
 import React, { useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { AppState } from '../../../DataProvider';
-import store from '../../../store';
 import BackArrow from '../../utils/backArrow';
 import { deleteEmptyCategory, deleteItem } from './itemSlice';
 
 const ItemDetails = () => {
   const dispatch = useDispatch();
+  const { session, items } = useSelector((state) => state);
+  const { accessToken } = session;
   const { displayShoppingList, itemDetails } = useContext(AppState);
-  
+  const itemId = itemDetails.id;
+  const categories = items.items;
+  console.log(categories);
+
   const handleDelete = async () => {
     try {
-      const response = await dispatch(deleteItem(itemDetails.id));
+      const response = await dispatch(deleteItem({ itemId, accessToken }));
       if (response.payload.message === 'Item deleted') {
-        const categories = store.getState().items.items
+        console.log(response.payload);
         const category = categories.find((item) => item.name === itemDetails.category_name);
-        await toast.success('Item deleted successfully', {
+        // remove deleted item from category items arrays
+        const filteredCategory = category.items.filter((item) => item.id !== itemId);
+        category.items = filteredCategory;
+        console.log(category);
+        toast.success('Item deleted successfully', {
           position: 'top-center',
         });
         if (category.items.length < 1) {
-          dispatch(deleteEmptyCategory(category.id)).then(res => {
+          const categoryId = category.id;
+          console.log(categoryId);
+          dispatch(deleteEmptyCategory({ categoryId, accessToken })).then((res) => {
             if (res.payload.message === 'Category deleted') {
               toast.success('Category deleted successfully', {
                 position: 'top-center',
                 progressClassName: 'success-toast-progress',
               });
             }
-          })
+          });
         }
-      }      
+      }
     } catch (error) {
       console.log(error);
     }
     displayShoppingList();
   };
-     
+
   return (
     <div className="px-8 py-5 bg-white h-[100vh] relative">
       <BackArrow
-        onClick={() => displayShoppingList()}     
+        onClick={() => displayShoppingList()}
       />
       <div className="item-image border h-[190px] rounded-3xl mb-7">
         <img src={itemDetails?.image} alt={itemDetails.name} />
       </div>
       <div className="mb-1">
-        <span className="text-xs text-[#C1C1C4] font-medium" >name</span>
+        <span className="text-xs text-[#C1C1C4] font-medium">name</span>
         <h2 className="text-2xl font-bold">{itemDetails?.name}</h2>
       </div>
       <div className="mb-1">
@@ -62,12 +72,14 @@ const ItemDetails = () => {
             type="button"
             className="p-4"
             onClick={() => handleDelete()}
-          >delete</button>
+          >
+            delete
+          </button>
           <button type="button" className="p-4 bg-orange text-white rounded-xl">Add to list</button>
         </div>
       </div>
     </div>
-);
+  );
 };
 
 export default ItemDetails;

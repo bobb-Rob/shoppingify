@@ -5,6 +5,7 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import DashboardLayout from './app/features/dashboard/DashboardLayout';
 import ShoppingListLayout from './app/features/dashboard/shoppingList/shoppingListLayout';
 import PrivateRoute from './app/features/routes/PrivateRoute';
@@ -16,70 +17,68 @@ import { UserContext } from './app/DataProvider';
 import History from './app/features/dashboard/history/History';
 import Analysis from './app/features/dashboard/analysis/Analysis';
 import ListContainer from './app/features/dashboard/items/ListContainer';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles/App.css';
 import './styles/user.css';
 import './styles/items.css';
 import CreatableSelect from './app/features/dashboard/items/AddItemForm/CreatableSelect';
 
-
 function App() {
   const { windowSize } = useContext(UserContext);
   return (
-      <Router>
-        {/* <main className="grid md:grid-cols-desktop font-quicksand"> */}
-        <main>
-          <Routes>
-            <Route element={<PersistLogin />}>
-              <Route path="/" element={<PrivateRoute />}>
-                <Route element={<DashboardLayout />}>
-                  <Route path="" element={<ListContainer />} />
-                  <Route path="/history" element={<History />} />
-                  <Route path="/analysis" element={<Analysis />} />
-                  <Route
-                    path="/cart"
-                    element={
-                      windowSize < 768 ? (
-                        <ShoppingListLayout classNam="showShoppingList" />
-                      ) : (
-                        <Navigate to="/" />
-                      )
-                    }
-                  />
-                </Route>
+    <Router>
+      {/* <main className="grid md:grid-cols-desktop font-quicksand"> */}
+      <main>
+        <Routes>
+          <Route element={<PersistLogin />}>
+            <Route path="/" element={<PrivateRoute />}>
+              <Route element={<DashboardLayout />}>
+                <Route path="" element={<ListContainer />} />
+                <Route path="/history" element={<History />} />
+                <Route path="/analysis" element={<Analysis />} />
+                <Route
+                  path="/cart"
+                  element={
+                    windowSize < 768 ? (
+                      <ShoppingListLayout classNam="showShoppingList" />
+                    ) : (
+                      <Navigate to="/" />
+                    )
+                  }
+                />
               </Route>
-              <Route path="/select" element={<CreatableSelect />} />
-              {/* <Route
-                path="/logout"
-                element={
-                  <PrivateRoute>
-                    <Logout />
-                  </PrivateRoute>
-                }
-              /> */}
-              <Route
-                path="/login"
-                element={
-                  <PublicOnlyRoute>
-                    <Login />
-                  </PublicOnlyRoute>
-                }
-              />
-              <Route
-                path="/signup"
-                element={
-                  <PublicOnlyRoute>
-                    <SignUp />
-                  </PublicOnlyRoute>
-                }
-              />
             </Route>
-          </Routes>
-          <ToastContainer progressClassName="toast-progress-bar" />
-        </main>
-        {/* </main> */}
-      </Router> 
+            <Route path="/select" element={<CreatableSelect />} />
+            {/* <Route
+              path="/logout"
+              element={
+                <PrivateRoute>
+                  <Logout />
+                </PrivateRoute>
+              }
+            /> */}
+            <Route
+              path="/login"
+              element={(
+                <PublicOnlyRoute>
+                  <Login />
+                </PublicOnlyRoute>
+              )}
+            />
+            <Route
+              path="/signup"
+              element={(
+                <PublicOnlyRoute>
+                  <SignUp />
+                </PublicOnlyRoute>
+              )}
+            />
+          </Route>
+        </Routes>
+        <ToastContainer progressClassName="toast-progress-bar" />
+      </main>
+      {/* </main> */}
+    </Router>
   );
 }
 

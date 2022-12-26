@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
-import { createItemWithCategoryAndAccessToken, createNewCategoryAndItemWithAccessToken, deleteEmptyCategoryWithAccessToken, deleteItemWithAccessToken, fetchItemsWithAccessToken } from '../../../api/itemApi';
-import store from '../../../store';
+import {
+  createItemWithCategoryAndAccessToken, createNewCategoryAndItemWithAccessToken, deleteEmptyCategoryWithAccessToken, deleteItemWithAccessToken, fetchItemsWithAccessToken,
+} from '../../../api/itemApi';
 
 export const fetchItems = createAsyncThunk(
   'items/getItems',
@@ -10,62 +11,59 @@ export const fetchItems = createAsyncThunk(
       return rejectWithValue(response.data);
     }
     return response;
-  }
+  },
 );
 
 export const createCategoryAndItem = createAsyncThunk(
   'items/createCategoryAndItem',
-  async (data, { rejectWithValue }) => {
-    const accessToken = store.getState().session.accessToken;
+  async ({data, accessToken }, { rejectWithValue }) => {
     const response = await createNewCategoryAndItemWithAccessToken(data, accessToken);
     if (response.errors) {
       return rejectWithValue(response.data);
     }
     return response;
-  }
-)
+  },
+);
 
 export const createItem = createAsyncThunk(
   'items/createItem',
-  async ({item, accessToken }, { rejectWithValue }) => {
+  async ({ item, accessToken }, { rejectWithValue }) => {
     const response = await createItemWithCategoryAndAccessToken(item, accessToken);
     if (response.errors) {
       return rejectWithValue(response.errors);
     }
     return response;
-  }
+  },
 );
 
 export const deleteItem = createAsyncThunk(
   'items/deleteItem',
-  async (itemId, { rejectWithValue }) => {
-    const accessToken = store.getState().session.accessToken;
+  async ({ itemId, accessToken }, { rejectWithValue }) => {
     const response = await deleteItemWithAccessToken(itemId, accessToken);
     if (response.errors) {
       return rejectWithValue(response.errors);
     }
     return { ...response, id: itemId };
-  }
+  },
 );
 
 // Implement category delete if category is empty
 export const deleteEmptyCategory = createAsyncThunk(
   'items/deleteEmptyCategory',
-  async (categoryId, { rejectWithValue }) => {
-    const accessToken = store.getState().session.accessToken;
+  async ({ categoryId, accessToken }, { rejectWithValue }) => {
     const response = await deleteEmptyCategoryWithAccessToken(categoryId, accessToken);
     if (response.errors) {
       return rejectWithValue(response.errors);
     }
     return { ...response, id: categoryId };
-  }
+  },
 );
 
 const initialState = {
   items: [],
   loading: false,
   error: false,
-  errorMessages: [],  
+  errorMessages: [],
 };
 
 const itemsSlice = createSlice({
@@ -83,7 +81,7 @@ const itemsSlice = createSlice({
       state.error = false;
       state.errorMessages = [];
     },
-    [fetchItems.fulfilled]: (state, action) => {      
+    [fetchItems.fulfilled]: (state, action) => {
       state.items = state.items.concat(action.payload);
       state.loading = false;
       state.error = false;
@@ -110,7 +108,7 @@ const itemsSlice = createSlice({
       const category = {
         ...action.payload.category,
         items: [newItem],
-      }
+      };
       state.items.push(category);
       state.loading = false;
       state.error = false;
