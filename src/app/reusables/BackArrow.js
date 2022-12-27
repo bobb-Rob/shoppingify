@@ -19,8 +19,8 @@ const BackArrow = ({ classNam }) => {
 export default BackArrow;
 
 BackArrow.defaultProps = {
-  classNam: "",
-}
+  classNam: '',
+};
 
 BackArrow.propTypes = {
   classNam: PropTypes.string,

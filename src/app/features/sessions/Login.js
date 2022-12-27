@@ -14,7 +14,6 @@ const Login = () => {
   const [allErrors, setAllErrors] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(allErrors);
 
   const {
     register,
@@ -38,13 +37,13 @@ const Login = () => {
   const onSubmit = async (user, e) => {
     e.preventDefault();
     setAllErrors([]);
-    console.log(user);
+
     const payload = {
       email: user.email,
       password: user.password,
     };
-    const response = await dispatch(loginUser(payload));
-    console.log(response);
+    dispatch(loginUser(payload));
+
     if (errorMessages.length > 0) {
       navigate('/');
     } else {
@@ -56,6 +55,7 @@ const Login = () => {
   return (
     <div className="user-container flex flex-col space-between">
       <div className="user-form-wrap flex flex-col">
+        <div>{allErrors}</div>
         <h2>Login</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="relative mb-4 ">

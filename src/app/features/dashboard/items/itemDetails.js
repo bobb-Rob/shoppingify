@@ -14,16 +14,15 @@ const ItemDetails = () => {
   const categories = items.items;
   const category = categories.find((item) => item.name === itemDetails.category_name);
 
-
   const handleDelete = async () => {
     try {
       const response = await dispatch(deleteItem({ itemId, accessToken }));
-      if (response.payload.message === 'Item deleted') {   
+      if (response.payload.message === 'Item deleted') {
         toast.success('Item deleted successfully', {
           position: 'top-center',
-        });   
+        });
         if ((category.items.length - 1) < 1) {
-          const categoryId = category.id;         
+          const categoryId = category.id;
           dispatch(deleteEmptyCategory({ categoryId, accessToken })).then((res) => {
             if (res.payload.message === 'Category deleted') {
               toast.success('Category deleted successfully', {
@@ -34,9 +33,8 @@ const ItemDetails = () => {
           });
         }
       }
-
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     displayShoppingList();
   };

@@ -1,7 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
-  createUserWithEmailAndPassword, getCurrentUser, loginUserWithEmailAndPassword, requestAccessTokenWithRefreshToken,
+  createUserWithEmailAndPassword,
+  getCurrentUser,
+  loginUserWithEmailAndPassword,
+  requestAccessTokenWithRefreshToken,
 } from '../../api/sessionApi';
 
 function setRefreshToken(token) {
@@ -64,7 +67,7 @@ export const signUpUser = createAsyncThunk(
     if (response.error) {
       return rejectWithValue(response.error);
     }
-    console.log(response);
+
     return response;
   },
 );

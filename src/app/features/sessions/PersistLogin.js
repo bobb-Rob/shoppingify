@@ -14,7 +14,7 @@ const PersistLogin = () => {
       try {
         dispatch(refreshAccessToken(refreshToken));
       } catch (error) {
-        console.log(error);
+        throw error;
       }
     }
 

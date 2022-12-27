@@ -1,6 +1,11 @@
+/* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
 import {
-  createItemWithCategoryAndAccessToken, createNewCategoryAndItemWithAccessToken, deleteEmptyCategoryWithAccessToken, deleteItemWithAccessToken, fetchItemsWithAccessToken,
+  createItemWithCategoryAndAccessToken,
+  createNewCategoryAndItemWithAccessToken,
+  deleteEmptyCategoryWithAccessToken,
+  deleteItemWithAccessToken,
+  fetchItemsWithAccessToken,
 } from '../../../api/itemApi';
 
 export const fetchItems = createAsyncThunk(
@@ -16,7 +21,7 @@ export const fetchItems = createAsyncThunk(
 
 export const createCategoryAndItem = createAsyncThunk(
   'items/createCategoryAndItem',
-  async ({data, accessToken }, { rejectWithValue }) => {
+  async ({ data, accessToken }, { rejectWithValue }) => {
     const response = await createNewCategoryAndItemWithAccessToken(data, accessToken);
     if (response.errors) {
       return rejectWithValue(response.data);

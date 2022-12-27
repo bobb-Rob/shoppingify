@@ -29,5 +29,4 @@ ItemCard.propTypes = {
     image: PropTypes.string,
     category_name: PropTypes.string,
   }).isRequired,
-  catId: PropTypes.number.isRequired,
 };
