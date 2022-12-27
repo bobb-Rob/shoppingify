@@ -7,29 +7,23 @@ import { deleteEmptyCategory, deleteItem } from './itemSlice';
 
 const ItemDetails = () => {
   const dispatch = useDispatch();
-  const { session, items } = useSelector((state) => state);
-  const { accessToken } = session;
+  const items = useSelector((state) => state.items);
+  const accessToken = useSelector((state) => state.session.accessToken);
   const { displayShoppingList, itemDetails } = useContext(AppState);
   const itemId = itemDetails.id;
   const categories = items.items;
-  console.log(categories);
+  const category = categories.find((item) => item.name === itemDetails.category_name);
+
 
   const handleDelete = async () => {
     try {
       const response = await dispatch(deleteItem({ itemId, accessToken }));
-      if (response.payload.message === 'Item deleted') {
-        console.log(response.payload);
-        const category = categories.find((item) => item.name === itemDetails.category_name);
-        // remove deleted item from category items arrays
-        const filteredCategory = category.items.filter((item) => item.id !== itemId);
-        category.items = filteredCategory;
-        console.log(category);
+      if (response.payload.message === 'Item deleted') {   
         toast.success('Item deleted successfully', {
           position: 'top-center',
-        });
-        if (category.items.length < 1) {
-          const categoryId = category.id;
-          console.log(categoryId);
+        });   
+        if ((category.items.length - 1) < 1) {
+          const categoryId = category.id;         
           dispatch(deleteEmptyCategory({ categoryId, accessToken })).then((res) => {
             if (res.payload.message === 'Category deleted') {
               toast.success('Category deleted successfully', {
@@ -40,6 +34,7 @@ const ItemDetails = () => {
           });
         }
       }
+
     } catch (error) {
       console.log(error);
     }
