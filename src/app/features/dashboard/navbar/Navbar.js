@@ -42,7 +42,12 @@ const SideNav = () => {
           onClick={() => {
             // Check and trigger below function only if window screen is below 768px;
             if (windowSize < 768) {
-              cartBtnClicked ? setCartBtnClicked(false) : setCartBtnClicked(true);
+              // cartBtnClicked ? setCartBtnClicked(false) : setCartBtnClicked(true);
+              if (cartBtnClicked) {
+                setCartBtnClicked(false);
+              } else {
+                setCartBtnClicked(true);
+              }
             }
           }}
         >

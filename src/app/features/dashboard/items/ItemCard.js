@@ -7,15 +7,16 @@ const ItemCard = ({ item }) => {
   const { displayItemDetails } = useContext(AppState);
 
   return (
-    <div
+    <button
       className="flex w-full rounded-xl p-3 cursor-pointer justify-between items-center shadow-[0_2px_8px_-1px_rgba(181,181,181,1)]"
       onClick={() => displayItemDetails(item)}
+      type="button"
     >
       <span className="font-medium">{item.name}</span>
       <button type="button">
         <HiOutlinePlusSm className="text-xl" />
       </button>
-    </div>
+    </button>
   );
 };
 

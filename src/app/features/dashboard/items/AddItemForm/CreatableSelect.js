@@ -43,7 +43,13 @@ export default function Select({ defaultOptions, onChange, value }) {
 }
 
 Select.propTypes = {
-  defaultOptions: PropType.array.isRequired,
+  defaultOptions: PropType.arrayOf(
+    PropType.shape({
+      label: PropType.string.isRequired,
+      value: PropType.number.isRequired,
+      isNew: PropType.bool.isRequired,
+    }),
+  ).isRequired,
   onChange: PropType.func.isRequired,
-  value: PropType.any.isRequired,
+  value: PropType.string.isRequired,
 };

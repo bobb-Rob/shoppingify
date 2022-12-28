@@ -1,4 +1,5 @@
-/* eslint-disable no-param-reassign no-plusplus */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-plusplus */
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
