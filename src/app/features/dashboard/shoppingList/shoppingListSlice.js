@@ -1,4 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-plusplus */
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   shoppingList: {
@@ -6,20 +8,20 @@ const initialState = {
     total: 0,
     totalItems: 0,
   },
-  status: "idle",
+  status: 'idle',
   error: null,
   errorMessages: [],
-  isDisplayed: "shoppingList",
+  isDisplayed: 'shoppingList',
 };
 
 const shoppingListSlice = createSlice({
-  name: "shoppingList",
+  name: 'shoppingList',
   initialState,
   reducers: {
     addItem(state, action) {
       const newItem = action.payload;
       const existingItem = state.shoppingList.items.find(
-        (item) => item.id === newItem.id
+        (item) => item.id === newItem.id,
       );
       state.shoppingList.totalItems++;
       state.shoppingList.total += newItem.price;
@@ -35,7 +37,7 @@ const shoppingListSlice = createSlice({
       }
     },
     displayItemDetails(state) {
-      state.isDisplayed = "showItemDetails";
+      state.isDisplayed = 'showItemDetails';
     },
   },
   extraReducers: {},

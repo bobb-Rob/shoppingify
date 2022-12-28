@@ -1,6 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { createUserWithEmailAndPassword, getCurrentUser, requestAccessTokenWithRefreshToken } from '../../api/sessionApi';
+import {
+  createUserWithEmailAndPassword,
+  getCurrentUser,
+  loginUserWithEmailAndPassword,
+  requestAccessTokenWithRefreshToken,
+} from '../../api/sessionApi';
 
 function setRefreshToken(token) {
   localStorage.setItem('refreshToken', token);
@@ -59,8 +64,24 @@ export const signUpUser = createAsyncThunk(
       payload.email,
       payload.password,
     );
-    if (response.errors) {
-      return rejectWithValue(response.errors);
+    if (response.error) {
+      return rejectWithValue(response.error);
+    }
+
+    return response;
+  },
+);
+
+export const loginUser = createAsyncThunk(
+  'session/loginUser',
+  async (payload, { rejectWithValue }) => {
+    const response = await loginUserWithEmailAndPassword(
+      payload.email,
+      payload.password,
+    );
+
+    if (response.error) {
+      return rejectWithValue(response.error);
     }
     return response;
   },
@@ -94,6 +115,32 @@ const sessionSlice = createSlice({
         state.errorMessages = [];
       })
       .addCase(signUpUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+        state.errorMessages = action.payload.errors;
+      })
+      .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+        state.errorMessages = [];
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.accessToken = action.payload.access_token;
+        state.refreshToken = action.payload.refresh_token;
+        state.expiresIn = action.payload.expires_in;
+        state.tokenType = action.payload.token_type;
+        state.currentUser = {
+          id: action.payload.id,
+          email: action.payload.email,
+          role: action.payload.role,
+          createdAt: action.payload.created_at,
+        };
+        setRefreshToken(action.payload.refresh_token);
+        state.loading = false;
+        state.error = false;
+        state.errorMessages = [];
+      })
+      .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
         state.errorMessages = action.payload.errors;

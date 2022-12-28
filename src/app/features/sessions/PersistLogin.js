@@ -1,4 +1,4 @@
- import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { refreshAccessToken } from './sessionSlice';
@@ -14,7 +14,7 @@ const PersistLogin = () => {
       try {
         dispatch(refreshAccessToken(refreshToken));
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
 

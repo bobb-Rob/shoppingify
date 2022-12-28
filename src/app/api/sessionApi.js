@@ -20,6 +20,20 @@ export async function createUserWithEmailAndPassword(email, password) {
     .catch((error) => error.response.data);
 }
 
+export async function loginUserWithEmailAndPassword(email, password) {
+  const data = {
+    grant_type: 'password',
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+    email,
+    password,
+  };
+  return myAxios
+    .post(LOGIN_URL, data)
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+}
+
 export async function requestAccessTokenWithRefreshToken(refreshToken) {
   const data = {
     grant_type: 'refresh_token',

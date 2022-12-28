@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
@@ -28,5 +30,25 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addComponents }) => {
+      addComponents({
+        '.btn': {
+          padding: '.5rem 1rem',
+          borderRadius: '.5rem',
+          backgroundColor: '#f9a109',
+          color: '#fff',
+          fontWeight: 'bold',
+          cursor: 'pointer',
+        },
+        '.btn-red': {
+          backgroundColor: '#e63946',
+          color: '#fff',
+          '&:hover': {
+            backgroundColor: '#e63946',
+          },
+        },
+      });
+    }),
+  ],
 };

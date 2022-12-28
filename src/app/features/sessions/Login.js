@@ -4,16 +4,16 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { HiOutlineArrowSmRight, HiOutlineMail } from 'react-icons/hi';
 import { MdOutlineLock } from 'react-icons/md';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { loginUser } from './sessionSlice';
 
 const Login = () => {
   let errorMessages = useSelector((state) => state.session.errorMessages);
   // const loading = useSelector((state) => state.session.loading);
   const [allErrors, setAllErrors] = useState([]);
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  console.log(allErrors);
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -37,15 +37,13 @@ const Login = () => {
   const onSubmit = async (user, e) => {
     e.preventDefault();
     setAllErrors([]);
-    console.log(user);
+
     const payload = {
       email: user.email,
       password: user.password,
     };
-    // const response = await dispatch(login(payload));
-    const response = [];
-    console.log(response);
-    console.log(payload);
+    dispatch(loginUser(payload));
+
     if (errorMessages.length > 0) {
       navigate('/');
     } else {
@@ -57,6 +55,7 @@ const Login = () => {
   return (
     <div className="user-container flex flex-col space-between">
       <div className="user-form-wrap flex flex-col">
+        <div>{allErrors}</div>
         <h2>Login</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="relative mb-4 ">

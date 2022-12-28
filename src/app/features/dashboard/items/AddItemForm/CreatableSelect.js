@@ -1,22 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropType from 'prop-types';
+import { useSelector } from 'react-redux';
 import CreatableSelect from 'react-select/creatable';
-import PropTypes from 'prop-types';
+// import { createCategory } from '../itemSlice';
 
-const Select = ({ handleChange, options, onInputChange }) => (
-  <CreatableSelect
-    isClearable
-    onChange={handleChange}
-    onInputChange={onInputChange}
-    options={options}
-  />
-);
+export default function Select({ defaultOptions, onChange, value }) {
+  const currentUser = useSelector((state) => state.session.currentUser);
+  const [isLoading, setIsLoading] = useState(false);
+  const [options, setOptions] = useState(defaultOptions);
 
-export default Select;
+  const createOption = (data) => ({
+    label: data.name,
+    value: data.id,
+    isNew: true,
+  });
+
+  const handleCreate = async (inputValue) => {
+    const newCategory = {
+      name: inputValue,
+      user_id: currentUser.id,
+    };
+    setIsLoading(true);
+
+    console.log(newCategory);
+    const newOption = createOption(newCategory);
+    setIsLoading(false);
+    setOptions((prev) => [...prev, newOption]);
+  };
+
+  return (
+    <CreatableSelect
+      isClearable
+      isDisabled={isLoading}
+      isLoading={isLoading}
+      onChange={onChange}
+      onCreateOption={handleCreate}
+      createOptionPosition="first"
+      options={options}
+      value={value}
+    />
+  );
+}
 
 Select.propTypes = {
-  handleChange: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  defaultOptions: PropType.arrayOf(
+    PropType.shape({
+      label: PropType.string.isRequired,
+      value: PropType.number.isRequired,
+      isNew: PropType.bool.isRequired,
+    }),
   ).isRequired,
-  onInputChange: PropTypes.func.isRequired,
+  onChange: PropType.func.isRequired,
+  value: PropType.string.isRequired,
 };

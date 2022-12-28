@@ -10,12 +10,9 @@ import { signUpUser } from './sessionSlice';
 
 const SignUp = () => {
   let errorMessages = useSelector((state) => state.session.errorMessages);
-  // const loading = useSelector((state) => state.session.loading);
   const [allErrors, setAllErrors] = useState([]);
-  // const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(allErrors);
 
   const {
     register,
@@ -41,15 +38,15 @@ const SignUp = () => {
   async function onSubmit(user, e) {
     e.preventDefault();
     setAllErrors([]);
-    console.log(user);
+
     const payload = {
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
       password: user.password,
     };
-    const response = await dispatch(signUpUser(payload));
-    console.log(response);
+    dispatch(signUpUser(payload));
+
     if (errorMessages.length > 0) {
       navigate('/');
     } else {
@@ -61,6 +58,7 @@ const SignUp = () => {
   return (
     <div className="user-container flex flex-col space-between">
       <div className="user-form-wrap flex flex-col">
+        <div>{allErrors}</div>
         <h2>Sign up</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="relative mt-6 mb-4 ">

@@ -26,7 +26,7 @@ const ShoppingListHolder = () => {
           />
         </div>
       </div>
-      <div className="shopping-list">
+      <div className="shopping-list border border-red">
         <ShoppingList />
       </div>
 
