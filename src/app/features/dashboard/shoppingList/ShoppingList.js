@@ -1,11 +1,11 @@
 import React from 'react';
-import CountChange from './shoppingListcomponents/CountChange';
 import ShopListHeader from './shoppingListcomponents/ShopListHeader';
+import ShopListItem from './shoppingListcomponents/ShopListItem';
 
 const ShoppingList = () => (
   <div className="shopping-list border mt-5">
     <ShopListHeader />
-    <CountChange />
+    <ShopListItem />
   </div>
 );
 
