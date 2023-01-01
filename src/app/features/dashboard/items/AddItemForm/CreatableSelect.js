@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropType from 'prop-types';
 import { useSelector } from 'react-redux';
 import CreatableSelect from 'react-select/creatable';
-// import { createCategory } from '../itemSlice';
 
 export default function Select({ defaultOptions, onChange, value }) {
   const currentUser = useSelector((state) => state.session.currentUser);
