@@ -3,11 +3,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  shoppingList: {
-    items: [],
-    total: 0,
-    totalItems: 0,
-  },
+  shoppingList: [],
+  editingMode: true,
   status: 'idle',
   error: null,
   errorMessages: [],
@@ -39,10 +36,13 @@ const shoppingListSlice = createSlice({
     displayItemDetails(state) {
       state.isDisplayed = 'showItemDetails';
     },
+    switchEditingMode(state) {
+      state.editingMode = !state.editingMode;
+    },
   },
   extraReducers: {},
 });
 
-export const { addItem, displayItemDetails } = shoppingListSlice.actions;
+export const { addItem, displayItemDetails, switchEditingMode } = shoppingListSlice.actions;
 
 export default shoppingListSlice.reducer;

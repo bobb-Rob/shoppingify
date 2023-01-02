@@ -19,31 +19,6 @@ export async function fetchItemsWithAccessToken(accessToken) {
     .catch((error) => error.response.data);
 }
 
-// export async function createNewCategoryAndItemWithAccessToken(data, accessToken) {
-//   const config = {
-//     headers: {
-//       Authorization: `Bearer ${accessToken}`,
-//     }
-//   };
-
-//   return myAxios
-//   .post(createCategoryUrl, data.newCategory, config)
-//   .then((response) => {
-//     if (response.status === 201) {
-//       data.item.category_id = response.data.id;
-//       return myAxios
-//       .post(createItemUrl, data.item, config)
-//       .then((response) => { //Refactor this unnecessary nesting
-//         if (response.status === 201) {
-//           return response.data;
-//         }
-//       })
-//       .catch((error) => error.response);
-//     }
-//   })
-//   .catch((error) => error.response);
-// }
-
 export async function createNewCategoryAndItemWithAccessToken({ item, newCategory }, accessToken) {
   const config = {
     headers: {

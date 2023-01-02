@@ -5,6 +5,7 @@ import ShopListCategory from './shoppingListcomponents/ShopListCategory';
 
 const ShoppingList = () => {
   const itemList = useSelector((state) => state.items.items);
+
   console.log(itemList);
   return (
     <div className="shopping-list mt-5">
