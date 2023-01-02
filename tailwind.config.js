@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require('tailwindcss/plugin');
+const colors = require('tailwindcss/colors')
 
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -28,6 +29,10 @@ module.exports = {
         itemsContainer: 'repeat(auto-fill, minmax(10rem, 1fr))',
         routes: '1fr 24.3rem',
       },
+      colors: {
+        amber: colors.amber,
+        emerald: colors.emerald,
+      }
     },
   },
   plugins: [
