@@ -19,12 +19,12 @@ const ShopListItem = ({ name, qty }) => {
       onMouseLeave={handleMouseLeave}
     >
       <span>
-        Avocago
         {name}
       </span>
       <CountChange
         quantity={qty}
         hovered={hovered}
+        handleDeleteShopItem={() => {}}
       />
     </div>
   );

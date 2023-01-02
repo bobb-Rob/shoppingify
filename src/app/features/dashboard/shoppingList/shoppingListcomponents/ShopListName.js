@@ -6,7 +6,6 @@ const ShopListHeader = ({ listName }) => (
   <div className="flex justify-between align-center">
     <h1>
       {listName}
-      Shopping List
     </h1>
     <MdModeEdit />
   </div>

@@ -14,9 +14,10 @@ const CountChange = ({ handleDeleteShopItem, quantity, hovered }) => {
         </div>
         <div className="flex items-center text-orange">
           <HiMinusSm className="cursor-pointer" />
-          <div className="border border-orange rounded rounded-[20px] px-2 py-0.5 text-xs mx-2">
+          <div className="text-center w-[4rem] border border-orange rounded rounded-[20px] px-2 py-[3.5px] text-xs mx-2">
             {quantity}
-            3pcs
+            {' '}
+            pcs
           </div>
           <HiPlusSm className="mr-1 cursor-pointer" />
         </div>
@@ -24,9 +25,10 @@ const CountChange = ({ handleDeleteShopItem, quantity, hovered }) => {
     );
   }
   return (
-    <div className="border border-orange rounded rounded-[20px] px-2 py-0.5 text-xs mx-2">
+    <div className="text-center text-orange border border-orange w-[4rem] rounded rounded-[20px] px-2 py-[3.5px] text-xs mx-2">
       {quantity}
-      3pcs
+      {' '}
+      pcs
     </div>
   );
 };

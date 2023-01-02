@@ -13,9 +13,7 @@ const ItemCard = ({ item }) => {
       type="button"
     >
       <span className="font-medium">{item.name}</span>
-      <button type="button">
-        <HiOutlinePlusSm className="text-xl" />
-      </button>
+      <HiOutlinePlusSm className="text-xl" />
     </button>
   );
 };
