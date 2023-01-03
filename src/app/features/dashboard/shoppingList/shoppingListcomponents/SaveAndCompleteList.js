@@ -37,16 +37,16 @@ const SaveAndCompleteList = () => {
   );
 
   const cancelOrComplete = (
-    <div className="flex ">
+    <div className="flex gap-4">
       <button
         type="button"
-        className="h-[60px] max-w-content"
+        className="h-[50.44px] w-[117.67px] hover:border hover:border-gray-300  rounded-lg"
       >
         Cancel
       </button>
       <button
         type="button"
-        className="h-[60px] max-w-content"
+        className="h-[50.44px] w-[117.67px] bg-blue hover:bg-sky-500 rounded-lg px-2 text-white text-base"
       >
         Complete
       </button>
@@ -54,7 +54,7 @@ const SaveAndCompleteList = () => {
   );
 
   return (
-    <div className="list-bottom h-[130.98px] bg-white absolute left-0 right-0 bottom-0 flex justify-center items-center">
+    <div className="list-bottom h-[110.98px] bg-white flex justify-center items-center">
       { editingMode ? save : cancelOrComplete }
     </div>
   );

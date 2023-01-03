@@ -9,8 +9,8 @@ const ShoppingListHolder = () => {
   const { displayAddItemForm } = useContext(AppState);
 
   return (
-    <div className="bg-peach h-[100vh] relative">
-      <div className="bg-peach px-10 py-10 overflow-scroll">
+    <div className="flex flex-col  bg-peach h-[100vh] relative">
+      <div className="bg-peach px-10 pt-10">
         <div className="list-top text-white flex bg-[#80485B] h-[129.91px] rounded-2xl">
           <div className="relative w-[78.67px]">
             <img

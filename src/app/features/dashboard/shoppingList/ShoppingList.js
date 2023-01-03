@@ -8,14 +8,16 @@ const ShoppingList = () => {
 
   console.log(itemList);
   return (
-    <div className="shopping-list mt-5">
+    <div className="shopping-list mt-5 ">
       <ShopListName listName="Cypress" />
-      {
-        itemList.map((category) => {
-          const { id, name, items } = category;
-          return <ShopListCategory key={id} categoryName={name} items={items} />;
-        })
-      }
+      <div className="overflow-hidden  h-[300px]">
+        {
+          itemList.map((category) => {
+            const { id, name, items } = category;
+            return <ShopListCategory key={id} categoryName={name} items={items} />;
+          })
+        }
+      </div>
     </div>
   );
 };

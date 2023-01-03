@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { AppState } from '../../../DataProvider';
-import BackArrow from '../../utils/backArrow';
+import BackArrow from '../../../commons/backArrow';
 import { deleteEmptyCategory, deleteItem } from './itemSlice';
 
 const ItemDetails = () => {

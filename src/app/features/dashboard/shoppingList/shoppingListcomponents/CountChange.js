@@ -6,7 +6,7 @@ import { HiPlusSm, HiMinusSm } from 'react-icons/hi';
 const CountChange = ({ handleDeleteShopItem, quantity, hovered }) => {
   if (hovered) {
     return (
-      <div className="flex items-center bg-white rounded rounded-full h-[2rem] max-w-fit">
+      <div className="flex items-center bg-white rounded rounded-full h-[2rem] max-w-fit ml-1">
         <div className="bg-orange cursor-pointer rounded rounded-lg h-full w-[1.6rem] flex justify-center items-center mr-2 text-white">
           <MdDeleteOutline
             onClick={handleDeleteShopItem}

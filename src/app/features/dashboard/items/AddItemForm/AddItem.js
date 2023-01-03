@@ -16,7 +16,7 @@ const AddItem = () => {
   const currentUser = useSelector((state) => state.session.currentUser);
   const accessToken = useSelector((state) => state.session.accessToken);
   const { notify } = useContext(AppState);
-  
+  console.log(items);
   const { displayShoppingList } = useContext(AppState);
  
   const { register, control, handleSubmit,  formState: { errors } } = useForm({
@@ -61,7 +61,7 @@ const AddItem = () => {
             position: toast.POSITION.TOP_CENTER,
           });
           displayShoppingList();
-        } else if (errorMessages.length === 0) {
+        } else if (errorMessages?.length === 0) {
           notify('Item creation failed. Please try again.');
         }
       });      
@@ -120,15 +120,18 @@ const AddItem = () => {
           name="category"
           control={control}
           rules={{ required: true }}
-          render={({ field: { onChange, value } }) => (<Select
-            onChange={onChange}
-            value={value}
-            defaultOptions={items.map((item) => ({
-              label: item.name,
-              value: item.id,
-              isNew: false,
-            }))}
-          />)}
+          render={({ field: { onChange, value } }) => {
+            console.log(value);
+            return (
+              <Select
+                onChange={onChange}
+                value={value}
+                defaultOptions={items.map((item) => ({
+                  label: item.name,
+                  value: item.id,
+                  isNew: false,
+                }))}
+          />)}}
         /> 
       </div>
       <div className="absolute bottom-0 right-0 left-0 flex justify-center p-4" >
