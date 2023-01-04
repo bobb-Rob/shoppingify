@@ -1,3 +1,4 @@
+/* eslint-disable prefer-object-spread */
 import myAxios from './myAxios';
 
 const fetchItemsUrl = '/categories';
@@ -19,7 +20,7 @@ export async function fetchItemsWithAccessToken(accessToken) {
     .catch((error) => error.response.data);
 }
 
-export async function createNewCategoryAndItemWithAccessToken({ item, newCategory }, accessToken) {
+export async function createNewCategoryAndItemWithAccessToken({ newCategory, item }, accessToken) {
   const config = {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -29,7 +30,8 @@ export async function createNewCategoryAndItemWithAccessToken({ item, newCategor
   return myAxios
     .post(createCategoryUrl, newCategory, config)
     .then((response) => {
-      const newItem = { ...item };
+      // const newItem = { ...item };
+      const newItem = Object.assign({}, item);
       newItem.category_id = response.data.id;
       return myAxios.post(createItemUrl, newItem, config);
     }).then((response) => response.data)

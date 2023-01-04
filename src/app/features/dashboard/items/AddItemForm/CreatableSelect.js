@@ -41,6 +41,12 @@ export default function Select({ defaultOptions, onChange, value }) {
   );
 }
 
+Select.defaultProps = {
+  defaultOptions: [],
+  value: {},
+  onChange: () => {},
+};
+
 Select.propTypes = {
   defaultOptions: PropType.arrayOf(
     PropType.shape({
@@ -48,7 +54,11 @@ Select.propTypes = {
       value: PropType.number.isRequired,
       isNew: PropType.bool.isRequired,
     }),
-  ).isRequired,
-  onChange: PropType.func.isRequired,
-  value: PropType.string.isRequired,
+  ),
+  onChange: PropType.func,
+  value: PropType.shape({
+    label: PropType.string,
+    value: PropType.number,
+    isNew: PropType.bool,
+  }),
 };

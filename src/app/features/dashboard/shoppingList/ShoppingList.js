@@ -10,7 +10,7 @@ const ShoppingList = () => {
   return (
     <div className="shopping-list mt-5 ">
       <ShopListName listName="Cypress" />
-      <div className="overflow-hidden  h-[300px]">
+      <div className="overflow-hidden hover:overflow-y-auto h-[300px]">
         {
           itemList.map((category) => {
             const { id, name, items } = category;
