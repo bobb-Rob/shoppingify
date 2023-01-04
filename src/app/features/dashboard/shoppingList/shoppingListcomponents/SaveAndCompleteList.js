@@ -1,29 +1,38 @@
-// eslint-disable
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+/* eslint-disable */
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateListName } from '../shoppingListSlice';
 // import PropTypes from 'prop-types';
 
 const SaveAndCompleteList = () => {
-  const [listName, setListName] = useState('');
+  const {
+    register, handleSubmit, reset, formState: { errors }
+  } = useForm({
+    listName: '',
+  });
+  const dispatch = useDispatch();
   const editingMode = useSelector((state) => state.shoppingList.editingMode);
+  // const handleChange = (e) => {
+  //   setListName(e.target.value);
+  // };
 
-  const handleChange = () => {
-    setListName('');
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefaut();
+  const nameSubmit = ({ listName }, e) => {
+    e.preventDefault();
+    console.log(listName);
+    dispatch(updateListName(listName));
+    reset();
   };
 
   const save = (
     <form
-      onSubmit={handleSubmit}
-      className=" h-[61.25px] flex justify-center items-center border border-red border border-orange border-2 rounded rounded-[15px]"
+      onSubmit={handleSubmit(nameSubmit)}
+      className=" h-[51.25px] relative flex justify-center items-center border border-red border border-orange border-2 rounded rounded-[15px]"
     >
       <input
         type="text"
-        value={listName}
-        onChange={handleChange}
+        name="listName"
+        {...register('listName', { required: "field must not be empty "}) }
         placeholder="Enter a name"
         className="h-full rounded text-sm rounded-[12px] focus:outline-none pl-4 focus:ring focus:ring-amber-400"
       />
@@ -33,6 +42,7 @@ const SaveAndCompleteList = () => {
       >
         Save
       </button>
+      {errors?.listName && (<p className="absolute bottom-[-25px] text-red-500 left-0">Field must not be empty</p>) }
     </form>
   );
 
