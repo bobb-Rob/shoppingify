@@ -1,16 +1,57 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import groupBy from 'lodash.groupby';
+import { fetchActiveListWithAccessToken } from '../../../api/shoppingListApi';
+
+export const fetchActiveList = createAsyncThunk(
+  'lists/getActiveList',
+  async (accessToken, { rejectWithValue }) => {
+    const response = await fetchActiveListWithAccessToken(accessToken);
+    if (response.errors) {
+      return rejectWithValue(response.data);
+    }
+    return response;
+  },
+);
+
+const transformActiveListData = (records) => {
+  console.log(records);
+  const groupedRecords = groupBy(records, 'item.categoryName');
+  const items = Object.entries(groupedRecords).map(([key, value]) => ({
+    name: key,
+    items: value.map(({ item }) => ({
+      ...item,
+    })),
+  }));
+  console.log(items);
+  console.log(groupedRecords);
+  return items;
+};
+
+// function transformActiveListData1(activeList) {
+//   let items = activeList.items;
+//   let records = activeList.records;
+//   for (let i = 0; i < items.length; i++) {
+//     const item = items[i];
+//     for (let j = 0; j < records.length; j++) {
+//       const quantity = records[j].quantity;
+//       if(item.id === records[j].item_id ) {
+
+//       }
+//     }
+//   }
+// }
 
 const initialState = {
-  list: {
+  activeList: {
     name: 'Shopping list',
     status: 'active',
-    categoryList: [],
+    items: [],
   },
   editingMode: true,
-  status: 'idle',
-  error: null,
+  loading: false,
+  error: false,
   errorMessages: [],
   isDisplayed: 'shoppingList',
 };
@@ -47,7 +88,25 @@ const shoppingListSlice = createSlice({
       state.list.name = action.payload;
     },
   },
-  extraReducers: {},
+  extraReducers: {
+    [fetchActiveList.pending]: (state) => {
+      state.loading = true;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [fetchActiveList.fulfilled]: (state, action) => {
+      state.activeList = action.payload;
+      state.activeList.items = transformActiveListData(action.payload.records);
+      state.loading = false;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [fetchActiveList.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.errorMessages = action.payload.errors;
+    },
+  },
 });
 
 export const {
