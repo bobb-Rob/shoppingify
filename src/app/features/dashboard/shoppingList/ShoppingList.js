@@ -9,10 +9,7 @@ import { fetchActiveList } from './shoppingListSlice';
 const ShoppingList = () => {
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.session.accessToken);
-  // const currentList = useSelector((state) => state.items.items);
-  const { name } = useSelector((state) => state.shoppingList.activeList);
-  const activeList = useSelector((state) => state.shoppingList.activeList.items);
-  console.log(activeList);
+  const { name, items } = useSelector((state) => state.shoppingList.activeList);
 
   useEffect(() => {
     dispatch(fetchActiveList(accessToken));
@@ -23,7 +20,7 @@ const ShoppingList = () => {
       <ShopListName listName={capitalizeFirstLetter(name)} />
       <div className="overflow-hidden hover:overflow-y-auto h-[300px]">
         {
-          activeList.map((category) => {
+          items.map((category) => {
             const { name, items } = category;
             return <ShopListCategory key={v4()} categoryName={name} items={items} />;
           })

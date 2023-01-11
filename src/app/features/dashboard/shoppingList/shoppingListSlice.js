@@ -16,32 +16,14 @@ export const fetchActiveList = createAsyncThunk(
 );
 
 const transformActiveListData = (records) => {
-  console.log(records);
   const groupedRecords = groupBy(records, 'item.categoryName');
-  const items = Object.entries(groupedRecords).map(([key, value]) => ({
+  return Object.entries(groupedRecords).map(([key, value]) => ({
     name: key,
     items: value.map(({ item }) => ({
       ...item,
     })),
   }));
-  console.log(items);
-  console.log(groupedRecords);
-  return items;
 };
-
-// function transformActiveListData1(activeList) {
-//   let items = activeList.items;
-//   let records = activeList.records;
-//   for (let i = 0; i < items.length; i++) {
-//     const item = items[i];
-//     for (let j = 0; j < records.length; j++) {
-//       const quantity = records[j].quantity;
-//       if(item.id === records[j].item_id ) {
-
-//       }
-//     }
-//   }
-// }
 
 const initialState = {
   activeList: {
