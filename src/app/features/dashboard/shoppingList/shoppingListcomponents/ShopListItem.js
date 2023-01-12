@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import CountChange from './CountChange';
+import { deleteItemFromActiveList } from '../shoppingListSlice';
 
-const ShopListItem = ({ name, qty, completed }) => {
+const ShopListItem = ({
+  name, qty, completed, recordId,
+}) => {
+  const dispatch = useDispatch();
+  const accessToken = useSelector((state) => state.session.accessToken);
   const [hovered, setHovered] = useState(false);
   const [checked, setChecked] = useState(false);
   const editingMode = useSelector((state) => state.shoppingList.editingMode);
@@ -20,8 +25,6 @@ const ShopListItem = ({ name, qty, completed }) => {
     // Update the backend data
     setChecked((ch) => !ch);
   }
-
-  console.log(checked);
 
   const checkboxes = (
     <input
@@ -55,7 +58,7 @@ const ShopListItem = ({ name, qty, completed }) => {
         <CountChange
           quantity={qty}
           hovered={hovered}
-          handleDeleteShopItem={() => {}}
+          handleDeleteShopItem={() => dispatch(deleteItemFromActiveList({ recordId, accessToken }))}
         />
       </div>
     </div>
@@ -66,6 +69,7 @@ ShopListItem.propTypes = {
   name: PropTypes.string.isRequired,
   qty: PropTypes.number.isRequired,
   completed: PropTypes.bool.isRequired,
+  recordId: PropTypes.number.isRequired,
 };
 
 export default ShopListItem;

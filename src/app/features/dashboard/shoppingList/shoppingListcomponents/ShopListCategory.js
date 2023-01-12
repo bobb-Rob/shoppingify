@@ -6,7 +6,15 @@ const ShopListCategory = ({ categoryName, items }) => (
   <div className="mt-4">
     <h4 className="text-sm text-gray-400 mb-3">{categoryName}</h4>
     {
-      items.map((item) => <ShopListItem key={item.id} name={item.name} qty={3} completed={false} />)
+      items.map((item) => (
+        <ShopListItem
+          key={item.id}
+          name={item.name}
+          qty={3}
+          completed={false}
+          recordId={item.recordId}
+        />
+      ))
     }
   </div>
 );

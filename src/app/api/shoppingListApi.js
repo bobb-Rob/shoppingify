@@ -2,7 +2,7 @@
 import myAxios from './myAxios';
 
 const fetchActiveListUrl = '/list/active';
-const addItemToActiveListUrl = '/records';
+const itemRecordsUrl = '/records';
 
 // Fetch all list
 export function fetchActiveListWithAccessToken(accessToken) {
@@ -26,7 +26,20 @@ export async function AddItemToActiveListWithAccessToken(item, accessToken) {
     },
   };
   return myAxios
-    .post(addItemToActiveListUrl, item, config)
+    .post(itemRecordsUrl, item, config)
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+}
+
+// Delete Item/record from activeList
+export async function deleteItemFromActiveLIstWithAccessToken(id, accessToken) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+  return myAxios
+    .delete(`${itemRecordsUrl}/${id}`, config)
     .then((response) => response.data)
     .catch((error) => error.response.data);
 }
