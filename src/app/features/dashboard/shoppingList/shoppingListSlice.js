@@ -1,14 +1,27 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
 import groupBy from 'lodash.groupby';
-import { fetchActiveListWithAccessToken } from '../../../api/shoppingListApi';
+import { AddItemToActiveListWithAccessToken, fetchActiveListWithAccessToken } from '../../../api/shoppingListApi';
 
 export const fetchActiveList = createAsyncThunk(
   'lists/getActiveList',
   async (accessToken, { rejectWithValue }) => {
     const response = await fetchActiveListWithAccessToken(accessToken);
     if (response.errors) {
+      return rejectWithValue(response.data);
+    }
+    return response;
+  },
+);
+
+export const addItemToActiveList = createAsyncThunk(
+  'lists/additemToList',
+  async ({ newRecord, accessToken }, { rejectWithValue }) => {
+    const response = await AddItemToActiveListWithAccessToken(newRecord, accessToken);
+    if (response.errors) {
+      console.log(response.errors);
+      console.log(response.data);
       return rejectWithValue(response.data);
     }
     return response;
@@ -87,6 +100,35 @@ const shoppingListSlice = createSlice({
       state.loading = false;
       state.error = true;
       state.errorMessages = action.payload.errors;
+    },
+    [addItemToActiveList.pending]: (state) => {
+      state.loading = true;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [addItemToActiveList.fulfilled]: (state, action) => {
+      const newItem = action.payload.item;
+      const category = state.activeList.items.find((item) => {
+        const stateCategoryName = current(item).name;
+        return stateCategoryName === newItem?.categoryName;
+      });
+
+      if (category) {
+        category.items.push(newItem);
+      } else {
+        state.activeList.items.push({
+          name: newItem.categoryName,
+          items: [newItem],
+        });
+      }
+      state.loading = false;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [addItemToActiveList.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.errorMessages = action.payload?.errors;
     },
   },
 });
