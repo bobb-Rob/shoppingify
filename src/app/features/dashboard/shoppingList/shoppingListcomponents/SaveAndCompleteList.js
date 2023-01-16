@@ -19,7 +19,6 @@ const SaveAndCompleteList = () => {
 
   const nameSubmit = ({ listName }, e) => {
     e.preventDefault();
-    console.log(listName);
     dispatch(updateListName(listName));
     reset();
   };

@@ -10,7 +10,7 @@ const ShopListItem = ({
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.session.accessToken);
   const [hovered, setHovered] = useState(false);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(completed);
   const editingMode = useSelector((state) => state.shoppingList.editingMode);
 
   function handleMouseEnter() {
@@ -21,7 +21,6 @@ const ShopListItem = ({
   }
 
   function handleCheckChange() {
-    console.log(completed);
     // Update the backend data
     setChecked((ch) => !ch);
   }
@@ -56,6 +55,7 @@ const ShopListItem = ({
           {name}
         </span>
         <CountChange
+          recordId={recordId}
           quantity={qty}
           hovered={hovered}
           handleDeleteShopItem={() => dispatch(deleteItemFromActiveList({ recordId, accessToken }))}

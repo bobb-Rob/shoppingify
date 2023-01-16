@@ -21,7 +21,6 @@ export default function Select({ defaultOptions, onChange, value }) {
     };
     setIsLoading(true);
 
-    console.log(newCategory);
     const newOption = createOption(newCategory);
     setIsLoading(false);
     setOptions((prev) => [...prev, newOption]);

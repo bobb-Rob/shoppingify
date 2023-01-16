@@ -6,6 +6,7 @@ import {
   AddItemToActiveListWithAccessToken,
   deleteItemFromActiveLIstWithAccessToken,
   fetchActiveListWithAccessToken,
+  updateItemQtyWithAccessToken,
 } from '../../../api/shoppingListApi';
 
 export const fetchActiveList = createAsyncThunk(
@@ -24,8 +25,6 @@ export const addItemToActiveList = createAsyncThunk(
   async ({ newRecord, accessToken }, { rejectWithValue }) => {
     const response = await AddItemToActiveListWithAccessToken(newRecord, accessToken);
     if (response.errors) {
-      console.log(response.errors);
-      console.log(response.data);
       return rejectWithValue(response.data);
     }
     return response;
@@ -36,6 +35,17 @@ export const deleteItemFromActiveList = createAsyncThunk(
   'lists/deleteItem',
   async ({ recordId, accessToken }, { rejectWithValue }) => {
     const response = await deleteItemFromActiveLIstWithAccessToken(recordId, accessToken);
+    if (response.errors) {
+      return rejectWithValue(response.errors);
+    }
+    return { ...response, id: recordId };
+  },
+);
+
+export const updateItemQty = createAsyncThunk(
+  'lists/updateItemQty',
+  async ({ recordId, newQty, accessToken }, { rejectWithValue }) => {
+    const response = await updateItemQtyWithAccessToken({ recordId, newQty }, accessToken);
     if (response.errors) {
       return rejectWithValue(response.errors);
     }
@@ -165,6 +175,29 @@ const shoppingListSlice = createSlice({
       state.errorMessages = [];
     },
     [deleteItemFromActiveList.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.errorMessages = action.payload?.errors;
+    },
+    [updateItemQty.pending]: (state) => {
+      state.loading = true;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [updateItemQty.fulfilled]: (state) => {
+      // const deletedItemID = action.payload.deleted_record.item_id;
+      // const categoryName = action.payload.item_category_name;
+      // const category = state.activeList.items.find((category) => category.name === categoryName);
+      // category.items = category.items.filter((item) => item.id !== deletedItemID);
+      // if (category.items.length === 0) {
+      //   state.activeList.items = state.activeList.items.filter((category) => (
+      //     category.name !== categoryName));
+      // }
+      state.loading = false;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [updateItemQty.rejected]: (state, action) => {
       state.loading = false;
       state.error = true;
       state.errorMessages = action.payload?.errors;

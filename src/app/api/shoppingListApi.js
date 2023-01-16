@@ -43,3 +43,16 @@ export async function deleteItemFromActiveLIstWithAccessToken(id, accessToken) {
     .then((response) => response.data)
     .catch((error) => error.response.data);
 }
+
+// Update item/record quantity
+export async function updateItemQtyWithAccessToken({ recordId, newQty }, accessToken) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+  return myAxios
+    .patch(`${itemRecordsUrl}/${recordId}`, newQty, config)
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+}

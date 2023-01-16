@@ -10,8 +10,8 @@ const ShopListCategory = ({ categoryName, items }) => (
         <ShopListItem
           key={item.id}
           name={item.name}
-          qty={3}
-          completed={false}
+          qty={item.quantity}
+          completed={item.completed}
           recordId={item.recordId}
         />
       ))
