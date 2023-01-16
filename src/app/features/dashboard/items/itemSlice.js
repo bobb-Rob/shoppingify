@@ -21,8 +21,8 @@ export const fetchItems = createAsyncThunk(
 
 export const createCategoryAndItem = createAsyncThunk(
   'items/createCategoryAndItem',
-  async ({ data, accessToken }, { rejectWithValue }) => {
-    const response = await createNewCategoryAndItemWithAccessToken(data, accessToken);
+  async ({ dataObj, accessToken }, { rejectWithValue }) => {
+    const response = await createNewCategoryAndItemWithAccessToken(dataObj, accessToken);
     if (response.errors) {
       return rejectWithValue(response.data);
     }
@@ -122,7 +122,7 @@ const itemsSlice = createSlice({
     [createCategoryAndItem.rejected]: (state, action) => {
       state.loading = false;
       state.error = true;
-      state.errorMessages = action.payload;
+      state.errorMessages = action.payload || [];
     },
     [createItem.pending]: (state) => {
       state.loading = true;

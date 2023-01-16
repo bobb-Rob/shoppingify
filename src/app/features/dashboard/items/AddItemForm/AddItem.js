@@ -9,6 +9,7 @@ import Select from './CreatableSelect';
 import { IoCloseSharp } from 'react-icons/io5';
 import { clearError } from '../itemSlice';
 import { toast } from 'react-toastify';
+import AddItemForm from './AddItemForm';
 
 const AddItem = () => {
   const dispatch = useDispatch();
@@ -16,10 +17,11 @@ const AddItem = () => {
   const currentUser = useSelector((state) => state.session.currentUser);
   const accessToken = useSelector((state) => state.session.accessToken);
   const { notify } = useContext(AppState);
-  
+  console.log(items);
+  console.log(errorMessages);
   const { displayShoppingList } = useContext(AppState);
  
-  const { register, control, handleSubmit,  formState: { errors } } = useForm({
+  const { register, control, handleSubmit,  formState } = useForm({
     name: '',
     category: '',
     note: '',
@@ -43,7 +45,7 @@ const AddItem = () => {
       user_id: currentUser.id,
     }
     const dataObj = { newCategory, item };
-
+    console.log(dataObj);
     if(data.category.isNew) {
       // dispatch action to create new category and then a new item
       dispatch(createCategoryAndItem({ dataObj, accessToken })).then((response) => {
@@ -70,7 +72,7 @@ const AddItem = () => {
   
   return (
     <form className="pt-5 px-5 pb-0 h-full relative overflow-scroll" onSubmit={handleSubmit(onSubmit)}>
-      {/* { show error messages if any} */}
+      {/* show error messages if any */}
       {errorMessages.length > 0 && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
           <strong className="font-bold">Error!</strong>
@@ -85,50 +87,29 @@ const AddItem = () => {
         </div>
       )}
       <h3 className="text-lg font-bold mt-3">Add a new item</h3>
-      <div className="mt-5" >
-        <label className="text-sm" htmlFor="name">Name</label><br/>
-        <input
-          type="text"
-          className="border my-input w-full text-sm rounded-xl p-3"
-          placeholder="Enter a name"
-          {...register('name', { required: true })}
-        />
-        {errors.name && <span>This field is required</span>}
-      </div>
-      <div className="mt-[2.5vh]" >
-        <label className="text-sm" htmlFor="note">Note (optional)</label><br/>
-        <textarea
-          className="border my-input w-full text-sm rounded-xl p-3"
-          // type="textarea"
-          rows="4"
-          placeholder="Enter a note"
-          {...register('note')}
-        />
-      </div>
-      <div className="mt-[2.5vh]" >
-        <label className="text-sm" htmlFor="imageUrl">Image (optional)</label><br/>
-        <input
-          className="border my-input w-full text-sm rounded-xl p-3"
-          type="url"
-          placeholder="Enter a url"
-          {...register('image')}
-        />
-      </div>
+      <AddItemForm
+        register={register}
+        formState={formState}
+      />
+  
       <div className="mt-[2.5vh]" >
         <label className="text-sm" htmlFor="category">Category</label><br/>
         <Controller
           name="category"
           control={control}
           rules={{ required: true }}
-          render={({ field: { onChange, value } }) => (<Select
-            onChange={onChange}
-            value={value}
-            defaultOptions={items.map((item) => ({
-              label: item.name,
-              value: item.id,
-              isNew: false,
-            }))}
-          />)}
+          render={({ field: { onChange, value } }) => {
+            console.log(value);
+            return (
+              <Select
+                onChange={onChange}
+                value={value}
+                defaultOptions={items.map((item) => ({
+                  label: item.name,
+                  value: item.id,
+                  isNew: false,
+                }))}
+          />)}}
         /> 
       </div>
       <div className="absolute bottom-0 right-0 left-0 flex justify-center p-4" >

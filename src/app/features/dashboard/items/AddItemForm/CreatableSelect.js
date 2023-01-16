@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropType from 'prop-types';
 import { useSelector } from 'react-redux';
 import CreatableSelect from 'react-select/creatable';
-// import { createCategory } from '../itemSlice';
 
 export default function Select({ defaultOptions, onChange, value }) {
   const currentUser = useSelector((state) => state.session.currentUser);
@@ -22,7 +21,6 @@ export default function Select({ defaultOptions, onChange, value }) {
     };
     setIsLoading(true);
 
-    console.log(newCategory);
     const newOption = createOption(newCategory);
     setIsLoading(false);
     setOptions((prev) => [...prev, newOption]);
@@ -42,6 +40,12 @@ export default function Select({ defaultOptions, onChange, value }) {
   );
 }
 
+Select.defaultProps = {
+  defaultOptions: [],
+  value: {},
+  onChange: () => {},
+};
+
 Select.propTypes = {
   defaultOptions: PropType.arrayOf(
     PropType.shape({
@@ -49,7 +53,11 @@ Select.propTypes = {
       value: PropType.number.isRequired,
       isNew: PropType.bool.isRequired,
     }),
-  ).isRequired,
-  onChange: PropType.func.isRequired,
-  value: PropType.string.isRequired,
+  ),
+  onChange: PropType.func,
+  value: PropType.shape({
+    label: PropType.string,
+    value: PropType.number,
+    isNew: PropType.bool,
+  }),
 };
