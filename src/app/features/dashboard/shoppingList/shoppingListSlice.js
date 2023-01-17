@@ -25,7 +25,8 @@ export const addItemToActiveList = createAsyncThunk(
   async ({ newRecord, accessToken }, { rejectWithValue }) => {
     const response = await AddItemToActiveListWithAccessToken(newRecord, accessToken);
     if (response.errors) {
-      return rejectWithValue(response.data);
+      console.log(response.errors);
+      return rejectWithValue(response.errors);
     }
     return response;
   },
@@ -117,6 +118,10 @@ const shoppingListSlice = createSlice({
     updateListName(state, action) {
       state.list.name = action.payload;
     },
+    shopListClearError(state) {
+      state.error = false;
+      state.errorMessages = [];
+    },
   },
   extraReducers: {
     [fetchActiveList.pending]: (state) => {
@@ -163,7 +168,7 @@ const shoppingListSlice = createSlice({
     [addItemToActiveList.rejected]: (state, action) => {
       state.loading = false;
       state.error = true;
-      state.errorMessages = action.payload?.errors;
+      state.errorMessages = action.payload?.item_id;
     },
     [deleteItemFromActiveList.pending]: (state) => {
       state.loading = true;
@@ -220,6 +225,7 @@ export const {
   displayItemDetails,
   switchEditingMode,
   updateListName,
+  shopListClearError,
 } = shoppingListSlice.actions;
 
 export default shoppingListSlice.reducer;

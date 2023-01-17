@@ -22,10 +22,11 @@ const CountChange = ({
     data.newQty.quantity += 1;
     const response = await dispatch(updateItemQty(data));
     if (response.type === 'lists/updateItemQty/fulfilled') {
-      setQty(qty + 1);
+      setQty((prevQty) => prevQty + 1);
+      console.log(qty, 'qty changes');
     } else {
-      // display error message on UI if rejected
       setQty(qty);
+      console.log(qty, 'qty remain the same');
     }
   };
 
@@ -44,7 +45,7 @@ const CountChange = ({
       <div className="flex items-center bg-white rounded rounded-full h-[2rem] max-w-fit ml-1">
         <div className="bg-orange cursor-pointer rounded rounded-lg h-full w-[1.6rem] flex justify-center items-center mr-2 text-white">
           <MdDeleteOutline
-            onClick={handleDeleteShopItem}
+            onClick={() => handleDeleteShopItem()}
           />
         </div>
         <div
