@@ -32,14 +32,14 @@ const CountChange = ({
       <div className="flex items-center bg-white rounded rounded-full h-[2rem] max-w-fit ml-1">
         <div className="bg-orange cursor-pointer rounded rounded-lg h-full w-[1.6rem] flex justify-center items-center mr-2 text-white">
           <MdDeleteOutline
-            onClick={() => handleDeleteShopItem()}
+            onClick={handleDeleteShopItem}
           />
         </div>
         <div
           className="flex items-center text-orange"
         >
           <HiMinusSm
-            className="minus cursor-pointer border"
+            className="minus cursor-pointer"
             onClick={handleQtyDecrement}
           />
           <div className="text-center w-[4rem] border border-orange rounded rounded-[20px] px-2 py-[3.5px] text-xs mx-2">
@@ -48,7 +48,7 @@ const CountChange = ({
             pcs
           </div>
           <HiPlusSm
-            className="plus mr-1 cursor-pointer border"
+            className="plus mr-1 cursor-pointer"
             onClick={handleQtyIncrement}
           />
         </div>
