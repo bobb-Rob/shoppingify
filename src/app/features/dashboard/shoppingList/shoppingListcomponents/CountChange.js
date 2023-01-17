@@ -2,22 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { MdDeleteOutline } from 'react-icons/md';
 import { HiPlusSm, HiMinusSm } from 'react-icons/hi';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateItemQty } from '../shoppingListSlice';
 
 const CountChange = ({
   handleDeleteShopItem, quantity, hovered, recordId,
 }) => {
+  const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.session.accessToken);
+
   const data = {
     recordId,
-    newQty: { quantity: quantity - 1 },
+    newQty: { quantity },
     accessToken,
   };
 
-  function handleQtyUpdate() {
-    const quantity = data;
-    return quantity;
-  }
+  const handleQtyIncrement = () => {
+    data.newQty.quantity += 1;
+    dispatch(updateItemQty(data));
+  };
+
+  const handleQtyDecrement = () => {
+    data.newQty.quantity -= 1;
+    dispatch(updateItemQty(data));
+  };
 
   if (hovered) {
     return (
@@ -32,14 +40,17 @@ const CountChange = ({
         >
           <HiMinusSm
             className="minus cursor-pointer"
-            onClick={() => handleQtyUpdate()}
+            onClick={handleQtyDecrement}
           />
           <div className="text-center w-[4rem] border border-orange rounded rounded-[20px] px-2 py-[3.5px] text-xs mx-2">
             {quantity}
             {' '}
             pcs
           </div>
-          <HiPlusSm className="plus mr-1 cursor-pointer" />
+          <HiPlusSm
+            className="plus mr-1 cursor-pointer"
+            onClick={handleQtyIncrement}
+          />
         </div>
       </div>
     );

@@ -25,7 +25,8 @@ export const addItemToActiveList = createAsyncThunk(
   async ({ newRecord, accessToken }, { rejectWithValue }) => {
     const response = await AddItemToActiveListWithAccessToken(newRecord, accessToken);
     if (response.errors) {
-      return rejectWithValue(response.data);
+      console.log(response.errors);
+      return rejectWithValue(response.errors);
     }
     return response;
   },
@@ -53,13 +54,23 @@ export const updateItemQty = createAsyncThunk(
   },
 );
 
+const alphabetically = (a, b) => {
+  if (a.name < b.name) {
+    return -1;
+  }
+  if (a.name > b.name) {
+    return 1;
+  }
+  return 0;
+};
+
 const transformActiveListData = (records) => {
   const groupedRecords = groupBy(records, 'item.categoryName');
   return Object.entries(groupedRecords).map(([key, value]) => ({
     name: key,
     items: value.map(({ item }) => ({
       ...item,
-    })),
+    })).sort(alphabetically),
   }));
 };
 
@@ -107,6 +118,10 @@ const shoppingListSlice = createSlice({
     updateListName(state, action) {
       state.list.name = action.payload;
     },
+    shopListClearError(state) {
+      state.error = false;
+      state.errorMessages = [];
+    },
   },
   extraReducers: {
     [fetchActiveList.pending]: (state) => {
@@ -153,7 +168,7 @@ const shoppingListSlice = createSlice({
     [addItemToActiveList.rejected]: (state, action) => {
       state.loading = false;
       state.error = true;
-      state.errorMessages = action.payload?.errors;
+      state.errorMessages = action.payload?.item_id;
     },
     [deleteItemFromActiveList.pending]: (state) => {
       state.loading = true;
@@ -184,15 +199,21 @@ const shoppingListSlice = createSlice({
       state.error = false;
       state.errorMessages = [];
     },
-    [updateItemQty.fulfilled]: (state) => {
-      // const deletedItemID = action.payload.deleted_record.item_id;
-      // const categoryName = action.payload.item_category_name;
-      // const category = state.activeList.items.find((category) => category.name === categoryName);
-      // category.items = category.items.filter((item) => item.id !== deletedItemID);
-      // if (category.items.length === 0) {
-      //   state.activeList.items = state.activeList.items.filter((category) => (
-      //     category.name !== categoryName));
-      // }
+    [updateItemQty.fulfilled]: (state, action) => {
+      const { id, categoryName, quantity } = action.payload.item;
+      const category = state.activeList.items.find((category) => category.name === categoryName);
+      category.items = category.items.map((item) => {
+        if (id === item.id) {
+          return {
+            ...item,
+            quantity,
+          };
+        }
+        return {
+          ...item,
+        };
+      });
+
       state.loading = false;
       state.error = false;
       state.errorMessages = [];
@@ -210,6 +231,7 @@ export const {
   displayItemDetails,
   switchEditingMode,
   updateListName,
+  shopListClearError,
 } = shoppingListSlice.actions;
 
 export default shoppingListSlice.reducer;
