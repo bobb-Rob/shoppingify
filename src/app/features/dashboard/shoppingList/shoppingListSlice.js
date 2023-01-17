@@ -199,15 +199,21 @@ const shoppingListSlice = createSlice({
       state.error = false;
       state.errorMessages = [];
     },
-    [updateItemQty.fulfilled]: (state) => {
-      // const deletedItemID = action.payload.deleted_record.item_id;
-      // const categoryName = action.payload.item_category_name;
-      // const category = state.activeList.items.find((category) => category.name === categoryName);
-      // category.items = category.items.filter((item) => item.id !== deletedItemID);
-      // if (category.items.length === 0) {
-      //   state.activeList.items = state.activeList.items.filter((category) => (
-      //     category.name !== categoryName));
-      // }
+    [updateItemQty.fulfilled]: (state, action) => {
+      const { id, categoryName, quantity } = action.payload.item;
+      const category = state.activeList.items.find((category) => category.name === categoryName);
+      category.items = category.items.map((item) => {
+        if (id === item.id) {
+          return {
+            ...item,
+            quantity,
+          };
+        }
+        return {
+          ...item,
+        };
+      });
+
       state.loading = false;
       state.error = false;
       state.errorMessages = [];
