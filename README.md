@@ -34,7 +34,7 @@
 
 ## Live link 🙌
 
-[Demo link (not ready yet)](#)
+[Demo link](https://shoppingify-live.vercel.app/)
 
 
 ## Getting Started 🙌
@@ -71,7 +71,7 @@ Run
 ```
 
 ### Deployment
-- [Visit Application Homepage](#www.git)
+- [Visit Application Homepage](https://shoppingify-live.vercel.app/)
 
 
 ### Authors
