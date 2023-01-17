@@ -53,13 +53,23 @@ export const updateItemQty = createAsyncThunk(
   },
 );
 
+const alphabetically = (a, b) => {
+  if (a.name < b.name) {
+    return -1;
+  }
+  if (a.name > b.name) {
+    return 1;
+  }
+  return 0;
+};
+
 const transformActiveListData = (records) => {
   const groupedRecords = groupBy(records, 'item.categoryName');
   return Object.entries(groupedRecords).map(([key, value]) => ({
     name: key,
     items: value.map(({ item }) => ({
       ...item,
-    })),
+    })).sort(alphabetically),
   }));
 };
 
