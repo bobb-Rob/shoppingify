@@ -3,6 +3,7 @@ import myAxios from './myAxios';
 
 const fetchActiveListUrl = '/list/active';
 const itemRecordsUrl = '/records';
+const listUrl = '/lists';
 
 // Fetch all list
 export function fetchActiveListWithAccessToken(accessToken) {
@@ -53,6 +54,19 @@ export async function updateItemQtyWithAccessToken({ recordId, newQty }, accessT
   };
   return myAxios
     .patch(`${itemRecordsUrl}/${recordId}`, newQty, config)
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+}
+
+// Update activelist name
+export async function updateListNameWithAccessToken({ listId, newName }, accessToken) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+  return myAxios
+    .patch(`${listUrl}/${listId}`, newName, config)
     .then((response) => response.data)
     .catch((error) => error.response.data);
 }

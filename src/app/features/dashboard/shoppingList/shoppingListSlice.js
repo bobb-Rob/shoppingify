@@ -7,6 +7,7 @@ import {
   deleteItemFromActiveLIstWithAccessToken,
   fetchActiveListWithAccessToken,
   updateItemQtyWithAccessToken,
+  updateListNameWithAccessToken,
 } from '../../../api/shoppingListApi';
 
 export const fetchActiveList = createAsyncThunk(
@@ -51,6 +52,17 @@ export const updateItemQty = createAsyncThunk(
       return rejectWithValue(response.errors);
     }
     return { ...response, id: recordId };
+  },
+);
+
+export const updateListName = createAsyncThunk(
+  'lists/updateListName',
+  async ({ listId, newName, accessToken }, { rejectWithValue }) => {
+    const response = await updateListNameWithAccessToken({ listId, newName }, accessToken);
+    if (response.errors) {
+      return rejectWithValue(response.errors);
+    }
+    return { ...response, id: listId };
   },
 );
 
@@ -116,7 +128,7 @@ const shoppingListSlice = createSlice({
       state.editingMode = !state.editingMode;
     },
     updateListName(state, action) {
-      state.list.name = action.payload;
+      state.activeList.name = action.payload;
     },
     shopListClearError(state) {
       state.error = false;
@@ -223,6 +235,23 @@ const shoppingListSlice = createSlice({
       state.error = true;
       state.errorMessages = action.payload?.errors;
     },
+    [updateListName.pending]: (state) => {
+      state.loading = true;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [updateListName.fulfilled]: (state, action) => {
+      const { name } = action.payload;
+      state.activeList.name = name;
+      state.loading = false;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [updateListName.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.errorMessages = action.payload?.errors;
+    },
   },
 });
 
@@ -230,7 +259,6 @@ export const {
   addItem,
   displayItemDetails,
   switchEditingMode,
-  updateListName,
   shopListClearError,
 } = shoppingListSlice.actions;
 
