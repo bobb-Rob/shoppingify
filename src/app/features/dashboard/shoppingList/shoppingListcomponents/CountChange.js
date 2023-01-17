@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { MdDeleteOutline } from 'react-icons/md';
 import { HiPlusSm, HiMinusSm } from 'react-icons/hi';
@@ -10,34 +10,21 @@ const CountChange = ({
 }) => {
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.session.accessToken);
-  const [qty, setQty] = useState(quantity);
 
   const data = {
     recordId,
-    newQty: { quantity: qty },
+    newQty: { quantity },
     accessToken,
   };
 
-  const handleQtyIncrement = async () => {
+  const handleQtyIncrement = () => {
     data.newQty.quantity += 1;
-    const response = await dispatch(updateItemQty(data));
-    if (response.type === 'lists/updateItemQty/fulfilled') {
-      setQty((prevQty) => prevQty + 1);
-      console.log(qty, 'qty changes');
-    } else {
-      setQty(qty);
-      console.log(qty, 'qty remain the same');
-    }
+    dispatch(updateItemQty(data));
   };
 
-  const handleQtyDecrement = async () => {
+  const handleQtyDecrement = () => {
     data.newQty.quantity -= 1;
-    const response = await dispatch(updateItemQty(data));
-    if (response.type === 'lists/updateItemQty/fulfilled') {
-      setQty(qty - 1);
-    } else {
-      setQty(qty);
-    }
+    dispatch(updateItemQty(data));
   };
 
   if (hovered) {
@@ -56,7 +43,7 @@ const CountChange = ({
             onClick={handleQtyDecrement}
           />
           <div className="text-center w-[4rem] border border-orange rounded rounded-[20px] px-2 py-[3.5px] text-xs mx-2">
-            {qty}
+            {quantity}
             {' '}
             pcs
           </div>
@@ -70,7 +57,7 @@ const CountChange = ({
   }
   return (
     <div className="text-center text-orange border border-orange w-[4rem] rounded rounded-[20px] px-2 py-[3.5px] text-xs mx-2">
-      {qty}
+      {quantity}
       {' '}
       pcs
     </div>
