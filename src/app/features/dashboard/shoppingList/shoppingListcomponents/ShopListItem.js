@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import CountChange from './CountChange';
-import { deleteItemFromActiveList } from '../shoppingListSlice';
+import { deleteItemFromActiveList, updateItemCompleted } from '../shoppingListSlice';
 
 const ShopListItem = ({
   name, qty, completed, recordId,
@@ -10,7 +10,6 @@ const ShopListItem = ({
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.session.accessToken);
   const [hovered, setHovered] = useState(false);
-  const [checked, setChecked] = useState(completed);
   const editingMode = useSelector((state) => state.shoppingList.editingMode);
 
   function handleMouseEnter() {
@@ -22,13 +21,18 @@ const ShopListItem = ({
 
   function handleCheckChange() {
     // Update the backend data
-    setChecked((ch) => !ch);
+    const data = {
+      recordId,
+      newCompleted: { completed: !completed },
+      accessToken,
+    };
+    dispatch(updateItemCompleted(data));
   }
 
   const checkboxes = (
     <input
       type="checkbox"
-      checked={checked}
+      checked={completed}
       onChange={handleCheckChange}
       className="w-5 bg-orange h-12 cursor-pointer mr-2"
     />
@@ -45,7 +49,7 @@ const ShopListItem = ({
         <span
           className=""
           style={
-            checked ? {
+            completed ? {
               textDecorationLine: 'line-through',
               textDecorationStyle: 'solid',
               textDecorationThickness: '2px',

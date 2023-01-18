@@ -6,6 +6,7 @@ import {
   AddItemToActiveListWithAccessToken,
   deleteItemFromActiveLIstWithAccessToken,
   fetchActiveListWithAccessToken,
+  updateItemCompletedWithAccessToken,
   updateItemQtyWithAccessToken,
   updateListNameWithAccessToken,
 } from '../../../api/shoppingListApi';
@@ -26,7 +27,6 @@ export const addItemToActiveList = createAsyncThunk(
   async ({ newRecord, accessToken }, { rejectWithValue }) => {
     const response = await AddItemToActiveListWithAccessToken(newRecord, accessToken);
     if (response.errors) {
-      console.log(response.errors);
       return rejectWithValue(response.errors);
     }
     return response;
@@ -48,6 +48,21 @@ export const updateItemQty = createAsyncThunk(
   'lists/updateItemQty',
   async ({ recordId, newQty, accessToken }, { rejectWithValue }) => {
     const response = await updateItemQtyWithAccessToken({ recordId, newQty }, accessToken);
+    if (response.errors) {
+      return rejectWithValue(response.errors);
+    }
+    return { ...response, id: recordId };
+  },
+);
+
+export const updateItemCompleted = createAsyncThunk(
+  'lists/updateItemCompleted',
+  async ({ recordId, newCompleted, accessToken }, { rejectWithValue }) => {
+    const response = await updateItemCompletedWithAccessToken({
+      recordId,
+      newCompleted,
+    }, accessToken);
+
     if (response.errors) {
       return rejectWithValue(response.errors);
     }
@@ -231,6 +246,35 @@ const shoppingListSlice = createSlice({
       state.errorMessages = [];
     },
     [updateItemQty.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.errorMessages = action.payload?.errors;
+    },
+    [updateItemCompleted.pending]: (state) => {
+      state.loading = true;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [updateItemCompleted.fulfilled]: (state, action) => {
+      const { id, categoryName, completed } = action.payload.item;
+      const category = state.activeList.items.find((category) => category.name === categoryName);
+      category.items = category.items.map((item) => {
+        if (id === item.id) {
+          return {
+            ...item,
+            completed,
+          };
+        }
+        return {
+          ...item,
+        };
+      });
+
+      state.loading = false;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [updateItemCompleted.rejected]: (state, action) => {
       state.loading = false;
       state.error = true;
       state.errorMessages = action.payload?.errors;

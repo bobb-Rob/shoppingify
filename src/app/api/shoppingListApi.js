@@ -58,6 +58,19 @@ export async function updateItemQtyWithAccessToken({ recordId, newQty }, accessT
     .catch((error) => error.response.data);
 }
 
+// Update item/record completed
+export async function updateItemCompletedWithAccessToken({ recordId, newCompleted }, accessToken) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+  return myAxios
+    .patch(`${itemRecordsUrl}/${recordId}`, newCompleted, config)
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+}
+
 // Update activelist name
 export async function updateListNameWithAccessToken({ listId, newName }, accessToken) {
   const config = {
