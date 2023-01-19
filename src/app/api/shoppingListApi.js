@@ -96,3 +96,16 @@ export async function updateListStatusWithAccessToken({ listId, newStatus }, acc
     .then((response) => response.data)
     .catch((error) => error.response.data);
 }
+
+// Create ActiveList
+export async function createActiveListWithAccessToken(activeList, accessToken) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+  return myAxios
+    .post(listUrl, activeList, config)
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+}

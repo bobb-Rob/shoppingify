@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { MdClose } from 'react-icons/md';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../DataProvider';
-import { updateListStatus } from '../dashboard/shoppingList/shoppingListSlice';
+import { createActiveList, updateListStatus } from '../dashboard/shoppingList/shoppingListSlice';
 
 const listModal = () => {
   const { actionType, setShowModal } = useContext(AppState);
@@ -10,6 +10,7 @@ const listModal = () => {
   const dispatch = useDispatch();
   const listId = useSelector((state) => state.shoppingList.activeList.id);
   const accessToken = useSelector((state) => state.session.accessToken);
+  const userId = useSelector((state) => state.session.currentUser.id);
 
   const handleModalClose = () => {
     setShowModal(false);
@@ -21,9 +22,19 @@ const listModal = () => {
       newStatus: { status: newStatus },
       accessToken,
     };
-    console.log(data);
-    handleModalClose();
-    dispatch(updateListStatus(data));
+
+    const activeList = {
+      name: 'GetNewNames()',
+      user_id: userId,
+    };
+
+    dispatch(updateListStatus(data)).then((response) => {
+      if (response.type === 'lists/updateListStatus/fulfilled' && response.payload.status === actionType.toLowerCase()) {
+        dispatch(createActiveList({ activeList, accessToken }));
+      }
+      handleModalClose();
+    });
+    // Create new list with default active status
   };
 
   return (

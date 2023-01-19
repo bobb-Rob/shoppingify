@@ -4,6 +4,7 @@ import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
 import groupBy from 'lodash.groupby';
 import {
   AddItemToActiveListWithAccessToken,
+  createActiveListWithAccessToken,
   deleteItemFromActiveLIstWithAccessToken,
   fetchActiveListWithAccessToken,
   updateItemCompletedWithAccessToken,
@@ -93,6 +94,17 @@ export const updateListStatus = createAsyncThunk(
   },
 );
 
+export const createActiveList = createAsyncThunk(
+  'items/createItem',
+  async ({ activeList, accessToken }, { rejectWithValue }) => {
+    const response = await createActiveListWithAccessToken(activeList, accessToken);
+    if (response.errors) {
+      return rejectWithValue(response.errors);
+    }
+    return response;
+  },
+);
+
 const alphabetically = (a, b) => {
   if (a.name < b.name) {
     return -1;
@@ -115,7 +127,7 @@ const transformActiveListData = (records) => {
 
 const initialState = {
   activeList: {
-    name: 'Shopping list',
+    name: '',
     status: 'active',
     items: [],
   },
@@ -176,6 +188,23 @@ const shoppingListSlice = createSlice({
       state.errorMessages = [];
     },
     [fetchActiveList.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.errorMessages = action.payload.errors;
+    },
+    [createActiveList.pending]: (state) => {
+      state.loading = true;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [createActiveList.fulfilled]: (state, action) => {
+      state.activeList = action.payload;
+      state.activeList.items = [];
+      state.loading = false;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [createActiveList.rejected]: (state, action) => {
       state.loading = false;
       state.error = true;
       state.errorMessages = action.payload.errors;
