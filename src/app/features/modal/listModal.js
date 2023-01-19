@@ -24,7 +24,7 @@ const listModal = () => {
     };
 
     const activeList = {
-      name: 'GetNewNames()',
+      name: 'Shopping List',
       user_id: userId,
     };
 
