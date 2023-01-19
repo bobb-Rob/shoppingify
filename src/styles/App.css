@@ -55,3 +55,12 @@
 .my-modal {
   background: rgba(0, 0, 0, 0.7);
 }
+
+@keyframes animate {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
