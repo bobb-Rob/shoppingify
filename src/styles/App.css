@@ -47,3 +47,11 @@
 .toast-progress-bar {
   background: var(--orange) !important;
 }
+
+.list-modal {
+  animation: animate 0.3s;
+}
+
+.my-modal {
+  background: rgba(0, 0, 0, 0.7);
+}

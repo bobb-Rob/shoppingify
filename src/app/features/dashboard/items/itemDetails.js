@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 import { AppState } from '../../../DataProvider';
 import BackArrow from '../../../commons/backArrow';
 import { deleteEmptyCategory, deleteItem } from './itemSlice';
+import { addItemToActiveList, shopListClearError } from '../shoppingList/shoppingListSlice';
+import ErrorDisplay from '../../notifications/errorMessages/ErrorDisplay';
 
 const ItemDetails = () => {
   const dispatch = useDispatch();
@@ -13,6 +15,16 @@ const ItemDetails = () => {
   const itemId = itemDetails.id;
   const categories = items.items;
   const category = categories.find((item) => item.name === itemDetails.category_name);
+  // List variables
+  const activeList = useSelector((state) => state.shoppingList.activeList);
+  const listError = useSelector((state) => state.shoppingList.error);
+  const errorMessages = useSelector((state) => state.shoppingList.errorMessages);
+
+  const newRecord = {
+    item_id: itemId,
+    list_id: activeList?.id,
+    quantity: 1,
+  };
 
   const handleDelete = async () => {
     try {
@@ -39,6 +51,11 @@ const ItemDetails = () => {
     displayShoppingList();
   };
 
+  const handleAddItemToList = async () => {
+    const response = await dispatch(addItemToActiveList({ newRecord, accessToken }));
+    if (!response.error) displayShoppingList();
+  };
+
   return (
     <div className="px-8 py-5 bg-white h-[100vh] relative">
       <BackArrow
@@ -47,6 +64,12 @@ const ItemDetails = () => {
       <div className="item-image border h-[190px] rounded-3xl mb-7">
         <img src={itemDetails?.image} alt={itemDetails.name} />
       </div>
+      {listError && (
+        <ErrorDisplay
+          errorMessages={errorMessages}
+          closeEvent={() => dispatch(shopListClearError())}
+        />
+      )}
       <div className="mb-1">
         <span className="text-xs text-[#C1C1C4] font-medium">name</span>
         <h2 className="text-2xl font-bold">{itemDetails?.name}</h2>
@@ -68,7 +91,13 @@ const ItemDetails = () => {
           >
             delete
           </button>
-          <button type="button" className="p-4 bg-orange text-white rounded-xl">Add to list</button>
+          <button
+            type="button"
+            className="p-4 bg-orange text-white rounded-xl"
+            onClick={handleAddItemToList}
+          >
+            Add to list
+          </button>
         </div>
       </div>
     </div>

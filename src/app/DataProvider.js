@@ -13,6 +13,10 @@ const DataProvider = ({ children }) => {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [isDisplayed, setIsDisplayed] = useState('shoppingList');
   const [itemDetails, setItemDetails] = useState({});
+  // Modal state
+  const [showModal, setShowModal] = useState(false);
+  // show modal on actionType - list cancel or complete
+  const [actionType, setActionType] = useState('');
 
   const notify = (message) => toast(message);
 
@@ -38,6 +42,10 @@ const DataProvider = ({ children }) => {
         displayShoppingList,
         displayAddItemForm,
         notify,
+        showModal,
+        setShowModal,
+        actionType,
+        setActionType,
       }}
     >
       <UserContext.Provider

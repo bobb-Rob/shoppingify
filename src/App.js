@@ -27,7 +27,6 @@ function App() {
   const { windowSize } = useContext(UserContext);
   return (
     <Router>
-      {/* <main className="grid md:grid-cols-desktop font-quicksand"> */}
       <main>
         <Routes>
           <Route element={<PersistLogin />}>
@@ -77,7 +76,6 @@ function App() {
         </Routes>
         <ToastContainer progressClassName="toast-progress-bar" />
       </main>
-      {/* </main> */}
     </Router>
   );
 }
