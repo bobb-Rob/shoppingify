@@ -4,7 +4,6 @@ import { AppState } from '../../../../DataProvider';
 const ListCompleteCancel = () => {
   const { setShowModal, setActionType } = useContext(AppState);
   const openConfirmModal = (e) => {
-    console.log('Cancel clicked');
     setActionType(e.target.textContent);
     setShowModal(true);
   };

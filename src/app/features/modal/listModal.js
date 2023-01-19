@@ -1,12 +1,29 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { MdClose } from 'react-icons/md';
+import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../DataProvider';
+import { updateListStatus } from '../dashboard/shoppingList/shoppingListSlice';
 
 const listModal = () => {
   const { actionType, setShowModal } = useContext(AppState);
+
+  const dispatch = useDispatch();
+  const listId = useSelector((state) => state.shoppingList.activeList.id);
+  const accessToken = useSelector((state) => state.session.accessToken);
+
   const handleModalClose = () => {
     setShowModal(false);
+  };
+
+  const handleListStatusChange = (newStatus) => {
+    const data = {
+      listId,
+      newStatus: { status: newStatus },
+      accessToken,
+    };
+    console.log(data);
+    handleModalClose();
+    dispatch(updateListStatus(data));
   };
 
   return (
@@ -33,6 +50,7 @@ const listModal = () => {
         <button
           type="button"
           className="px-7 py-4 bg-red-500 text-white rounded-xl"
+          onClick={() => handleListStatusChange(actionType.toLowerCase())}
         >
           Yes
         </button>
@@ -43,10 +61,6 @@ const listModal = () => {
       />
     </div>
   );
-};
-
-listModal.propTypes = {
-  actionType: PropTypes.string.isRequired,
 };
 
 export default listModal;

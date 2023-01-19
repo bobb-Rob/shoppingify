@@ -83,3 +83,16 @@ export async function updateListNameWithAccessToken({ listId, newName }, accessT
     .then((response) => response.data)
     .catch((error) => error.response.data);
 }
+
+// Update activelist name
+export async function updateListStatusWithAccessToken({ listId, newStatus }, accessToken) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+  return myAxios
+    .patch(`${listUrl}/${listId}`, newStatus, config)
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+}

@@ -9,6 +9,7 @@ import {
   updateItemCompletedWithAccessToken,
   updateItemQtyWithAccessToken,
   updateListNameWithAccessToken,
+  updateListStatusWithAccessToken,
 } from '../../../api/shoppingListApi';
 
 export const fetchActiveList = createAsyncThunk(
@@ -74,6 +75,17 @@ export const updateListName = createAsyncThunk(
   'lists/updateListName',
   async ({ listId, newName, accessToken }, { rejectWithValue }) => {
     const response = await updateListNameWithAccessToken({ listId, newName }, accessToken);
+    if (response.errors) {
+      return rejectWithValue(response.errors);
+    }
+    return { ...response, id: listId };
+  },
+);
+
+export const updateListStatus = createAsyncThunk(
+  'lists/updateListStatus',
+  async ({ listId, newStatus, accessToken }, { rejectWithValue }) => {
+    const response = await updateListStatusWithAccessToken({ listId, newStatus }, accessToken);
     if (response.errors) {
       return rejectWithValue(response.errors);
     }
