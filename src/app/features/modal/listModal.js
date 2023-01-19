@@ -16,7 +16,9 @@ const listModal = () => {
       <p className="font-quicksand font-bold leading-relaxed mb-6 w-5/6">
         Are you sure that you want to
         {' '}
-        {actionType.toLowerCase()}
+        <em className="text-red-500">
+          {actionType.toLowerCase()}
+        </em>
         {' '}
         this list?
       </p>
