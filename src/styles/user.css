@@ -91,6 +91,7 @@
   /* removing default appearance */
   -webkit-appearance: none;
   appearance: none;
+
   /* creating a custom design */
   width: 1.4em;
   height: 1.4em;
@@ -114,6 +115,7 @@ input.checked::before {
   right: 1px;
   top: -5px;
 }
+
 /* input:checked {
   background-color: #007a7e;
   position: relative;
