@@ -59,10 +59,17 @@ const SignUp = () => {
   return (
     <section>
       <div className="user-container w-5/6 md:flex md:max-w-3xl mx-auto mt-10 md:mt-20 shadow-lg">
+        <div className="p-6 order-last flex flex-col justify-center items-center bg-orange border-amber-700 grow text-white">
+          <h3 className="text-2xl font-bold">Welcome to Sign up</h3>
+          Already have an account?
+          <Link to="/login" className="border border-white py-1 px-3 rounded-3xl hover:bg-white hover:text-orange font-bold">
+            Sign in
+          </Link>
+        </div>
         <div className="px-6 py-8 order-none border-red-500 flex flex-col grow">
           <div>{allErrors}</div>
           <div className="flex w-full justify-between mb-5">
-            <h2 className="text-2xl">Sign up</h2>
+            <h2 className="text-3xl">Sign up</h2>
             <div className="flex items-center justify-between gap-2 text-xl text-gray-500">
               <div className="social-icons w-[40px] h-[40px] flex items-center justify-center border border-gray-300 rounded-full">
                 <MdFacebook />
@@ -153,20 +160,12 @@ const SignUp = () => {
             </div>
             <button
               type="submit"
-              className="self-end bg-gradient-to-r from-[#f7c659] to-[#fda33c] text-white w-[120px] py-2 px-2 rounded-3xl mt-6 flex items-center justify-center"
+              className="self-end bg-gradient-to-r from-[#f7c659] to-[#fda33c] text-white min-w-[120px] py-2 px-2 rounded-3xl mt-6 flex items-center justify-center"
             >
               <span className="text-md">Create Account</span>
               <HiOutlineArrowSmRight className="inline-block ml-2 text-xl" />
             </button>
           </form>
-        </div>
-        <div className="p-6 order-last flex flex-col justify-center items-center bg-orange border-amber-700 grow text-white">
-          <span>
-            Already have an account?
-            <Link to="/login" className="">
-              Sign in
-            </Link>
-          </span>
         </div>
       </div>
     </section>

@@ -70,7 +70,7 @@ const Login = () => {
         <div className="px-6 py-8 order-none border-red-500 flex flex-col grow">
           <div>{allErrors}</div>
           <div className="flex w-full justify-between mb-5">
-            <h2 className="text-2xl">Login</h2>
+            <h2 className="text-3xl">Login</h2>
             <div className="flex items-center justify-between gap-2 text-xl text-gray-500">
               <div className="social-icons w-[40px] h-[40px] flex items-center justify-center border border-gray-300 rounded-full">
                 <MdFacebook />
