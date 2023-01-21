@@ -61,7 +61,9 @@ const SignUp = () => {
       <div className="user-container w-5/6 md:flex md:max-w-3xl mx-auto mt-10 md:mt-20 shadow-lg">
         <div className="p-6 order-last flex flex-col justify-center items-center bg-orange border-amber-700 grow text-white">
           <h3 className="text-2xl font-bold">Welcome to Sign up</h3>
-          Already have an account?
+          <span className="my-3">
+            Already have an account?
+          </span>
           <Link to="/login" className="border border-white py-1 px-3 rounded-3xl hover:bg-white hover:text-orange font-bold">
             Sign in
           </Link>
