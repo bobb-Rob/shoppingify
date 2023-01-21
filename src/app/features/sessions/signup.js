@@ -2,8 +2,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { BsTwitter } from 'react-icons/bs';
 import { HiOutlineArrowSmRight, HiOutlineMail } from 'react-icons/hi';
-import { MdOutlineLock } from 'react-icons/md';
+import { MdFacebook, MdOutlineLock } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { signUpUser } from './sessionSlice';
@@ -58,9 +59,19 @@ const SignUp = () => {
   return (
     <section>
       <div className="user-container w-5/6 md:flex md:max-w-3xl mx-auto mt-10 md:mt-20 shadow-lg">
-        <div className="user-form-wrap flex flex-col">
+        <div className="px-6 py-8 order-none border-red-500 flex flex-col grow">
           <div>{allErrors}</div>
-          <h2>Sign up</h2>
+          <div className="flex w-full justify-between mb-5">
+            <h2 className="text-2xl">Sign up</h2>
+            <div className="flex items-center justify-between gap-2 text-xl text-gray-500">
+              <div className="social-icons w-[40px] h-[40px] flex items-center justify-center border border-gray-300 rounded-full">
+                <MdFacebook />
+              </div>
+              <div className="social-icons w-[40px] h-[40px] flex items-center justify-center border border-gray-300 rounded-full">
+                <BsTwitter />
+              </div>
+            </div>
+          </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="relative mt-6 mb-4 ">
               <label
@@ -149,7 +160,7 @@ const SignUp = () => {
             </button>
           </form>
         </div>
-        <div>
+        <div className="p-6 order-last flex flex-col justify-center items-center bg-orange border-amber-700 grow text-white">
           <span>
             Already have an account?
             <Link to="/login" className="">
