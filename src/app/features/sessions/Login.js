@@ -10,11 +10,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from './sessionSlice';
 import Checkbox from '../../commons/Checkbox';
-// import { UserContext } from '../../DataProvider';
 
 const Login = () => {
   let errorMessages = useSelector((state) => state.session.errorMessages);
-  // const loading = useSelector((state) => state.session.loading);
   const [allErrors, setAllErrors] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();

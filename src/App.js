@@ -21,7 +21,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import './styles/App.css';
 import './styles/user.css';
 import './styles/items.css';
-import CreatableSelect from './app/features/dashboard/items/AddItemForm/CreatableSelect';
 
 function App() {
   const { windowSize } = useContext(UserContext);
@@ -47,15 +46,6 @@ function App() {
                 />
               </Route>
             </Route>
-            <Route path="/select" element={<CreatableSelect />} />
-            {/* <Route
-              path="/logout"
-              element={
-                <PrivateRoute>
-                  <Logout />
-                </PrivateRoute>
-              }
-            /> */}
             <Route
               path="/login"
               element={(
