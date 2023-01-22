@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsTwitter } from 'react-icons/bs';
+import { FcGoogle } from 'react-icons/fc';
 import { HiOutlineArrowSmRight, HiOutlineMail } from 'react-icons/hi';
 import { MdFacebook, MdOutlineLock } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
@@ -72,11 +73,14 @@ const SignUp = () => {
           <div>{allErrors}</div>
           <div className="flex w-full justify-between mb-5">
             <h2 className="text-3xl">Sign up</h2>
-            <div className="flex items-center justify-between gap-2 text-xl text-gray-500">
-              <div className="social-icons w-[40px] h-[40px] flex items-center justify-center border border-gray-300 rounded-full">
+            <div className="flex items-center justify-between gap-2 text-xl">
+              <div className="social-icons cursor-pointer w-[40px] h-[40px] flex items-center justify-center border border-gray-300 rounded-full">
+                <FcGoogle />
+              </div>
+              <div className="social-icons cursor-pointer w-[40px] h-[40px] flex text-[#3b5998] text-2xl items-center justify-center border border-gray-300 rounded-full">
                 <MdFacebook />
               </div>
-              <div className="social-icons w-[40px] h-[40px] flex items-center justify-center border border-gray-300 rounded-full">
+              <div className="social-icons cursor-pointer w-[40px] h-[40px] flex text-[#00acee] items-center justify-center border border-gray-300 rounded-full">
                 <BsTwitter />
               </div>
             </div>
