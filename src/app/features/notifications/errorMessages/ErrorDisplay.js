@@ -12,7 +12,7 @@ const ErrorDisplay = ({ errorMessages, closeEvent }) => (
         </span>
       ))}
     </div>
-    <IoCloseSharp className="absolute top-2 right-2 pointer" onClick={closeEvent} />
+    <IoCloseSharp className="absolute top-2 right-2 cursor-pointer" onClick={closeEvent} />
   </div>
 );
 

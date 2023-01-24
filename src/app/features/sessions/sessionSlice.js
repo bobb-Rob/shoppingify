@@ -83,7 +83,12 @@ export const loginUser = createAsyncThunk(
     if (response.error) {
       return rejectWithValue(response.error);
     }
-    return response;
+
+    const userResponse = await getCurrentUser(response.access_token);
+    if (userResponse.errors) {
+      return rejectWithValue(userResponse.data);
+    }
+    return { ...response, ...userResponse };
   },
 );
 
