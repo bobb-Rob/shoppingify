@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 } from 'uuid';
+// /* eslint-disable */
 import ShopListName from './shoppingListcomponents/ShopListName';
 import ShopListCategory from './shoppingListcomponents/ShopListCategory';
 import capitalizeFirstLetter from '../../../helperFunctions/capitalizeFirstLeter';

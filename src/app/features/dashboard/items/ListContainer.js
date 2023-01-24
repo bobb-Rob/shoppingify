@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import ItemContainerHeader from './ItemContainerHeader';
 import CategoryCard from './categoryCard';
 import { fetchItems } from './itemSlice';

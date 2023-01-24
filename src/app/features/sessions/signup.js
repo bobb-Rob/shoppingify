@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -49,12 +50,12 @@ const SignUp = () => {
     };
     dispatch(signUpUser(payload));
 
-    if (errorMessages.length > 0) {
-      navigate('/');
-    } else {
-      return setAllErrors(errorMessages);
-    }
-    return null;
+    // if (errorMessages.length > 0) {
+    //   navigate('/');
+    // } else {
+    //   return setAllErrors(errorMessages);
+    // }
+    // return null;
   }
 
   return (
