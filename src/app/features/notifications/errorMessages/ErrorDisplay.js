@@ -7,9 +7,9 @@ const ErrorDisplay = ({ errorMessages, closeEvent }) => (
     <strong className="font-bold">Error!</strong>
     <div>
       {errorMessages.map((message) => (
-        <span className="block sm:inline" key={message}>
+        <p className="block sm:inline" key={message}>
           {message}
-        </span>
+        </p>
       ))}
     </div>
     <IoCloseSharp className="absolute top-2 right-2 cursor-pointer" onClick={closeEvent} />
@@ -18,9 +18,13 @@ const ErrorDisplay = ({ errorMessages, closeEvent }) => (
 
 export default ErrorDisplay;
 
+ErrorDisplay.defaultProps = {
+  errorMessages: [],
+};
+
 ErrorDisplay.propTypes = {
   errorMessages: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  ).isRequired,
+  ),
   closeEvent: PropTypes.func.isRequired,
 };
