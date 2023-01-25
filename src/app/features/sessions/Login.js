@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+/* eslint-disable */
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { HiOutlineArrowSmRight, HiOutlineMail } from 'react-icons/hi';
 import { MdFacebook, MdOutlineLock } from 'react-icons/md';
@@ -8,13 +9,15 @@ import { BsTwitter } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginUser } from './sessionSlice';
+import { loginUser, sessionClearErrors } from './sessionSlice';
 import Checkbox from '../../commons/Checkbox';
+import ErrorDisplay from '../notifications/errorMessages/ErrorDisplay';
 
 const Login = () => {
-  let errorMessages = useSelector((state) => state.session.errorMessages);
-  const [allErrors, setAllErrors] = useState([]);
-  const navigate = useNavigate();
+  const errorMessages = useSelector((state) => state.session.errorMessages);
+  const error = useSelector((state) => state.session.error);
+  console.log(errorMessages);
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const {
@@ -28,29 +31,9 @@ const Login = () => {
     },
   });
 
-  useEffect(() => {
-    if (errorMessages.length > 0) {
-      setAllErrors(errorMessages);
-      errorMessages = [];
-      // dispatch(resetErrorState());
-    }
-  });
-
-  const onSubmit = async (user, e) => {
-    e.preventDefault();
-    setAllErrors([]);
-
-    const payload = {
-      email: user.email,
-      password: user.password,
-    };
-    dispatch(loginUser(payload));
-
-    if (errorMessages.length > 0) {
-      navigate('/');
-    } else {
-      return setAllErrors(errorMessages);
-    }
+  const onSubmit = async ({ email, password }, e) => {
+    e.preventDefault();    
+    dispatch(loginUser({ email, password }));
     return null;
   };
 
@@ -67,8 +50,11 @@ const Login = () => {
           </Link>
         </div>
         <div className="px-6 py-8 order-none border-red-500 flex flex-col grow">
-          <div>{allErrors}</div>
-          <div className="flex w-full justify-between mb-5">
+          {error && (<ErrorDisplay
+            errorMessages={errorMessages}
+            closeEvent={() => dispatch(sessionClearErrors())}
+          />)}
+          <div className="flex w-full justify-between my-5">
             <h2 className="text-3xl">Login</h2>
             <div className="flex items-center justify-between gap-2 text-xl">
               <div className="social-icons cursor-pointer w-[40px] h-[40px] flex items-center justify-center border border-gray-300 rounded-full">
