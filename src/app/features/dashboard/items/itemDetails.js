@@ -61,7 +61,7 @@ const ItemDetails = () => {
       <BackArrow
         onClick={() => displayShoppingList()}
       />
-      <div className="item-image border h-[190px] rounded-3xl mb-7">
+      <div className="item-image border h-[190px] rounded-3xl mb-7 overflow-hidden object-cover">
         <img src={itemDetails?.image} alt={itemDetails.name} />
       </div>
       {listError && (
