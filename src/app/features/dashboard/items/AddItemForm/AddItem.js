@@ -59,30 +59,19 @@ const AddItem = () => {
           console.log(response);
         }
       });
-      // Create category, use response to extract the category_id,
-      // then create item 
-      // dispatch action to create new category and then a new item
-      // dispatch(createCategory({ dataObj, accessToken })).then((response) => {
-      //   if (response.type === "items/createCategoryAndItem/fulfilled") {
-      //     toast.success('Category and Item created successfully', {
-      //       position: 'top-center',
-      //     });
-      //     displayShoppingList();
-      //   }
-      // });
     } else {
       console.log(newItem);
       dispatch(createItem({newItem, accessToken}))
-      // dispatch(createItem({item, accessToken})).then((response) => {
-      //   if (response.type === "items/createItem/fulfilled") {
-      //     toast.success("Item created successfully!", {
-      //       position: toast.POSITION.TOP_CENTER,
-      //     });
-      //     displayShoppingList();
-      //   } else if (errorMessages.length === 0) {
-      //     notify('Item creation failed. Please try again.');
-      //   }
-      // });      
+      .then((response) => {
+        if (response.type === "items/createItem/fulfilled") {
+          toast.success("Item created successfully!", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+          displayShoppingList();
+        } else if (errorMessages.length === 0) {
+          notify('Item creation failed. Please try again.');
+        }
+      });      
     }
   };
   
