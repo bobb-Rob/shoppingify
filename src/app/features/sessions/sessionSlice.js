@@ -151,7 +151,7 @@ const sessionSlice = createSlice({
         state.loading = false;
         state.error = true;
         if (action.payload === 'invalid_grant') {
-          state.errorMessages.push('Invalid email or password');
+          state.errorMessages.push('Wrong email or password');
         }
       })
       .addCase(refreshAccessToken.pending, (state) => {
