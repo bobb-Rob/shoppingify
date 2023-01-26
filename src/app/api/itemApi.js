@@ -20,6 +20,19 @@ export async function fetchItemsWithAccessToken(accessToken) {
     .catch((error) => error.response.data);
 }
 
+export async function createNewCategoryWithAccessToken(newCategory, accessToken) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
+  return myAxios
+    .post(createCategoryUrl, newCategory, config)
+    .then((response) => response.data)
+    .catch((error) => error.response);
+}
+
 export async function createNewCategoryAndItemWithAccessToken({ newCategory, item }, accessToken) {
   const config = {
     headers: {
@@ -38,14 +51,14 @@ export async function createNewCategoryAndItemWithAccessToken({ newCategory, ite
     .catch((error) => error.response);
 }
 
-export async function createItemWithCategoryAndAccessToken(item, accessToken) {
+export async function createItemWithCategoryAndAccessToken(newItem, accessToken) {
   const config = {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
   };
   return myAxios
-    .post(createItemUrl, item, config)
+    .post(createItemUrl, newItem, config)
     .then((response) => response.data)
     .catch((error) => error.response.data);
 }

@@ -3,7 +3,7 @@ import ShoppingList from './ShoppingList';
 import Button from '../../../reusables/Button';
 import sourceBottle from '../../../../assets/source.svg';
 import { AppState } from '../../../DataProvider';
-import SaveAndCompleteList from './shoppingListcomponents/SaveAndCompleteList';
+import SaveAndCompleteWrap from './shoppingListcomponents/SaveAndCompleteWrap';
 
 const ShoppingListHolder = () => {
   const { displayAddItemForm } = useContext(AppState);
@@ -30,7 +30,7 @@ const ShoppingListHolder = () => {
         </div>
         <ShoppingList />
       </div>
-      <SaveAndCompleteList />
+      <SaveAndCompleteWrap />
     </div>
   );
 };

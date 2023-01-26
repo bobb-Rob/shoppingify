@@ -1,21 +1,72 @@
-# Shoppingify challenge - REACT.js
+<a name="readme-top"></a>
 
-## Welcome! 👋
-> #### REACT app for shoppers
-> This is a Real-life projects, an app where you can create shopping lists, save them, keep a record of them, view some dirived statistics showing various trends.
+# 📗 Table of Contents
 
-                             
-## Built With ✔️
+- [📖 About the Project](#about-project)
+  - [🛠 Built With](#built-with)
+    - [Tech Stack](#tech-stack)
+    - [Key Features](#key-features)
+    - [Functionalities](#Functionalities)
+  - [🚀 Live Demo](#live-demo)
+  - [🚀 Backend Repository](#Backend-Repository)
+- [💻 Getting Started](#getting-started)
+  - [Setup](#setup)
+  - [Prerequisites](#prerequisites)
+  - [Install](#install)
+  - [Usage](#usage)
+  - [Run tests](#run-tests)
+  - [Deployment](#triangular_flag_on_post-deployment)
+- [👥 Authors](#authors)
+- [🔭 Future Features](#future-features)
+- [🤝 Contributing](#contributing)
+- [⭐️ Show your support](#support)
+- [🙏 Acknowledgements](#acknowledgements)
+- [📝 License](#license)
 
-- React 🔥
-- React router
-- redux toolkit
-- CSS 😋
-- Node.js
-- Express 🔥
+<!-- PROJECT DESCRIPTION -->
 
-## Functionalites 😄
- 
+# 📖 Shoppingify <a name="about-project"></a>
+
+
+**Shoppingify** is a responsive fullstack web application that helps users keep track of their shopping activities. It features very useful analytics and trend tracking. 
+
+
+## 🛠 Built With <a name="built-with"></a>
+
+### **Tech Stack** <a name="tech-stack"></a>
+
+<details>
+  <summary>Client</summary>
+  <ul>
+    <li><a href="https://reactjs.org/">React.js & Redux toolkit</a></li>
+  </ul>
+</details>
+
+<details>
+  <summary>Server</summary>
+  <ul>
+    <li><a href="https://rubyonrails.org/">Ruby on Rails</a></li>
+  </ul>
+</details>
+
+<details>
+<summary>Database</summary>
+  <ul>
+    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+  </ul>
+</details>
+
+<!-- Features -->
+
+### **Key Features** <a name="key-features"></a>
+
+
+- _**Analysis**_ showing where most of your spending goes
+- Track your shopping _**history**_ by noticing recurrent trends
+
+### **Functionalities** <a name="Functionalities"></a>
+
+
 - When I select the items tab, I can see a list of items under different categories.
 - I can add a new item with name, category, note, and image.
 - When I add a new item, I can select one from the existing categories or add a new one if the category does not exist 🔥
@@ -32,68 +83,144 @@
 - I can see some statistics: top items, top categories, and monthly comparison.
 - I can search for items
 
-## Live link 🙌
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-[Demo link](https://shoppingify-live.vercel.app/)
+<!-- LIVE DEMO -->
+
+## 🚀 Live Demo <a name="live-demo"></a>
+
+- [Live Demo Link](https://shoppingify-ten.vercel.app/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LIVE DEMO -->
+
+## 🚀 Backend Repository <a name="Backend-Repository"></a>
+
+- [Backend Repository](https://github.com/bobb-Rob/shoppingify-v2)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+
+## 💻 Getting Started <a name="getting-started"></a>
+
+To get a local copy up and running, follow these steps.
+
+### **Prerequisites**
+
+In order to run this project you need have folowwing installed on your machine:
+
+    - Node.js
+    - npm enabled
+    - Ruby:latest (Backend)
+
+### **Setup**
+
+Clone this repository to your desired folder:
 
 
-## Getting Started 🙌
-
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
+```sh
+  cd my-folder
+  git clone https://github.com/bobb-Rob/shoppingify.git
 ```
-  node js
-  npm
 
-```
-### Setup
-Clone the repository and change the directory to portfolio
+### **Install**
 
-``` 
-  `$ git clone https://github.com/bobb-Rob/shoppingify.git`
+_Install this project with:_
 
-  `$ cd Space-travelers-Hub`
-
+```sh
+  cd my-project
+  npm install
 ```
 
-### Install
-Install all project dependencies by running the command below
- 
-``` 
- ` $ npm install`
-```
-### Usage
+### **Usage**
 
-Run
-``` 
-  `$ npm start or deploy the index.html from the build/public folder 
+To run the project, execute the following command:
+
+```sh
+  npm start
 ```
+-
+
+### Run tests
+
+To run tests, run the following command:
+
+<!--
+Example command:
+
+```sh
+  bin/rails test test/models/article_test.rb
+```
+--->
 
 ### Deployment
-- [Visit Application Homepage](https://shoppingify-live.vercel.app/)
+
+You can deploy this project using:
+
+<!--
+Example:
+
+```sh
+
+```
+ -->
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- AUTHORS -->
+
+## 👥 Authors <a name="authors"></a>
 
 
-### Authors
 
 | 👤 Name | Github | Twitter | LinkedIn |
 |------|--------|---------|----------|
 |Robertson Akpan|[@bobb-rob](https://github.com/bobb-rob)|[@___Robertson](https://twitter.com/___Robertson)|[@RobertsonAkpan](https://www.linkedin.com/in/robertsonakpan/)|
 
 
-## 🤝 Contributing
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- FUTURE FEATURES -->
+
+## 🔭 **Future Features** <a name="future-features"></a>
+
+- Sync your phone message with in-app budget tool to help tract spending and overtime help restrain unecessary spending
+- Add another user as co-planner and event purchase helper
+- Attach summary note to completed list or canceled list
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+
+## 🤝 Contributing <a name="contributing"></a>
 
 Contributions, issues, and feature requests are welcome!
 
+Feel free to check the [issues page](../../issues/).
 
-## Show your support
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Give a ⭐️ if you like this project!
+<!-- SUPPORT -->
 
-## Acknowledgments
+## ⭐️ Show your support <a name="support"></a>
 
-- Hat tip to DevChallenges for this inpiring design
+If you like this project, and would love to see how we monetize this kind of app, you can reach out to me.
 
-## 📝 License
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-All rights reserved.
+<!-- ACKNOWLEDGEMENTS -->
+
+## 🙏 Acknowledgments <a name="acknowledgements"></a>
+
+I would like to thank [DevChallenges](https://devchallenges.io/) for this inspiring project design.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- LICENSE -->
+
+## 📝 License <a name="license"></a>
+
+This project is [MIT](./LICENSE) licensed.

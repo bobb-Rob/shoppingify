@@ -74,23 +74,30 @@ export const signUpUser = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
   'session/loginUser',
-  async (payload, { rejectWithValue }) => {
-    const response = await loginUserWithEmailAndPassword(
-      payload.email,
-      payload.password,
-    );
+  async ({ email, password }, { rejectWithValue }) => {
+    const response = await loginUserWithEmailAndPassword(email, password);
 
     if (response.error) {
       return rejectWithValue(response.error);
     }
-    return response;
+
+    const userResponse = await getCurrentUser(response.access_token);
+    if (userResponse.errors) {
+      return rejectWithValue(userResponse.data);
+    }
+    return { ...response, ...userResponse };
   },
 );
 
 const sessionSlice = createSlice({
   name: 'session',
   initialState,
-  reducers: {},
+  reducers: {
+    sessionClearErrors(state) {
+      state.error = false;
+      state.errorMessages = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(signUpUser.pending, (state) => {
@@ -143,7 +150,9 @@ const sessionSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
-        state.errorMessages = action.payload.errors;
+        if (action.payload === 'invalid_grant') {
+          state.errorMessages.push('Wrong email or password');
+        }
       })
       .addCase(refreshAccessToken.pending, (state) => {
         state.loading = true;
@@ -167,9 +176,9 @@ const sessionSlice = createSlice({
       })
       .addCase(refreshAccessToken.rejected, (state) => {
         state.loading = false;
-        state.error = true;
       });
   },
 });
 
 export default sessionSlice.reducer;
+export const { sessionClearErrors } = sessionSlice.actions;

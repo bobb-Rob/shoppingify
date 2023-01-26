@@ -21,13 +21,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import './styles/App.css';
 import './styles/user.css';
 import './styles/items.css';
-import CreatableSelect from './app/features/dashboard/items/AddItemForm/CreatableSelect';
 
 function App() {
   const { windowSize } = useContext(UserContext);
   return (
     <Router>
-      {/* <main className="grid md:grid-cols-desktop font-quicksand"> */}
       <main>
         <Routes>
           <Route element={<PersistLogin />}>
@@ -48,15 +46,6 @@ function App() {
                 />
               </Route>
             </Route>
-            <Route path="/select" element={<CreatableSelect />} />
-            {/* <Route
-              path="/logout"
-              element={
-                <PrivateRoute>
-                  <Logout />
-                </PrivateRoute>
-              }
-            /> */}
             <Route
               path="/login"
               element={(
@@ -77,7 +66,6 @@ function App() {
         </Routes>
         <ToastContainer progressClassName="toast-progress-bar" />
       </main>
-      {/* </main> */}
     </Router>
   );
 }

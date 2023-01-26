@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../../../DataProvider';
 import Button from '../../../../reusables/Button';
-import { createCategoryAndItem, createItem } from '../itemSlice';
+import { createCategory, createCategoryAndItem, createItem } from '../itemSlice';
 import Select from './CreatableSelect';
 import { IoCloseSharp } from 'react-icons/io5';
 import { clearError } from '../itemSlice';
@@ -17,8 +17,7 @@ const AddItem = () => {
   const currentUser = useSelector((state) => state.session.currentUser);
   const accessToken = useSelector((state) => state.session.accessToken);
   const { notify } = useContext(AppState);
-  console.log(items);
-  console.log(errorMessages);
+
   const { displayShoppingList } = useContext(AppState);
  
   const { register, control, handleSubmit,  formState } = useForm({
@@ -28,36 +27,42 @@ const AddItem = () => {
     image: '',
   });
 
-  const onSubmit = (data, e) => {
+  const onSubmit = ({ name, image, note, category }, e) => {
     e.preventDefault();
-    console.log(data);
     
     const newCategory = {
-      name: data.category.label,
+      name: category.label.toLowerCase(),
       user_id: currentUser.id,
     }
 
-    const item = {
-      name: data.name,
-      note: data.note,
-      image: data.image,
-      category_id: data.category.value || undefined,
+    const newItem = {
+      name: name.toLowerCase(),
+      note,
+      image,
+      category_id: category.value || undefined, // This is the point that the co
       user_id: currentUser.id,
     }
-    const dataObj = { newCategory, item };
-    console.log(dataObj);
-    if(data.category.isNew) {
-      // dispatch action to create new category and then a new item
-      dispatch(createCategoryAndItem({ dataObj, accessToken })).then((response) => {
-        if (response.type === "items/createCategoryAndItem/fulfilled") {
-          toast.success('Category and Item created successfully', {
-            position: 'top-center',
-          });
-          displayShoppingList();
+
+    if(category.isNew) {
+      dispatch(createCategory({ newCategory, accessToken })).then((response) => {
+        if(response.meta.requestStatus === 'fulfilled') {
+          newItem.category_id = response.payload?.id;
+          dispatch(createItem({newItem, accessToken})).then((res) => {
+            if (res.type === "items/createItem/fulfilled") {
+                toast.success('Category and Item created successfully', {
+                  position: 'top-center',
+                });
+                displayShoppingList();
+              }
+          })
+        } else {
+          console.log(response);
         }
       });
     } else {
-      dispatch(createItem({item, accessToken})).then((response) => {
+      console.log(newItem);
+      dispatch(createItem({newItem, accessToken}))
+      .then((response) => {
         if (response.type === "items/createItem/fulfilled") {
           toast.success("Item created successfully!", {
             position: toast.POSITION.TOP_CENTER,

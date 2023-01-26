@@ -1,29 +1,34 @@
 /* eslint-disable */
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateListName } from '../shoppingListSlice';
 // import PropTypes from 'prop-types';
 
-const SaveAndCompleteList = () => {
+const SaveListName = () => {
   const {
     register, handleSubmit, reset, formState: { errors }
   } = useForm({
     listName: '',
   });
   const dispatch = useDispatch();
-  const editingMode = useSelector((state) => state.shoppingList.editingMode);
-  // const handleChange = (e) => {
-  //   setListName(e.target.value);
-  // };
-
+  const listId = useSelector((state) => state.shoppingList.activeList.id);
+  const accessToken = useSelector((state) => state.session.accessToken);
+ 
   const nameSubmit = ({ listName }, e) => {
     e.preventDefault();
-    dispatch(updateListName(listName));
+    const data = {
+      listId,
+      newName: { name: listName },
+      accessToken,
+    };
+    dispatch(updateListName(data));
+    console.log(listName);
     reset();
   };
 
-  const save = (
+  return (
     <form
       onSubmit={handleSubmit(nameSubmit)}
       className=" h-[51.25px] relative flex justify-center items-center border border-red border border-orange border-2 rounded rounded-[15px]"
@@ -44,29 +49,6 @@ const SaveAndCompleteList = () => {
       {errors?.listName && (<p className="absolute bottom-[-25px] text-red-500 left-0">Field must not be empty</p>) }
     </form>
   );
-
-  const cancelOrComplete = (
-    <div className="flex gap-4">
-      <button
-        type="button"
-        className="h-[50.44px] w-[117.67px] hover:border hover:border-gray-300  rounded-lg"
-      >
-        Cancel
-      </button>
-      <button
-        type="button"
-        className="h-[50.44px] w-[117.67px] bg-blue hover:bg-sky-500 rounded-lg px-2 text-white text-base"
-      >
-        Complete
-      </button>
-    </div>
-  );
-
-  return (
-    <div className="list-bottom h-[110.98px] bg-white flex justify-center items-center">
-      { editingMode ? save : cancelOrComplete }
-    </div>
-  );
 };
 
-export default SaveAndCompleteList;
+export default SaveListName;

@@ -43,29 +43,19 @@
 /* Sign up CSS start here */
 
 .user-container {
-  background-image: url(../assets/login-bg-ilustration.svg);
+  /* background-image: url(../assets/login-bg-ilustration.svg); */
   background-repeat: no-repeat;
   background-position: 100% 0;
-  background-size: 40%;
-  height: 100vh;
+  background-size: 20%;
   position: relative;
 }
 
-.user-form-wrap {
-  border: 1px solid red;
-  padding: 11rem 1.6rem 1rem 1.6rem;
-}
-
-.user-form-wrap > h2 {
+/* .user-form-wrap > h2 {
   font-size: 2rem;
   font-weight: 700;
   color: var(--darkGray);
   margin-bottom: 1rem;
-}
-
-.user-form-wrap > form {
-  /* border: 1px solid red; */
-}
+} */
 
 .register-back-btn {
   position: absolute;
@@ -78,4 +68,77 @@
 
 .border-bottom {
   border-bottom: 1px solid var(--light-grey);
+}
+
+.checkbox-wrapper {
+  border-bottom: 1px solid #c6c6c6;
+  margin-bottom: 20px;
+}
+
+.checkbox-wrapper:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.checkbox-wrapper label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Customizing the checkbox */
+.checkbox-wrapper input[type="checkbox"] {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+
+  /* creating a custom design */
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 0.15em;
+  margin-right: 0.5em;
+  border: 0.15em solid var(--orange);
+  outline: none;
+  cursor: pointer;
+}
+
+input.checked {
+  background-color: var(--orange);
+  position: relative;
+}
+
+input.checked::before {
+  content: "\2713";
+  font-size: 1.3rem;
+  color: rgb(255, 255, 255);
+  position: absolute;
+  right: 1px;
+  top: -5px;
+}
+
+/* input:checked {
+  background-color: #007a7e;
+  position: relative;
+}
+
+input:checked::before {
+  content: "\2714";
+  font-size: 1.5em;
+  color: #fff;
+  position: absolute;
+  right: 1px;
+  top: -5px;
+} */
+
+.checkbox-wrapper input[type="checkbox"]:disabled {
+  border-color: #c0c0c0;
+  background-color: #c0c0c0;
+}
+
+.checkbox-wrapper input[type="checkbox"]:disabled + span {
+  color: #c0c0c0;
+}
+
+.checkbox-wrapper input[type="checkbox"]:focus {
+  box-shadow: 0 0 5px #a7a7a7;
 }

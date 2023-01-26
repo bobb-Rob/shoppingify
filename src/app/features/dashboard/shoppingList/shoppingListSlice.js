@@ -4,9 +4,13 @@ import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
 import groupBy from 'lodash.groupby';
 import {
   AddItemToActiveListWithAccessToken,
+  createActiveListWithAccessToken,
   deleteItemFromActiveLIstWithAccessToken,
   fetchActiveListWithAccessToken,
+  updateItemCompletedWithAccessToken,
   updateItemQtyWithAccessToken,
+  updateListNameWithAccessToken,
+  updateListStatusWithAccessToken,
 } from '../../../api/shoppingListApi';
 
 export const fetchActiveList = createAsyncThunk(
@@ -25,7 +29,6 @@ export const addItemToActiveList = createAsyncThunk(
   async ({ newRecord, accessToken }, { rejectWithValue }) => {
     const response = await AddItemToActiveListWithAccessToken(newRecord, accessToken);
     if (response.errors) {
-      console.log(response.errors);
       return rejectWithValue(response.errors);
     }
     return response;
@@ -54,6 +57,54 @@ export const updateItemQty = createAsyncThunk(
   },
 );
 
+export const updateItemCompleted = createAsyncThunk(
+  'lists/updateItemCompleted',
+  async ({ recordId, newCompleted, accessToken }, { rejectWithValue }) => {
+    const response = await updateItemCompletedWithAccessToken({
+      recordId,
+      newCompleted,
+    }, accessToken);
+
+    if (response.errors) {
+      return rejectWithValue(response.errors);
+    }
+    return { ...response, id: recordId };
+  },
+);
+
+export const updateListName = createAsyncThunk(
+  'lists/updateListName',
+  async ({ listId, newName, accessToken }, { rejectWithValue }) => {
+    const response = await updateListNameWithAccessToken({ listId, newName }, accessToken);
+    if (response.errors) {
+      return rejectWithValue(response.errors);
+    }
+    return { ...response, id: listId };
+  },
+);
+
+export const updateListStatus = createAsyncThunk(
+  'lists/updateListStatus',
+  async ({ listId, newStatus, accessToken }, { rejectWithValue }) => {
+    const response = await updateListStatusWithAccessToken({ listId, newStatus }, accessToken);
+    if (response.errors) {
+      return rejectWithValue(response.errors);
+    }
+    return { ...response, id: listId };
+  },
+);
+
+export const createActiveList = createAsyncThunk(
+  'items/createItem',
+  async ({ activeList, accessToken }, { rejectWithValue }) => {
+    const response = await createActiveListWithAccessToken(activeList, accessToken);
+    if (response.errors) {
+      return rejectWithValue(response.errors);
+    }
+    return response;
+  },
+);
+
 const alphabetically = (a, b) => {
   if (a.name < b.name) {
     return -1;
@@ -76,7 +127,7 @@ const transformActiveListData = (records) => {
 
 const initialState = {
   activeList: {
-    name: 'Shopping list',
+    name: '',
     status: 'active',
     items: [],
   },
@@ -116,7 +167,7 @@ const shoppingListSlice = createSlice({
       state.editingMode = !state.editingMode;
     },
     updateListName(state, action) {
-      state.list.name = action.payload;
+      state.activeList.name = action.payload;
     },
     shopListClearError(state) {
       state.error = false;
@@ -137,6 +188,23 @@ const shoppingListSlice = createSlice({
       state.errorMessages = [];
     },
     [fetchActiveList.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.errorMessages = action.payload.errors;
+    },
+    [createActiveList.pending]: (state) => {
+      state.loading = true;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [createActiveList.fulfilled]: (state, action) => {
+      state.activeList = action.payload;
+      state.activeList.items = [];
+      state.loading = false;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [createActiveList.rejected]: (state, action) => {
       state.loading = false;
       state.error = true;
       state.errorMessages = action.payload.errors;
@@ -223,6 +291,52 @@ const shoppingListSlice = createSlice({
       state.error = true;
       state.errorMessages = action.payload?.errors;
     },
+    [updateItemCompleted.pending]: (state) => {
+      state.loading = true;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [updateItemCompleted.fulfilled]: (state, action) => {
+      const { id, categoryName, completed } = action.payload.item;
+      const category = state.activeList.items.find((category) => category.name === categoryName);
+      category.items = category.items.map((item) => {
+        if (id === item.id) {
+          return {
+            ...item,
+            completed,
+          };
+        }
+        return {
+          ...item,
+        };
+      });
+
+      state.loading = false;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [updateItemCompleted.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.errorMessages = action.payload?.errors;
+    },
+    [updateListName.pending]: (state) => {
+      state.loading = true;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [updateListName.fulfilled]: (state, action) => {
+      const { name } = action.payload;
+      state.activeList.name = name;
+      state.loading = false;
+      state.error = false;
+      state.errorMessages = [];
+    },
+    [updateListName.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.errorMessages = action.payload?.errors;
+    },
   },
 });
 
@@ -230,7 +344,6 @@ export const {
   addItem,
   displayItemDetails,
   switchEditingMode,
-  updateListName,
   shopListClearError,
 } = shoppingListSlice.actions;
 

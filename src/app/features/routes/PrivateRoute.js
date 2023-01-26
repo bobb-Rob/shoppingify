@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Loading from '../loading/Loading';
 
 function PrivateRoute() {
   const accessToken = useSelector((state) => state.session.accessToken);
@@ -15,7 +16,7 @@ function PrivateRoute() {
     return <Outlet />;
   }
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   if (!accessToken && !loading) {
     return (

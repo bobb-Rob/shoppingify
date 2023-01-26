@@ -38,12 +38,28 @@
   border-radius: 0 4px 4px 0;
 }
 
-/* box-shadow: 0 2px 8px 0 rgb(0 0 0 / 17%); */
-
 .Toastify__toast-theme--colored.Toastify__toast--success {
   background: var(--orange) !important;
 }
 
 .toast-progress-bar {
   background: var(--orange) !important;
+}
+
+.list-modal {
+  animation: animate 0.3s;
+}
+
+.my-modal {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+@keyframes animate {
+  from {
+    transform: scale(0.5);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
