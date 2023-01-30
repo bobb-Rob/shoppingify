@@ -17,7 +17,7 @@ const HistoryDetails = ({ name, items }) => {
       </div>
       <div>
         {items.map((item) => {
-          return <HistListCategory key={item.id}/>
+          return <HistListCategory key={item.id} items={item.items}/>
         })}
       </div>
     </div>
