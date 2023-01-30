@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BackArrow from '../../../commons/backArrow';
+import HistListCategory from './HistListCategory';
 
-const HistoryDetails = ({ name }) => {
+const HistoryDetails = ({ name, items }) => {
   const returnToListHistory = () => {
 
   }
@@ -15,7 +16,9 @@ const HistoryDetails = ({ name }) => {
         <span>{date}</span>
       </div>
       <div>
-
+        {items.map((item) => {
+          return <HistListCategory key={item.id}/>
+        })}
       </div>
     </div>
   );
