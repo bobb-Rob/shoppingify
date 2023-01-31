@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FcNext } from 'react-icons/fc';
 
-const HistListItem = ({ ListName, date, status }) => {
-  return (
-    <div>
-      <h3>{ListName}</h3>
-      <div>
-        <span>{date}</span>
-        <div>{status}</div>
-      </div>
+const HistListItem = ({ listName, date, status }) => (
+  <div className="flex justify-between">
+    <h3>{listName}</h3>
+    <div className="flex gap">
+      <span>{date}</span>
+      <div>{status}</div>
+      <FcNext />
     </div>
-  );
-};
+  </div>
+);
 
-HistListItem.propTypes = {};
+HistListItem.propTypes = {
+  listName: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+};
 
 export default HistListItem;
