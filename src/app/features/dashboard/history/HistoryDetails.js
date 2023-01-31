@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BackArrow from '../../../commons/backArrow';
-import HistListCategory from './HistListCategory';
+import HistListCategory from './HistListItem';
 
 const HistoryDetails = ({ name, items }) => {
   const returnToListHistory = () => {
