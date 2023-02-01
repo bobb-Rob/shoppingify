@@ -16,11 +16,11 @@ const History = () => {
 
   return (
     <div className="bg-[#fff] h-full px-10 py-7">
-      <h3 className="font-quicksand font-bold text-[26px] leading-8 mb-7">Shopping History</h3>
+      <h3 className="font-quicksand font-bold text-[26px] leading-8">Shopping History</h3>
       <div>
         {lists.map((list) => (
           <div key={v4()}>
-            <h4 className="text-xs font-bold">{list.month}</h4>
+            <h4 className="text-xs font-bold mt-6">{list.month}</h4>
             <div>
               {list.lists.map((innerList) => (
                 <HistListItem
