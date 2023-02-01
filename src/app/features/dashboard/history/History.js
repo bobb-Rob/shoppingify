@@ -28,6 +28,8 @@ const History = () => {
                   date={formatDate(innerList.created_at)}
                   listName={innerList.name}
                   status={innerList.status}
+                  id={innerList.id}
+                  month={list.month}
                 />
               ))}
             </div>
