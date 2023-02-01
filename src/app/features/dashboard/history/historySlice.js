@@ -53,9 +53,8 @@ const historySlice = createSlice({
       state.errorMessages = [];
     },
     [fetchAllList.fulfilled]: (state, action) => {
-      state.lists = action.payload;
       const newList = transformListArray(action.payload);
-      console.log(newList);
+      state.lists = newList;
       state.loading = false;
       state.error = false;
       state.errorMessages = [];
