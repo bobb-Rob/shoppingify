@@ -20,7 +20,7 @@ const HistoryDetails = () => {
   };
 
   const emptyList = (
-    <h3>List is empty</h3>
+    <h3 className="font-bold text-lg">List is empty</h3>
   );
 
   const listItems = regroupedListBycategory.map((category) => (
