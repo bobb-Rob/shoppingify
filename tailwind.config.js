@@ -22,6 +22,7 @@ module.exports = {
       white: '#fff',
       black: '#000000',
       blue: '#56CCF2',
+      myRed: '#EB5757',
     },
     extend: {
       gridTemplateColumns: {

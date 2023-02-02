@@ -21,6 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './styles/App.css';
 import './styles/user.css';
 import './styles/items.css';
+import HistoryDetails from './app/features/dashboard/history/HistoryDetails';
 
 function App() {
   const { windowSize } = useContext(UserContext);
@@ -33,6 +34,7 @@ function App() {
               <Route element={<DashboardLayout />}>
                 <Route path="" element={<ListContainer />} />
                 <Route path="/history" element={<History />} />
+                <Route path="/history/:id/:month" element={<HistoryDetails />} />
                 <Route path="/analysis" element={<Analysis />} />
                 <Route
                   path="/cart"
