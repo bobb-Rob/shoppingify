@@ -1,4 +1,3 @@
-// /* eslint-disable */
 import React from 'react';
 import { HiOutlineCalendar } from 'react-icons/hi';
 import { useLocation, useNavigate } from 'react-router-dom';
