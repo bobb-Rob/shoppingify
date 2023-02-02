@@ -1,23 +1,18 @@
-/* eslint-disable */
+// /* eslint-disable */
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { v4 } from 'uuid';
 import BackArrow from '../../../commons/backArrow';
 import groupByCategory from '../../../commons/groupByCategory';
 import formatDate from '../../../commons/historyDateFormat';
 
 const HistoryDetails = () => {
-  const history = useSelector((state) => state.history.lists);
   const navigate = useNavigate();
   const location = useLocation();
-  const { id, search } = useParams();
-  // const { month } = search;
-  console.log(search);
-  // const listsArray = history.find((list) => list.month === month);
-  // const currentList = listsArray.lists.find((item) => item.id === Number(id));
-  // const regroupedListBycategory = groupByCategory(currentList.records);
-  // console.log(regroupedListBycategory);
+
+  const { records, listName, date } = location.state;
+  console.log(location.state);
+  const regroupedListBycategory = groupByCategory(records);
 
   const returnToListHistory = () => {
     navigate('/history');
@@ -26,9 +21,9 @@ const HistoryDetails = () => {
   return (
     <div>
       <BackArrow onClick={returnToListHistory} />
-      {/* <div>
-        <h1>{currentList.name}</h1>
-        <span>{formatDate(currentList.created_at)}</span>
+      <div>
+        <h1>{listName}</h1>
+        <span>{formatDate(date)}</span>
       </div>
       <div>
         {regroupedListBycategory.map((category) => (
@@ -49,7 +44,7 @@ const HistoryDetails = () => {
             </div>
           </div>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 };

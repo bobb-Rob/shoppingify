@@ -30,6 +30,7 @@ const History = () => {
                   status={innerList.status}
                   id={innerList.id}
                   month={list.month}
+                  records={innerList.records}
                 />
               ))}
             </div>

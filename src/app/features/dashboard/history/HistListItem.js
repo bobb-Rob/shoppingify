@@ -3,18 +3,15 @@ import PropTypes from 'prop-types';
 
 import { HiOutlineCalendar } from 'react-icons/hi';
 import { MdNavigateNext } from 'react-icons/md';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const HistListItem = ({
-  listName, date, status, id, month,
+  listName, date, status, id, month, records,
 }) => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleListItemClick = () => {
-    searchParams.set('month', month);
-    setSearchParams(searchParams);
-    navigate(`/history/${id}`);
+    navigate(`/history/${id}/${month}`, { state: { records, listName, date } });
   };
 
   return (
@@ -54,6 +51,9 @@ HistListItem.propTypes = {
   status: PropTypes.string.isRequired,
   month: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
+  records: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  ).isRequired,
 };
 
 export default HistListItem;
