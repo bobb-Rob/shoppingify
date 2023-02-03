@@ -100,7 +100,7 @@
 
 ![](/screenshots/Desktop2.png)
 
-- | -
+Home | Login
 --- | ---
 ![](/screenshots/mobile1.png) | ![](/screenshots/Login.png)
 
