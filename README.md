@@ -8,6 +8,7 @@
     - [Key Features](#key-features)
     - [Functionalities](#Functionalities)
   - [🚀 Live Demo](#live-demo)
+  - [🚀 Screenshots](#screen-shot)
   - [🚀 Backend Repository](#Backend-Repository)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
@@ -93,7 +94,19 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- LIVE DEMO -->
+<!-- SCREENSHOTS -->
+
+## 🚀 Screenshots <a name="screenshots"></a>
+
+![](/screenshots/Desktop2.png)
+
+- | -
+--- | ---
+![](/screenshots/mobile1.png) | ![](/screenshots/Login.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- BACKEND REPO -->
 
 ## 🚀 Backend Repository <a name="Backend-Repository"></a>
 
