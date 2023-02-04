@@ -44,6 +44,7 @@ Shoppingify has been designed with the user in mind, making shopping more effici
   <summary>Client</summary>
   <ul>
     <li><a href="https://reactjs.org/">React.js & Redux toolkit</a></li>
+    <li><a href="https://tailwindcss.com/">Tailwind CSS</a></li>
   </ul>
 </details>
 
@@ -58,6 +59,16 @@ Shoppingify has been designed with the user in mind, making shopping more effici
 <summary>Database</summary>
   <ul>
     <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+  </ul>
+</details>
+
+<details>
+<summary>Additional Used</summary>
+  <ul>
+    <li>DoorKeeper authentication</li>
+    <li>Devise</li>
+    <li>React-hook-form</li>
+    <li>Gitflow</li>
   </ul>
 </details>
 
