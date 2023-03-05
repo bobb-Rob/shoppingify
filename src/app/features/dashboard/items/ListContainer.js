@@ -19,7 +19,7 @@ const ItemContainer = () => {
 
   return (
     <section
-      className="bg-[#f9f9f9] h-[100vh] relative overflow-y-hidden hover:overflow-y-auto focus:overflow-y-auto active:overflow-y-auto"
+      className="bg-white pt-2 h-[100vh] relative overflow-y-hidden hover:overflow-y-auto focus:overflow-y-auto active:overflow-y-auto"
     >
       <ItemContainerHeader />
       <div className="mt-6 md:mt-20 p-5 md:pl-16">
