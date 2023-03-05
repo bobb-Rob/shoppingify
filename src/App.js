@@ -30,19 +30,19 @@ function App() {
       <main>
         <Routes>
           <Route element={<PersistLogin />}>
-            <Route path="/" element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<PrivateRoute />}>
               <Route element={<DashboardLayout />}>
-                <Route path="" element={<ListContainer />} />
-                <Route path="/history" element={<History />} />
-                <Route path="/history/:id/:month" element={<HistoryDetails />} />
-                <Route path="/analysis" element={<Analysis />} />
+                <Route path="list" element={<ListContainer />} />
+                <Route path="history" element={<History />} />
+                <Route path="history/:id/:month" element={<HistoryDetails />} />
+                <Route path="analysis" element={<Analysis />} />
                 <Route
-                  path="/cart"
+                  path="cart"
                   element={
                     windowSize < 768 ? (
                       <ShoppingListLayout classNam="showShoppingList" />
                     ) : (
-                      <Navigate to="/" />
+                      <Navigate to="/dashboard/list" />
                     )
                   }
                 />
@@ -61,6 +61,14 @@ function App() {
               element={(
                 <PublicOnlyRoute>
                   <SignUp />
+                </PublicOnlyRoute>
+              )}
+            />
+            <Route
+              path="/"
+              element={(
+                <PublicOnlyRoute>
+                  <h1>Landingpage</h1>
                 </PublicOnlyRoute>
               )}
             />

@@ -15,7 +15,7 @@ const HistoryDetails = () => {
   const regroupedListBycategory = groupByCategory(records);
 
   const returnToListHistory = () => {
-    navigate('/history');
+    navigate(-1);
   };
 
   const emptyList = (

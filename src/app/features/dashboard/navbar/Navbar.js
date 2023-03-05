@@ -14,21 +14,21 @@ const SideNav = () => {
   return (
     <nav className="grid grid-rows-[1fr 1fr 1fr] py-6 w-[61.58px] h-[100vh]">
       <div className="flex justify-center">
-        <Link to="/">
+        <Link to="/dashboard/list">
           <img src={logo} alt="Shoppingify Logo" />
         </Link>
       </div>
       <div className="flex justify-evenly flex-col relative items-center">
         <NavLinkEl
-          to="/"
+          to="/dashboard/list"
           icon={<FaListUl size={21} />}
         />
         <NavLinkEl
-          to="/history"
+          to="/dashboard/history"
           icon={<IoMdRefresh size={22} />}
         />
         <NavLinkEl
-          to="analysis"
+          to="/dashboard/analysis"
           icon={<MdOutlineAnalytics size={22} />}
         />
       </div>
@@ -36,7 +36,7 @@ const SideNav = () => {
         className="flex justify-center items-center self-end justify-self-center rounded-[50%] bg-orange w-[42px] h-[42px]"
       >
         <NavLink
-          to={(cartBtnClicked && windowSize < 768) ? '/' : '/cart'} // Go back to root route if cartBtnClicked is true
+          to={(cartBtnClicked && windowSize < 768) ? '/dashboard/list' : '/dashboard/cart'} // Go back to root route if cartBtnClicked is true
           state={{ cartBtnClicked: !cartBtnClicked, windowSize }}
           style={{ color: 'var(--white)' }}
           onClick={() => {
