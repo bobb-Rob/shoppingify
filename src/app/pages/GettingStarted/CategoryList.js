@@ -1,18 +1,15 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import Category from './Category';
 
 function CategoryList({ categories, onSubmit }) {
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const handleCheckboxChange = (event) => {
-    const categoryId = parseInt(event.target.value, 2);
-    if (event.target.checked) {
-      setSelectedCategories([...selectedCategories, categoryId]);
+  const handleCategorySelect = (categoryId) => {
+    if (selectedCategories.includes(categoryId)) {
+      setSelectedCategories(selectedCategories.filter((id) => id !== categoryId));
     } else {
-      setSelectedCategories(
-        selectedCategories.filter((id) => id !== categoryId),
-      );
+      setSelectedCategories([...selectedCategories, categoryId]);
     }
   };
 
@@ -29,7 +26,7 @@ function CategoryList({ categories, onSubmit }) {
             key={category.id}
             category={category}
             selected={selectedCategories.includes(category.id)}
-            onChange={handleCheckboxChange}
+            onSelect={handleCategorySelect}
           />
         ))}
       </div>

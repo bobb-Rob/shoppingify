@@ -5,6 +5,10 @@ import categories from './categories';
 /* eslint-disable */
 
 function WelcomePage({ username }) {
+  const selectedCategoriesSubmit = (selectedCategories) => {
+    console.log(selectedCategories);
+  }
+
   return (
     <div className="bg-gray-100 h-screen">
       <nav className="bg-white shadow">
@@ -27,7 +31,7 @@ function WelcomePage({ username }) {
           {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             
           </div> */}
-          <CategoryList categories={categories}/>
+          <CategoryList categories={categories} onSubmit={selectedCategoriesSubmit} />
         </div>
       </main>
     </div>
