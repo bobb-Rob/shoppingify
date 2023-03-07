@@ -18,7 +18,7 @@ function PublicOnlyRoute({ children }) {
   } if (accessToken && !loading) {
     return (
       <>
-        <Navigate to="/dashboard" replace />
+        <Navigate to="/dashboard/gettingstarted" replace />
       </>
     );
   }

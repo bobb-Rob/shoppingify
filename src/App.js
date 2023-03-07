@@ -22,6 +22,7 @@ import './styles/App.css';
 import './styles/user.css';
 import './styles/items.css';
 import HistoryDetails from './app/features/dashboard/history/HistoryDetails';
+import GettingStarted from './app/pages/GettingStarted/GettingStarted';
 
 function App() {
   const { windowSize } = useContext(UserContext);
@@ -29,8 +30,15 @@ function App() {
     <Router>
       <main>
         <Routes>
+          <Route
+            path="/"
+            element={(
+              <h1>Landingpage</h1>
+            )}
+          />
           <Route element={<PersistLogin />}>
             <Route path="/dashboard" element={<PrivateRoute />}>
+              <Route path="/dashboard/gettingstarted" element={<GettingStarted />} />
               <Route element={<DashboardLayout />}>
                 <Route path="list" element={<ListContainer />} />
                 <Route path="history" element={<History />} />
@@ -61,14 +69,6 @@ function App() {
               element={(
                 <PublicOnlyRoute>
                   <SignUp />
-                </PublicOnlyRoute>
-              )}
-            />
-            <Route
-              path="/"
-              element={(
-                <PublicOnlyRoute>
-                  <h1>Landingpage</h1>
                 </PublicOnlyRoute>
               )}
             />
