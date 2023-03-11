@@ -8,12 +8,10 @@ const CURRENT_USER_URL = '/users/current';
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 
-export async function createUserWithEmailAndPassword(email, password) {
-  const data = {
-    email,
-    password,
-    client_id: CLIENT_ID,
-  };
+export async function createUserWithEmailAndPassword(userData) {
+  // add client_id to userData without modifying the original object
+  const data = { ...userData, client_id: CLIENT_ID };
+
   return myAxios
     .post(SIGNUP_URL, data)
     .then((response) => response.data)

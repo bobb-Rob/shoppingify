@@ -48,6 +48,7 @@ const SignUp = () => {
       password: user.password,
     };
     dispatch(signUpUser(payload));
+    console.log(payload);
   }
 
   return (

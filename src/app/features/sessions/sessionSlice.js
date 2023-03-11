@@ -60,14 +60,10 @@ export const refreshAccessToken = createAsyncThunk(
 export const signUpUser = createAsyncThunk(
   'session/signUpUser',
   async (payload, { rejectWithValue }) => {
-    const response = await createUserWithEmailAndPassword(
-      payload.email,
-      payload.password,
-    );
+    const response = await createUserWithEmailAndPassword(payload);
     if (response.error) {
       return rejectWithValue(response.error);
     }
-
     return response;
   },
 );
@@ -113,7 +109,8 @@ const sessionSlice = createSlice({
         state.currentUser = {
           id: action.payload.id,
           email: action.payload.email,
-          role: action.payload.role,
+          first_name: action.payload.first_name,
+          last_name: action.payload.last_name,
           createdAt: action.payload.created_at,
         };
         setRefreshToken(action.payload.refresh_token);
@@ -139,6 +136,8 @@ const sessionSlice = createSlice({
         state.currentUser = {
           id: action.payload.id,
           email: action.payload.email,
+          first_name: action.payload.first_name,
+          last_name: action.payload.last_name,
           role: action.payload.role,
           createdAt: action.payload.created_at,
         };

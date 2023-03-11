@@ -8,7 +8,8 @@ export const fetchDefaultCategories = createAsyncThunk(
   'gettingStarted/fetchDefaultCategories',
   async (accessToken) => {
     const response = await fetchAllDefaultCategories(accessToken);
-    return response.data;
+    console.log('response.data', response);
+    return response;
   },
 );
 

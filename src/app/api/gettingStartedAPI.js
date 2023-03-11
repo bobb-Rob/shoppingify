@@ -1,6 +1,6 @@
 import myAxios from './myAxios';
 
-const defaultCategoriesUrl = '/default_categories/index';
+const defaultCategoriesUrl = '/default_categories';
 
 // Fetch all default categories
 export function fetchAllDefaultCategories(accessToken) {

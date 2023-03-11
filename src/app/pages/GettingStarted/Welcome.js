@@ -12,6 +12,7 @@ function WelcomePage({ username, categories }) {
         <div className="px-4 py-6 sm:px-0">
           <h1 className="text-3xl font-bold mb-4">
             Welcome to Shoppingify,
+            {' '}
             {username}
             !
           </h1>
