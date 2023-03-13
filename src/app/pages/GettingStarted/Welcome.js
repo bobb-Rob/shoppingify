@@ -1,9 +1,17 @@
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import CategoryList from './CategoryList';
+import { createNewDefaultCategoriesAndItems } from './gettingStartedSlice';
 
 function WelcomePage({ username, categories }) {
-  const selectedCategoriesSubmit = (selectedCategories) => {
-    console.log(selectedCategories);
+  const accessToken = useSelector((state) => state.session.accessToken);
+  const dispatch = useDispatch();
+  const selectedCategoriesSubmit = (selectedCategoriesIds) => {
+    console.log(selectedCategoriesIds);
+    dispatch(createNewDefaultCategoriesAndItems({
+      accessToken,
+      selectedCategoriesIds,
+    }));
   };
 
   return (

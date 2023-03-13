@@ -16,6 +16,16 @@ export function fetchAllDefaultCategories(accessToken) {
     .catch((error) => error.response.data);
 }
 
-export function number() {
-  return 2;
+// Create new Categories and Items from Default_categories and default_items
+export function createDefaultCategoriesAndItems(accessToken, selectedCategoriesIds) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
+  return myAxios
+    .post(defaultCategoriesUrl, { selectedCategoriesIds }, config)
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
 }

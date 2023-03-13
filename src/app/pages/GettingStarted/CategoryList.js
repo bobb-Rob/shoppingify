@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Category from './Category';
 
 function CategoryList({ categories, onSubmit }) {
-  const [selectedCategories, setSelectedCategories] = useState([1, 2, 9, 19, 21]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const handleCategorySelect = (categoryId) => {
     if (selectedCategories.includes(categoryId)) {

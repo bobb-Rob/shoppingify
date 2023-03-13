@@ -1,14 +1,24 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
-// Use createAsyncThunk to create an async action creator to fetch default categories
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchAllDefaultCategories } from '../../api/gettingStartedAPI';
+import { createDefaultCategoriesAndItems, fetchAllDefaultCategories } from '../../api/gettingStartedAPI';
 
 export const fetchDefaultCategories = createAsyncThunk(
   'gettingStarted/fetchDefaultCategories',
   async (accessToken) => {
     const response = await fetchAllDefaultCategories(accessToken);
-    console.log('response.data', response);
+    return response;
+  },
+);
+
+export const createNewDefaultCategoriesAndItems = createAsyncThunk(
+  'gettingStarted/createNewDefaultCategoriesAndItems',
+  async ({ accessToken, selectedCategoriesIds }, { rejectWithValue }) => {
+    console.log('selectedCategoriesIds: ', selectedCategoriesIds);
+    const response = await createDefaultCategoriesAndItems(accessToken, selectedCategoriesIds);
+    if (response.error) {
+      return rejectWithValue(response.error);
+    }
     return response;
   },
 );
