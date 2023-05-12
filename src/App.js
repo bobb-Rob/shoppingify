@@ -16,13 +16,14 @@ import SignUp from './app/features/sessions/signup';
 import { UserContext } from './app/DataProvider';
 import History from './app/features/dashboard/history/History';
 import Analysis from './app/features/dashboard/analysis/Analysis';
-import ListContainer from './app/features/dashboard/items/ListContainer';
+import ListContainer from './app/features/dashboard/items/itemContainer';
+import HistoryDetails from './app/features/dashboard/history/HistoryDetails';
+import GettingStarted from './app/pages/GettingStarted/GettingStarted';
+import LandingPage from './app/pages/landingPage/LandingPage';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles/App.css';
 import './styles/user.css';
 import './styles/items.css';
-import HistoryDetails from './app/features/dashboard/history/HistoryDetails';
-import GettingStarted from './app/pages/GettingStarted/GettingStarted';
 
 function App() {
   const { windowSize } = useContext(UserContext);
@@ -32,9 +33,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={(
-              <h1>Landingpage</h1>
-            )}
+            element={<h1>Manual</h1>}
           />
           <Route element={<PersistLogin />}>
             <Route path="/dashboard" element={<PrivateRoute />}>

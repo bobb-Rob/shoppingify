@@ -14,21 +14,21 @@ const SideNav = () => {
   return (
     <nav className="grid grid-rows-[1fr 1fr 1fr] py-6 w-[61.58px] h-[100vh]">
       <div className="flex justify-center">
-        <Link to="/dashboard/list">
+        <Link to="/">
           <img src={logo} alt="Shoppingify Logo" />
         </Link>
       </div>
       <div className="flex justify-evenly flex-col relative items-center">
         <NavLinkEl
-          to="/dashboard/list"
+          to="/"
           icon={<FaListUl size={21} />}
         />
         <NavLinkEl
-          to="/dashboard/history"
+          to="/history"
           icon={<IoMdRefresh size={22} />}
         />
         <NavLinkEl
-          to="/dashboard/analysis"
+          to="/analysis"
           icon={<MdOutlineAnalytics size={22} />}
         />
       </div>

@@ -4,7 +4,7 @@ import sessionReducer from './features/sessions/sessionSlice';
 import shoppingListReducer from './features/dashboard/shoppingList/shoppingListSlice';
 import itemReducer from './features/dashboard/items/itemSlice';
 import historyReducer from './features/dashboard/history/historySlice';
-import defaultCategoryReducer from './pages/GettingStarted/gettingStartedSlice';
+import defaultCategoriesReducer from './features/dashboard/defaultCategories/defaultCategoriesSlice';
 
 const store = configureStore({
   reducer: {
@@ -12,7 +12,7 @@ const store = configureStore({
     items: itemReducer,
     shoppingList: shoppingListReducer,
     history: historyReducer,
-    defaultCategory: defaultCategoryReducer,
+    defaultCategory: defaultCategoriesReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
