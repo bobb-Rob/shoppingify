@@ -8,7 +8,6 @@ export const fetchDefaultCategories = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     const response = await requestDefaultCategories();
 
-    console.log(response);
     if (response.errors) {
       return rejectWithValue(response);
     }

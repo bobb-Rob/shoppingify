@@ -8,7 +8,7 @@ export const requestDefaultCategories = async () => {
       'Content-Type': 'application/json',
     },
   });
-  console.log(response);
+
   if (response.errors) {
     return response.errors;
   }

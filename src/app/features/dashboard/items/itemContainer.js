@@ -7,30 +7,23 @@ import { fetchDefaultCategories } from '../defaultCategories/defaultCategoriesSl
 /* eslint-disable */
 const ItemContainer = () => {
   const dispatch = useDispatch();
-  const { items, loading } = useSelector((state) => state.items);
-  const { defaultCategories } = useSelector((state) => state.defaultCategory);
+  // const { items, loading } = useSelector((state) => state.items);
+  // const { defaultCategories } = useSelector((state) => state.defaultCategory);
   const accessToken = useSelector((state) => state.session.accessToken);
   const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    if (items.length <= 0 && loading === false) {
-      if (accessToken) {
-        dispatch(fetchItems(accessToken)).then((data) => {
-          console.log(data);
-          const { requestStatus } = data.meta;
-          if (requestStatus === 'fulfilled') {
-            setCategories(data.payload);
-          }
-        });
-      } else {
-        dispatch(fetchDefaultCategories()).then((data) => {
-          console.log(data);
-          const { requestStatus } = data.meta;
-          if (requestStatus === 'fulfilled') {
-            setCategories(data.payload);
-          }
-        });
-      }
+  const handleCategories = (itemsData) => {
+    const { requestStatus } = itemsData.meta;
+    if (requestStatus === 'fulfilled') {
+      setCategories(itemsData.payload);
+    }
+  };
+
+  useEffect(() => {   
+    if (accessToken) {
+      dispatch(fetchItems(accessToken)).then(handleCategories);
+    } else {
+      dispatch(fetchDefaultCategories()).then(handleCategories);
     }
   }, []);
 

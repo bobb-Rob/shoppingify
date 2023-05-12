@@ -1,8 +1,8 @@
-const mockData = [{ 
+const mockData = [{
   id: 1,
-  name: "Fruits",
-  updated_at: "2023-03-09T14:37:12.461Z" ,
-  created_at: "2023-03-09T14:37:12.461Z",
+  name: 'Fruits',
+  updated_at: '2023-03-09T14:37:12.461Z',
+  created_at: '2023-03-09T14:37:12.461Z',
   default_items: [
     {
       id: 468,
@@ -10,7 +10,7 @@ const mockData = [{
       note: 'Organic, Granny Smith variety',
       default_category_id: 1,
       created_at: '2023-03-11T01:34:28.668Z',
-      updated_at: "2023-03-11T01:34:28.935Z"
+      updated_at: '2023-03-11T01:34:28.935Z',
     },
     {
       id: 470,
@@ -18,7 +18,7 @@ const mockData = [{
       note: 'California-grown, seedless',
       default_category_id: 1,
       created_at: '2023-03-11T01:34:28.974Z',
-      updated_at: "2023-03-11T01:34:29.013Z"
+      updated_at: '2023-03-11T01:34:29.013Z',
     },
     {
       id: 471,
@@ -26,7 +26,7 @@ const mockData = [{
       note: 'Local, freshly picked',
       default_category_id: 1,
       created_at: '2023-03-11T01:34:29.017Z',
-      updated_at: "2023-03-11T01:34:29.057Z"
+      updated_at: '2023-03-11T01:34:29.057Z',
     },
   ],
 },
@@ -42,7 +42,7 @@ const mockData = [{
       note: 'Organic, locally grown',
       default_category_id: 2,
       created_at: '2023-03-11T01:34:29.115Z',
-      updated_at: "2023-03-11T01:34:29.153Z"
+      updated_at: '2023-03-11T01:34:29.153Z',
     },
     {
       id: 474,
@@ -50,7 +50,7 @@ const mockData = [{
       note: 'Fresh, crisp florets',
       default_category_id: 2,
       created_at: '2023-03-11T01:34:29.157Z',
-      updated_at: "2023-03-11T01:34:29.198Z"
+      updated_at: '2023-03-11T01:34:29.198Z',
     },
     {
       id: 475,
@@ -58,10 +58,10 @@ const mockData = [{
       note: 'Vine-ripened, heirloom variety',
       default_category_id: 2,
       created_at: '2023-03-11T01:34:29.198Z',
-      updated_at: "2023-03-11T01:34:29.238Z"
-    }
+      updated_at: '2023-03-11T01:34:29.238Z',
+    },
   ],
-}
+},
 ];
 
 export default mockData;

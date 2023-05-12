@@ -1,12 +1,10 @@
 import axios from 'axios';
 import { requestDefaultCategories } from '../../app/api/defaultCategoriesAPI';
-import mockData from './mockCategoriesData'
+import mockData from './mockCategoriesData';
 
 jest.mock('axios');
 
 describe('requestDefaultCategories', () => {
-  
-
   afterEach(() => {
     jest.clearAllMocks();
   });

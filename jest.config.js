@@ -13,7 +13,7 @@ module.exports = {
   },
 
   // Set up some test-specific configuration
-  testEnvironment: 'node',  
-  collectCoverage: true, 
+  testEnvironment: 'node',
+  collectCoverage: true,
   coverageDirectory: 'coverage',
 };
