@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import SignIn from './SignIn';
 import SignUp from './SignUp2';
-import './Auth.css';
 
 function Auth() {
   const [isSignUp, setIsSignUp] = useState(false);
