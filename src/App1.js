@@ -16,7 +16,6 @@ import './styles/user.css';
 import './styles/items.css';
 
 const App1 = () => {
-  console.log('App1');
   const { windowSize } = useContext(UserContext);
   return (
     <Router>

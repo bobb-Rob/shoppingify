@@ -19,7 +19,6 @@ import Analysis from './app/features/dashboard/analysis/Analysis';
 import ListContainer from './app/features/dashboard/items/itemContainer';
 import HistoryDetails from './app/features/dashboard/history/HistoryDetails';
 import GettingStarted from './app/pages/GettingStarted/GettingStarted';
-import LandingPage from './app/pages/landingPage/LandingPage';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles/App.css';
 import './styles/user.css';

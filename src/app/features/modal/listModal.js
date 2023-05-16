@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../DataProvider';
 import { createActiveList, updateListStatus } from '../dashboard/shoppingList/shoppingListSlice';
 
-const listModal = () => {
+const ListModal = () => {
   const { actionType, setShowModal } = useContext(AppState);
 
   const dispatch = useDispatch();
@@ -74,4 +74,4 @@ const listModal = () => {
   );
 };
 
-export default listModal;
+export default ListModal;
