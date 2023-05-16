@@ -5,7 +5,7 @@ import ShoppingListHolder from './shoppingListHolder';
 import AddItemForm from '../items/AddItemForm/AddItem';
 import ItemDetails from '../items/itemDetails';
 import { UserContext, AppState } from '../../../DataProvider';
-import Auth from '../../sessions/Auth';
+import Auth from '../../sessions/Auth-v2/Auth';
 
 const ShoppingListLayout = ({ classNam }) => {
   const { cartBtnClicked } = useContext(UserContext);
