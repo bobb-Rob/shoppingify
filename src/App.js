@@ -16,12 +16,13 @@ import SignUp from './app/features/sessions/signup';
 import { UserContext } from './app/DataProvider';
 import History from './app/features/dashboard/history/History';
 import Analysis from './app/features/dashboard/analysis/Analysis';
-import ListContainer from './app/features/dashboard/items/ListContainer';
+import ListContainer from './app/features/dashboard/items/itemContainer';
+import HistoryDetails from './app/features/dashboard/history/HistoryDetails';
+import GettingStarted from './app/pages/GettingStarted/GettingStarted';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles/App.css';
 import './styles/user.css';
 import './styles/items.css';
-import HistoryDetails from './app/features/dashboard/history/HistoryDetails';
 
 function App() {
   const { windowSize } = useContext(UserContext);
@@ -29,20 +30,25 @@ function App() {
     <Router>
       <main>
         <Routes>
+          <Route
+            path="/"
+            element={<h1>Manual</h1>}
+          />
           <Route element={<PersistLogin />}>
-            <Route path="/" element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<PrivateRoute />}>
+              <Route path="/dashboard/gettingstarted" element={<GettingStarted />} />
               <Route element={<DashboardLayout />}>
-                <Route path="" element={<ListContainer />} />
-                <Route path="/history" element={<History />} />
-                <Route path="/history/:id/:month" element={<HistoryDetails />} />
-                <Route path="/analysis" element={<Analysis />} />
+                <Route path="list" element={<ListContainer />} />
+                <Route path="history" element={<History />} />
+                <Route path="history/:id/:month" element={<HistoryDetails />} />
+                <Route path="analysis" element={<Analysis />} />
                 <Route
-                  path="/cart"
+                  path="cart"
                   element={
                     windowSize < 768 ? (
                       <ShoppingListLayout classNam="showShoppingList" />
                     ) : (
-                      <Navigate to="/" />
+                      <Navigate to="/dashboard/list" />
                     )
                   }
                 />

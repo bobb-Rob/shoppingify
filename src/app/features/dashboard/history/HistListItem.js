@@ -11,7 +11,7 @@ const HistListItem = ({
   const navigate = useNavigate();
 
   const handleListItemClick = () => {
-    navigate(`/history/${id}/${month}`, { state: { records, listName, date } });
+    navigate(`${id}/${month}`, { state: { records, listName, date } });
   };
 
   return (

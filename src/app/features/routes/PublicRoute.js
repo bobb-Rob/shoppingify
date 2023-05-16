@@ -8,12 +8,8 @@ import Loading from '../loading/Loading';
 function PublicOnlyRoute({ children }) {
   const accessToken = useSelector((state) => state.session.accessToken);
   const loading = useSelector((state) => state.session.loading);
-  // const location = useLocation();
-  // const fromLocation = location.state?.from;
-
-  // const previousLocation = location.state
-  //   ? fromLocation
-  //   : { pathname: '/login' };
+  console.log(accessToken, 'from public route');
+  console.log(loading, 'from public route');
 
   if (!accessToken && !loading) {
     return children;
@@ -22,7 +18,7 @@ function PublicOnlyRoute({ children }) {
   } if (accessToken && !loading) {
     return (
       <>
-        <Navigate to="/" replace />
+        <Navigate to="/dashboard/gettingstarted" replace />
       </>
     );
   }

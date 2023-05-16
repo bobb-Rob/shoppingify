@@ -17,6 +17,7 @@ export const fetchActiveList = createAsyncThunk(
   'lists/getActiveList',
   async (accessToken, { rejectWithValue }) => {
     const response = await fetchActiveListWithAccessToken(accessToken);
+    console.log(response);
     if (response.errors) {
       return rejectWithValue(response.data);
     }

@@ -34,7 +34,6 @@ const SignUp = () => {
     if (errorMessages.length > 0) {
       setAllErrors(errorMessages);
       errorMessages = [];
-      // dispatch(resetErrorState());
     }
   });
 
@@ -49,13 +48,7 @@ const SignUp = () => {
       password: user.password,
     };
     dispatch(signUpUser(payload));
-
-    // if (errorMessages.length > 0) {
-    //   navigate('/');
-    // } else {
-    //   return setAllErrors(errorMessages);
-    // }
-    // return null;
+    console.log(payload);
   }
 
   return (

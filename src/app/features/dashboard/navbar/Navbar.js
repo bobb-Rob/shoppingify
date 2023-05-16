@@ -28,7 +28,7 @@ const SideNav = () => {
           icon={<IoMdRefresh size={22} />}
         />
         <NavLinkEl
-          to="analysis"
+          to="/analysis"
           icon={<MdOutlineAnalytics size={22} />}
         />
       </div>
@@ -36,7 +36,7 @@ const SideNav = () => {
         className="flex justify-center items-center self-end justify-self-center rounded-[50%] bg-orange w-[42px] h-[42px]"
       >
         <NavLink
-          to={(cartBtnClicked && windowSize < 768) ? '/' : '/cart'} // Go back to root route if cartBtnClicked is true
+          to={(cartBtnClicked && windowSize < 768) ? '/dashboard/list' : '/dashboard/cart'} // Go back to root route if cartBtnClicked is true
           state={{ cartBtnClicked: !cartBtnClicked, windowSize }}
           style={{ color: 'var(--white)' }}
           onClick={() => {

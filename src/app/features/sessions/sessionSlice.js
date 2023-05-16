@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
 import {
   createUserWithEmailAndPassword,
   getCurrentUser,
@@ -11,6 +11,12 @@ function setRefreshToken(token) {
   localStorage.setItem('refreshToken', token);
 }
 
+function setCurrentUser(user) {
+  // stringify the user object before storing it in localStorage
+  user = JSON.stringify(user);
+  localStorage.setItem('currentUser', user);
+}
+
 // function removeRefreshToken() {
 //   localStorage.removeItem('refreshToken');
 // }
@@ -19,22 +25,6 @@ function getRefreshToken() {
   const token = localStorage.getItem('refreshToken');
   return token;
 }
-
-const initialState = {
-  currentUser: {
-    id: undefined,
-    email: undefined,
-    role: undefined,
-    createdAt: undefined,
-  },
-  loading: true,
-  accessToken: undefined,
-  error: false,
-  errorMessages: [],
-  refreshToken: getRefreshToken(),
-  expiresIn: undefined,
-  tokenType: undefined,
-};
 
 export const refreshAccessToken = createAsyncThunk(
   'session/refreshAccessToken',
@@ -60,14 +50,10 @@ export const refreshAccessToken = createAsyncThunk(
 export const signUpUser = createAsyncThunk(
   'session/signUpUser',
   async (payload, { rejectWithValue }) => {
-    const response = await createUserWithEmailAndPassword(
-      payload.email,
-      payload.password,
-    );
+    const response = await createUserWithEmailAndPassword(payload);
     if (response.error) {
       return rejectWithValue(response.error);
     }
-
     return response;
   },
 );
@@ -88,6 +74,36 @@ export const loginUser = createAsyncThunk(
     return { ...response, ...userResponse };
   },
 );
+
+// Fetch current user
+export const fetchCurrentUser = createAsyncThunk(
+  'session/fetchCurrentUser',
+  async (accessToken, { rejectWithValue }) => {
+    const response = await getCurrentUser(accessToken);
+    if (response.errors) {
+      return rejectWithValue(response.error);
+    }
+    return response;
+  },
+);
+
+const initialState = {
+  currentUser: {
+    id: undefined,
+    email: undefined,
+    first_name: undefined,
+    last_name: undefined,
+    role: undefined,
+    createdAt: undefined,
+  },
+  loading: true,
+  accessToken: undefined,
+  error: false,
+  errorMessages: [],
+  refreshToken: getRefreshToken(),
+  expiresIn: undefined,
+  tokenType: undefined,
+};
 
 const sessionSlice = createSlice({
   name: 'session',
@@ -113,7 +129,8 @@ const sessionSlice = createSlice({
         state.currentUser = {
           id: action.payload.id,
           email: action.payload.email,
-          role: action.payload.role,
+          first_name: action.payload.first_name,
+          last_name: action.payload.last_name,
           createdAt: action.payload.created_at,
         };
         setRefreshToken(action.payload.refresh_token);
@@ -124,7 +141,7 @@ const sessionSlice = createSlice({
       .addCase(signUpUser.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
-        state.errorMessages = action.payload.errors;
+        state.errorMessages = action.payload;
       })
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
@@ -139,10 +156,13 @@ const sessionSlice = createSlice({
         state.currentUser = {
           id: action.payload.id,
           email: action.payload.email,
+          first_name: action.payload.first_name,
+          last_name: action.payload.last_name,
           role: action.payload.role,
           createdAt: action.payload.created_at,
         };
         setRefreshToken(action.payload.refresh_token);
+        setCurrentUser(current(state).currentUser);
         state.loading = false;
         state.error = false;
         state.errorMessages = [];
@@ -153,6 +173,27 @@ const sessionSlice = createSlice({
         if (action.payload === 'invalid_grant') {
           state.errorMessages.push('Wrong email or password');
         }
+      })
+      .addCase(fetchCurrentUser.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+        state.errorMessages = [];
+      })
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+        state.currentUser = {
+          id: action.payload.id,
+          email: action.payload.email,
+          first_name: action.payload.first_name,
+          last_name: action.payload.last_name,
+          role: action.payload.role,
+          createdAt: action.payload.created_at,
+        };
+        state.loading = false;
+        state.error = false;
+        state.errorMessages = [];
+      })
+      .addCase(fetchCurrentUser.rejected, (state) => {
+        state.loading = false;
       })
       .addCase(refreshAccessToken.pending, (state) => {
         state.loading = true;

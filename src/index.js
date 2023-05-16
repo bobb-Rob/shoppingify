@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import store from './app/store';
-import App from './App';
+import App from './App1';
 import DataProvider from './app/DataProvider';
 import './index.css';
 

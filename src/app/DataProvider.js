@@ -11,7 +11,7 @@ const DataProvider = ({ children }) => {
   const dispatch = useDispatch();
   const [cartBtnClicked, setCartBtnClicked] = useState(false);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
-  const [isDisplayed, setIsDisplayed] = useState('shoppingList');
+  const [isDisplayed, setIsDisplayed] = useState('showAuthPage');
   const [itemDetails, setItemDetails] = useState({});
   // Modal state
   const [showModal, setShowModal] = useState(false);
@@ -33,6 +33,10 @@ const DataProvider = ({ children }) => {
     setIsDisplayed('addItemForm');
   };
 
+  const displayAuthPage = () => {
+    setIsDisplayed('showAuthPage');
+  };
+
   return (
     <AppState.Provider
       value={{
@@ -41,6 +45,7 @@ const DataProvider = ({ children }) => {
         displayItemDetails,
         displayShoppingList,
         displayAddItemForm,
+        displayAuthPage,
         notify,
         showModal,
         setShowModal,

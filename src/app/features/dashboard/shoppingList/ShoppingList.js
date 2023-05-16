@@ -20,7 +20,10 @@ const ShoppingList = () => {
   const { name, items } = useSelector((state) => state.shoppingList.activeList);
 
   useEffect(() => {
-    dispatch(fetchActiveList(accessToken));
+    // fetch active list only when a user is logged in i.e AccessToken = true
+    if (accessToken) {
+      dispatch(fetchActiveList(accessToken));
+    }
   }, []);
 
   return (
