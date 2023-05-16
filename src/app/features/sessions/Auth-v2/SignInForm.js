@@ -1,5 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { useForm } from 'react-hook-form';
+
+/* eslint-disable react/jsx-props-no-spreading */
 
 function SignInForm({ onSubmit, register, errors }) {
   return (
@@ -45,7 +48,7 @@ function SignInForm({ onSubmit, register, errors }) {
 SignInForm.propTypes = {
   onSubmit: propTypes.func.isRequired,
   register: propTypes.func.isRequired,
-  errors: propTypes.object.isRequired,
+  errors: propTypes.objectOf(useForm().formState.errors),
 };
 
 export default SignInForm;
